@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="2" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml">
+<path name=".."/><path name="testing.mlw"/>
+<theory name="Testing">
+ <goal name="n_list&#39;vc" expl="VC for n_list">
+ </goal>
+ <goal name="contains&#39;vc" expl="VC for contains">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1"><result status="timeout" time="1.00" steps="1553120"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="180968"/></proof>
+ <transf name="split_vc" >
+  <goal name="contains&#39;vc.0" expl="loop invariant init" proved="true">
+  <proof prover="2"><result status="valid" time="0.06" steps="12468"/></proof>
+  </goal>
+  <goal name="contains&#39;vc.1" expl="index in array bounds" proved="true">
+  <proof prover="2"><result status="valid" time="0.08" steps="14231"/></proof>
+  </goal>
+  <goal name="contains&#39;vc.2" expl="loop invariant preservation" proved="true">
+  <proof prover="2"><result status="valid" time="0.08" steps="12701"/></proof>
+  </goal>
+  <goal name="contains&#39;vc.3" expl="loop invariant preservation" proved="true">
+  <proof prover="2"><result status="valid" time="0.11" steps="14073"/></proof>
+  </goal>
+  <goal name="contains&#39;vc.4" expl="postcondition">
+  <proof prover="0" timelimit="5" memlimit="2000"><result status="timeout" time="5.00"/></proof>
+  <proof prover="1" timelimit="5" memlimit="2000"><result status="timeout" time="5.00" steps="7469916"/></proof>
+  <proof prover="2" timelimit="5" memlimit="2000"><result status="unknown" time="0.20" steps="25048"/></proof>
+  <transf name="inline_goal" >
+   <goal name="contains&#39;vc.4.0" expl="postcondition">
+   <transf name="split_all_full" >
+    <goal name="contains&#39;vc.4.0.0" expl="postcondition">
+    <proof prover="0" timelimit="30" memlimit="4000"><result status="timeout" time="30.00"/></proof>
+    <proof prover="1" timelimit="30" memlimit="4000"><result status="timeout" time="30.00" steps="42878571"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000"><result status="unknown" time="0.23" steps="28768"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="contains&#39;vc.5" expl="postcondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.07" steps="14204"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="min_color&#39;vc" expl="VC for min_color">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="1492113"/></proof>
+ <proof prover="2" obsolete="true"><result status="unknown" time="0.23" steps="28236"/></proof>
+ <transf name="split_vc" >
+  <goal name="min_color&#39;vc.0" expl="loop invariant init">
+  <proof prover="2" obsolete="true"><result status="valid" time="0.07" steps="12194"/></proof>
+  </goal>
+  <goal name="min_color&#39;vc.1" expl="postcondition">
+  <proof prover="2" obsolete="true"><result status="valid" time="0.10" steps="13753"/></proof>
+  </goal>
+  <goal name="min_color&#39;vc.2" expl="loop variant decrease">
+  <proof prover="2" obsolete="true"><result status="valid" time="0.09" steps="14597"/></proof>
+  </goal>
+  <goal name="min_color&#39;vc.3" expl="loop invariant preservation">
+  <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+  <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="1421188"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="381940"/></proof>
+  <transf name="split_vc" >
+   <goal name="min_color&#39;vc.3.0" expl="loop invariant preservation">
+   <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00"/></proof>
+   <proof prover="1" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00" steps="76403245"/></proof>
+   <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><result status="timeout" time="30.00" steps="9093560"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="min_color&#39;vc.4" expl="postcondition">
+  <proof prover="2" obsolete="true"><result status="valid" time="0.13" steps="13954"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="mem_list&#39;vc" expl="VC for mem_list">
+ </goal>
+ <goal name="get_free_state&#39;vc" expl="VC for get_free_state">
+ </goal>
+</theory>
+<theory name="MaxAndSum">
+ <goal name="max_sum&#39;vc" expl="VC for max_sum">
+ </goal>
+</theory>
+<theory name="Russian">
+ <goal name="odd&#39;vc" expl="VC for odd">
+ </goal>
+ <goal name="half&#39;vc" expl="VC for half">
+ </goal>
+ <goal name="mult&#39;vc" expl="VC for mult">
+ </goal>
+ <goal name="pow_help">
+ </goal>
+ <goal name="pow&#39;vc" expl="VC for pow">
+ </goal>
+ <goal name="main&#39;vc" expl="VC for main">
+ </goal>
+</theory>
+<theory name="Selectionsort">
+ <goal name="minindex&#39;vc" expl="VC for minindex">
+ </goal>
+ <goal name="sort&#39;vc" expl="VC for sort">
+ </goal>
+ <goal name="sort&#39;&#39;vc" expl="VC for sort&#39;">
+ </goal>
+</theory>
+<theory name="SimpleInsertionSort">
+ <goal name="sort&#39;vc" expl="VC for sort">
+ </goal>
+</theory>
+<theory name="FancyInsertionsort">
+ <goal name="lfind&#39;vc" expl="VC for lfind">
+ </goal>
+ <goal name="shift&#39;vc" expl="VC for shift">
+ </goal>
+ <goal name="sort&#39;vc" expl="VC for sort">
+ </goal>
+ <goal name="bfind&#39;vc" expl="VC for bfind">
+ </goal>
+ <goal name="sortb&#39;vc" expl="VC for sortb">
+ </goal>
+</theory>
+<theory name="BubbleSort">
+ <goal name="sort&#39;vc" expl="VC for sort">
+ </goal>
+ <goal name="sort2&#39;vc" expl="VC for sort2">
+ </goal>
+</theory>
+</file>
+</why3session>

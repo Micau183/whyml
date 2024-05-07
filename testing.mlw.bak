@@ -1,0 +1,581 @@
+module Testing
+  use real.Real
+  use int.Int
+  use export list.List
+  use export list.Length
+  use export list.Nth
+  use option.Option
+  use list.Mem
+  use list.Append
+  use list.Nth
+    use array.Array
+  use ref.Ref
+  use array.ArraySwap
+use array.ArrayPermut
+  
+axiom cons: forall x:int. forall l: list int. mem x (Cons x l) = true
+
+val constant k_color : int
+ 
+val constant max_array : int 
+
+  let test2 (l:list int) =
+  match l with
+  |Nil -> true
+  |x -> false
+  end
+  
+  
+  
+    let function n_list (k:int) : (list int)
+    requires{k>=0}
+    ensures { forall x:int. 0 < x <= k -> mem x result } =
+    let rec aux l i
+    requires{i>=0}
+    ensures{forall x:int. 0 < x <= i -> mem x result}
+    variant {i} =
+    if i = 0 then (Cons i l) else Cons i (aux l ((i-1)))
+      in aux Nil k  
+   
+   
+  let function contains (a: array int) (x: int) : bool
+    ensures { exists i. 0 <= i < length a /\ a[i] = x  <-> result = true}
+  =
+    let found = ref false in
+    for i = 0 to length a - 1 do
+      invariant { forall j. 0 <= j < i -> a[j] <> x \/ !found = true}
+      if a[i] = x then
+        found := true
+    done;
+    !found
+    
+
+    
+
+let min_color(tab: array int) : int =
+      (*ensures {0 <= result <= length tab /\ not (contains tab result)}*)
+      ensures {forall i. 0 <= i < result -> contains tab i}
+    let mini = ref 0 in 
+    let find = ref false in 
+    while !mini <= length tab do
+      variant { length tab - !mini }
+      invariant { forall k. 0 <= k < !mini -> contains tab k }
+      
+
+      if (contains tab !mini) then break else  
+      mini := !mini + 1
+    done;
+    !mini
+    
+    
+
+
+
+
+   
+
+    let rec function mem_list (x: int) (l: list int) : bool 
+  ensures {result <-> mem x l}=
+    match l with
+    |Nil  -> false
+    |Cons y r -> x = y || mem_list x r 
+    end
+  
+  
+let function get_free_state (l:list int) : (list int)=
+  let color_liste = n_list 5 in 
+
+  let rec aux (liste: list int) (k: int) 
+  variant{k}
+  ensures{forall i:int. 0 < i <= k -> mem i result \/ mem i color_liste} 
+  ensures {forall i:int. mem_list i result -> not (mem_list i color_liste)}
+
+  =
+  
+    if k < 0 
+    then liste
+    else 
+     if mem_list k color_liste 
+     then aux liste (k-1)
+     else Cons k (aux liste (k-1))
+     
+  in aux Nil k_color
+
+end
+module Coloring 
+  use list.List
+  use int.Int
+  use int.EuclideanDivision
+  use map.Map
+  use list.Mem
+  use list.Length
+  use Ref
+  use list.SortedInt
+  use list.HdTl
+  
+    type node = int
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  let predicate validNd (n:node) = 0 <= n 
+
+  axiom at_least_two : 2 < n_nodes
+
+  
+  (* Nombre de couleur *)
+  val constant k_color : int
+  
+  val color : int
+
+  (* On suppose qu'il y au plus autant de couleur que de noeuds (une couleur par noeud) *)
+  axiom k_color_bound : n_nodes <= k_color  
+  axiom cons: forall x:int. forall l: list int. mem x (Cons x l) = true
+  type state = int
+(*
+
+  let rec function mem_list (x: int) (l: list int) : bool 
+  ensures {result <-> mem x l}=
+    match l with
+    |Nil  -> false
+    |Cons y r -> x = y || mem_list x r 
+    end
+    
+
+
+
+ let function neighbor_list (lS:map node state) (i:node): (list state) = 
+      Cons (lS(i-1)) (Cons (lS(i+1)) Nil)
+      
+
+let function color_list (k:state) : (list state)
+requires{k>=0}
+=
+let l = Nil in
+let rec aux l k 
+variant {k} =
+if k = 0 then l else aux (Cons k l) (k-1)  
+  in aux Nil k    
+
+let function get_free (lS: map node state) (i: node) : list state =
+  let neighbor_colors = neighbor_list lS i in
+  let rec aux (n: state) (liste: list state) : list state
+    requires{n>=0}
+    variant {n}
+    ensures {forall c: state. (0<= c<= k_color /\ not(mem c neighbor_colors)) -> (mem c result)} =
+    if n < 0 then liste
+    else if mem_list n neighbor_colors then aux (n - 1) liste
+    else Cons n (aux (n - 1) liste)
+  in aux (k_color) Nil
+
+
+(*marche pas*)
+(* La fonction min_color détermine la plus petite couleur disponible pour un nœud donné, en évitant les couleurs déjà utilisées par ses voisins. *)
+let function min_color2(lS:map node state) (i:node) : state =
+  
+  let neighbor_colors = Cons (lS (mod (i+1) n_nodes)) (Cons (lS (mod (i+1) n_nodes)) Nil) in
+  let rec aux (n: state) : state
+
+    variant { k_color - n } = 
+    if mem_list n neighbor_colors then
+      aux (n + 1)
+    else
+      n
+  in
+  aux 0
+lemma max_neighbor : forall lS: map node state, i: node.
+  length (neighbor_list lS i) <= n_nodes
+
+(* On ne peut traiter les listes que dans des match with, les if then else ne marche pas ?? *)
+let function test : (bool) = 
+let liste = Nil in
+match liste with
+|Nil -> true
+|Cons x Nil -> false
+end
+
+(* marche pas *)
+(*(
+let function new_min_color(lS:map node state) (i:node) =
+
+let neighbor_colors = (neighbor_list lS i) in
+
+let rec aux (n:state) (neighbors: list state) : state =
+variant { k_color - n + (length neighbors)}
+match neighbors with 
+|Nil -> n
+|Cons x y -> if x = n 
+  then aux n y
+  else aux (n+1) neighbors
+end 
+  in aux 0 neighbor_colors
+
+
+let function new_min_color2(lS:map node state) (i:node) =
+
+let neighbor_colors = (neighbor_list lS i) in
+let len = length neighbor_colors in
+
+let rec aux (n:state) (neighbors: list state) (len: int) : state =
+variant { k_color - n + len}
+match neighbors with 
+|Nil -> n
+|Cons x y -> if x = n 
+  then aux n y (len - 1)
+  else aux (n+1) neighbors len
+end 
+  in aux 0 neighbor_colors
+*)
+
+
+(*marche pas non plus*)
+let function min_color3(lS:map node state) (i:node) : state =
+    
+  let neighbor_colors = Cons (lS (mod (i+1) n_nodes)) (Cons (lS (mod (i+1) n_nodes)) Nil) in
+  let rec aux (n: state) : state
+
+    
+    ensures {result <> lS (mod (i+1) n_nodes)}
+    ensures {result <= k_color+1}
+    variant { k_color - n } = 
+    if  n = k_color then
+    k_color + 1
+    else if (n = lS (mod (i+1) n_nodes)) || (n = lS (mod (i-1) n_nodes)) then
+      aux (n + 1)
+    else
+      n
+  in aux 0
+
+*)
+
+end
+module MaxAndSum
+
+  use int.Int
+  use ref.Ref
+  use array.Array
+
+  let max_sum (a: array int) (n: int) : (int, int)
+    requires { n = length a }
+    requires { forall i. 0 <= i < n -> a[i] >= 0 }
+    returns  { sum, max -> sum <= n * max }
+  = let sum = ref 0 in
+    let max = ref 0 in
+    for i = 0 to n - 1 do
+      invariant { !sum <= i * !max }
+      if !max < a[i] then max := a[i];
+      sum := !sum + a[i]
+    done;
+    !sum, !max
+
+end
+module Russian
+
+use ref.Ref
+use int.Int
+use int.Abs
+
+(* this code works with both Computer- and EuclideanDivision *)
+
+(* use int.EuclideanDivision *)
+use int.ComputerDivision
+
+predicate odd (x: int) = exists k:int. x=2*k+1
+
+let odd (x: int): bool
+  ensures { result <-> odd x }
+= mod (abs x) 2 <> 0
+
+(* any of these postconditions is fine,
+   and there are many more that work *)
+let half (q: int): int
+  ensures { result = div q 2 }
+  ensures { q = 2*result + mod q 2 }
+  ensures { (odd q/\q>0 -> q = 2*result+1) /\ (not odd q -> q = 2*result) }
+  ensures { if q >= 0 then q-1 <= 2*result <= q else q <= 2*result <= q+1 }
+= div q 2
+
+(* this function performs russian peasant multiplication *)
+let mult (a b: int): int
+  requires { a >= 0 /\ b >= 0 }
+  ensures { result = a*b }
+= let p = ref a in
+  let q = ref b in
+  let r = ref 0 in
+  while !q <> 0 do
+    invariant { !r + !p * !q = a*b }
+    invariant { !q >= 0 }
+    variant { !q }
+    if odd !q then r := !r + !p;
+    p := !p + !p;
+    q := half !q
+  done;
+  return !r
+
+use int.Power
+
+lemma pow_help:
+  forall x y: int. y >= 0 -> power (x*x) y = power x (2*y)
+
+let pow (a b: int): int
+  requires { a >= 0 /\ b >= 0 }
+  ensures { result = power a b }
+= let p = ref a in
+  let q = ref b in
+  let r = ref 1 in
+  while !q <> 0 do
+    invariant { !r * power !p !q = power a b }
+    invariant { !q >= 0 }
+    variant { !q }
+    if odd !q then r := !r * !p;
+    p := !p * !p;
+    q := half !q
+  done;
+  return !r
+
+(* for testing *)
+
+let main () = (mult 27 37, pow 27 37)
+
+end
+
+module Selectionsort
+
+use int.Int
+use ref.Ref
+use array.Array
+use array.ArraySwap
+use array.ArrayPermut
+
+(* using two functions *)
+
+let minindex (a: array int) (l h: int): int
+  requires { 0 <= l < h <= length a }
+  ensures { l <= result < h }
+  ensures { forall i. l <= i < h -> a[result] <= a[i] }
+= let min_so_far = ref l in
+  for i = l+1 to h-1 do
+    invariant { forall j. l <= j < i -> a[!min_so_far] <= a[j] }
+    invariant { l <= !min_so_far < h }
+    if a[i] < a[!min_so_far] then min_so_far := i
+  done;
+  return !min_so_far
+  
+let sort (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all (old a) a }
+= for pos = 0 to length a-1 do
+    invariant { forall i j. 0 <= i <= j < pos -> a[i] <= a[j] }
+    invariant { forall i j. 0 <= i < pos <= j < length a -> a[i] <= a[j] }
+    invariant { permut_all (old a) a }
+    swap a pos (minindex a pos (length a))
+  done
+  
+(* using one function *)
+
+let sort' (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all (old a) a }
+= for pos = 0 to length a-1 do
+    invariant { forall i j. 0 <= i <= j < pos -> a[i] <= a[j] }
+    invariant { forall i j. 0 <= i < pos <= j < length a -> a[i] <= a[j] }
+    invariant { permut_all (old a) a }
+    let min_so_far = ref pos in
+    for i = pos+1 to length a-1 do
+      invariant { forall j. pos <= j < i -> a[!min_so_far] <= a[j] }
+      invariant { pos <= !min_so_far < length a }
+      if a[i] < a[!min_so_far] then min_so_far := i
+    done;
+    swap a pos !min_so_far
+  done
+
+end
+
+module SimpleInsertionSort
+
+use int.Int
+use ref.Ref
+use array.Array
+use array.ArraySwap
+use array.ArrayPermut
+
+(* using a simple version is about as easy as selection sort *)
+
+let sort (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all (old a) a }
+= for pos = 0 to length a - 1 do
+    invariant { forall i j. 0 <= i <= j < pos -> a[i] <= a[j] }
+    invariant { permut_all (old a) a }
+     for k = pos downto 1 do
+       invariant { forall i j. 0 <= i <= j < k -> a[i] <= a[j] }
+       invariant { forall i j. 0 <= i < k < j <= pos -> a[i] <= a[j] }
+       invariant { forall i j. 0 <= k <= i <= j <= pos -> a[i] <= a[j] }
+       invariant { permut_all (old a) a }
+       if a[k] < a[k-1] then
+         swap a k (k-1)
+       else
+         break
+     done
+  done
+
+end
+
+module FancyInsertionsort
+
+use int.Int
+use ref.Ref
+use array.Array
+use array.ArraySwap
+use array.ArrayPermut
+
+let lfind (a: array int) (l h: int) (x: int): int
+  requires { 0 <= l <= h <= length a }
+  requires { forall i j. l <= i <= j < h -> a[i] <= a[j] }
+  ensures { forall i. l <= i < result -> a[i] <= x }
+  ensures { forall i. result <= i < h -> x <= a[i] }
+  ensures { l <= result <= h }
+= for pos = l to h-1 do
+    invariant { forall i. l <= i < pos -> a[i] <= x }
+    if a[pos] >= x then return pos;
+  done;
+  return h
+
+let shift (a: array int) (i j: int)
+  requires { 0 <= i <= j < length a }
+  ensures { forall k. i+1 <= k <= j -> a[k] = old a[k-1] }
+  ensures { a[i] = old a[j] }
+  ensures { permut_sub (old a) a i (j+1) }
+= for k = j downto i+1 do
+    invariant { permut_sub (old a) a i (j+1) }
+    invariant { forall k'. i <= k' < k -> a[k'] = old a[k'] }
+    invariant { forall k'. k < k' <= j -> a[k'] = old a[k'-1] }
+    invariant { a[k] = old a[j] }
+    swap a k (k-1);
+  done
+
+let sort (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all a (old a) }
+= for pos = 0 to length a-1 do
+    invariant { forall i j. 0 <= i <= j < pos -> a[i] <= a[j] }
+    invariant { permut_all (old a) a }
+    let x = a[pos] in
+    shift a (lfind a 0 pos x) pos;
+  done
+  
+(* the above function can easily be optimized by a binary search *)
+
+use int.ComputerDivision
+
+let bfind (a: array int) (l h: int) (x: int): int
+  requires { 0 <= l <= h <= length a }
+  requires { forall i j. l <= i <= j < h -> a[i] <= a[j] }
+  ensures { forall i. l <= i < result -> a[i] <= x }
+  ensures { forall i. result <= i < h -> x <= a[i] }
+  ensures { l <= result <= h }
+= let p = ref l in
+  let q = ref h in
+  while !p < !q do
+    invariant { l <= !p <= !q <= h }
+    invariant { forall i. l <= i < !p -> a[i] <= x }
+    invariant { forall i. !q <= i < h -> x <= a[i] }
+    variant { !q - !p }
+    let mid = div (!p + !q) 2 in
+    if a[mid] < x then p := mid+1 else
+    if a[mid] > x then q := mid else
+    return mid
+  done;
+  return !q
+  
+let sortb (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all a (old a) }
+= for pos = 0 to length a-1 do
+    invariant { forall i j. 0 <= i <= j < pos -> a[i] <= a[j] }
+    invariant { permut_all (old a) a }
+    let x = a[pos] in
+    shift a (bfind a 0 pos x) pos;
+  done
+
+
+end
+
+module BubbleSort
+
+use int.Int
+use ref.Ref
+use array.Array
+use array.ArraySwap
+use array.ArrayPermut
+
+(* partial correctness is easy for bubble sort, but to prove it
+   terminates is quite a challenge; most of the invariants below are
+   devoted to proving termination; which is quite different from
+   selection sort or insertion sort! *)
+
+let sort (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all (old a) a }
+= let len = ref (length a) in
+  while true do
+    invariant { permut_all (old a) a }
+    invariant { 0 <= !len <= length a }
+    invariant { forall i j. !len <= i <= j < length a -> a[i] <= a[j] }
+    invariant { forall i j. 0 <= i <= !len <= j < length a -> a[i] <= a[j] }
+    variant { !len }
+    let swapped = ref false in
+    for pos = 0 to !len-2 do
+      invariant { !swapped \/ forall i j. 0 <= i <= j <= pos -> a[i] <= a[j] }
+      invariant { permut_all (old a) a }
+      invariant { forall i j. !len <= i <= j < length a -> a[i] <= a[j] }
+      invariant { forall i j. 0 <= i <= !len <= j < length a -> a[i] <= a[j] }
+      invariant { forall i. 0 <= i <= pos -> a[pos] >= a[i] }
+      if a[pos] > a[pos+1] then begin
+        swap a pos (pos+1);
+        swapped := true
+      end   
+    done;
+    if not !swapped then break;
+    len := !len - 1;
+  done
+
+(* using the notion of 'inversions', and some hard proof work that
+   the Why3 developers did for us to prove that swapping two elements
+   that are out of order reduces the amount of 'inversions', however,
+   we can also create a simpler proof *)
+
+use array.Inversions
+
+let sort2 (a: array int)
+  ensures { forall i j. 0 <= i <= j < length a -> a[i] <= a[j] }
+  ensures { permut_all (old a) a }
+= while true do
+    invariant { permut_all (old a) a }
+    variant { inversions a }
+    let swapped = ref false in
+    label Inner in
+    for pos = 0 to length a-2 do
+      invariant { !swapped \/ forall i j. 0 <= i <= j <= pos -> a[i] <= a[j] }
+      invariant { permut_all (old a) a }
+      invariant { inversions a <= inversions (a at Inner) }
+      invariant { !swapped -> inversions a < inversions (a at Inner) }
+      if a[pos] > a[pos+1] then begin
+        swap a pos (pos+1);
+        swapped := true
+      end   
+    done;
+    if not !swapped then break
+  done
+
+end
+
+
+
+
+
+
+
+
+
+  

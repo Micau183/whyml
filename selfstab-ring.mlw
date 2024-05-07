@@ -1,0 +1,489 @@
+(** {1 Self-stabilizing mutual exclusion on a ring (Closure)} *)
+module SelfStab_Ring_Closure
+
+  use int.Int
+  use int.EuclideanDivision
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+  use map.Map
+
+  (* Basic Setup: nodes, packets, inputs, outputs, states *)
+
+  type node = int
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  let predicate validNd (n:node) = 0 <= n < n_nodes
+
+  axiom n_nodes_bounds : 2 < n_nodes
+
+
+  type state = int
+
+  val constant k_states : int
+
+  axiom k_states_lower_bound : n_nodes < k_states
+
+  let function incre (x:state) : state
+  = mod (x+1) k_states
+
+  let predicate case_node (_node) = true
+  let predicate case_state (_state) = true
+
+  (* clone World theory to get additional types/functions *)
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+  (* System initialization: node states and messages      *)
+  let function initState (n:node) : state
+  = if n=n_nodes-1 then 1 else 0
+
+  (* defining when a node in the ring has the token *)
+  predicate has_token (lS:map node state) (i:node) =
+  (i = 0 /\  lS i =  lS (n_nodes-1))
+  \/
+  (i > 0 /\ i < n_nodes /\ lS i <> lS (i-1))
+
+  (* enabling predicate *)
+  let ghost predicate enabled (lS:map node state) (i:node)
+  = has_token lS i
+
+  (* handling function *)
+  let function handleEnbld (h:node) (lS:map node state) : state
+  = if h = 0 then incre (lS (n_nodes-1))
+             else lS (h-1)
+
+  (* helper definitions for invariant predicate *)
+  let rec ghost predicate atLeastOneToken (lS:map node state) (n:int)
+    requires { 0 <= n <= n_nodes }
+    ensures { result <-> exists k :int. 0<=k<n /\ has_token lS k }
+    variant { n }
+  = n > 0 && (has_token lS (n-1) || atLeastOneToken lS (n-1))
+
+  val ghost predicate atMostOneToken (lS:map node state) (n:int)
+    requires { 0 <= n <= n_nodes }
+    ensures { result <-> forall i j :int. 0<=i<n -> 0<=j<n -> has_token lS i -> has_token lS j -> i=j }
+
+
+  (* crucial lemma to achieve an unbounded proof *)
+  (* of the atLeastOneTokenLm lemma              *)
+  lemma first_last : forall n: int, lS :map node state.
+    n >= 0 ->
+      (forall j :int. 0<j<=n -> lS j = lS (j-1)) ->
+        lS 0 = lS n
+
+  lemma atLeastOneTokenLm : forall w :world. atLeastOneToken w n_nodes
+
+
+
+  (* candidate invariant predicate *)
+  predicate inv (lS:map node state) =
+    (forall n :int. 0 <= n < n_nodes -> 0 <= lS n < k_states)
+    /\
+    atMostOneToken lS n_nodes
+    (* /\ *)
+    (* atLeastOneToken lS n_nodes *)
+
+  let ghost predicate indpred (w:world) = inv ( w)
+
+
+  (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
+  clone modelReadallEnabled.Steps with
+    type node,
+    type state,
+    val validNd,
+    val case_node,
+    val case_state,
+    val initState,
+    val indpred,
+    val enabled,
+    val handleEnbld
+
+  (* SYSTEM PROPERTIES TO BE PROVED FROM INVARIANT *)
+  predicate oneToken (w:world) = atMostOneToken w n_nodes /\ atLeastOneToken w n_nodes
+
+  goal oneToken : forall w :world. reachable w -> oneToken w
+
+end
+
+(** {2 Self-stabilizing mutual exclusion on a ring (Convergence)} *)
+module SelfStab_Ring_Convergence
+
+  use int.Int
+  use int.EuclideanDivision
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+  use map.Map
+  use set.FsetInt
+
+  (* Basic Setup: nodes, packets, inputs, outputs, states *)
+
+  type node = int
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  let predicate validNd (n:node) = 0 <= n < n_nodes
+
+  axiom n_nodes_bounds : 2 < n_nodes
+
+
+  type state = int
+
+  val constant k_states : int
+
+  axiom k_states_lower_bound : n_nodes < k_states
+
+  (* axiom k_states_lower_bound : k_states = n_nodes + 1 *)
+
+  let function incre (x:state) : state
+  = mod (x+1) k_states
+
+
+  (* crucial lemma for unbounded verification
+     proved by induction on n
+   *)
+  lemma first_last : forall n: int, lS :map node state.
+    n >= 0 ->
+      (forall j :int. 0<j<=n -> lS j = lS (j-1)) ->
+        lS 0 = lS n
+
+
+  (* required modular arithmetic lemmas *)
+
+  lemma modular_1 : forall c s  :state. 0<=s<k_states -> 0<=c<k_states ->  c<>s ->
+     mod (c-(incre s)) k_states - mod (c-s) k_states = -1
+
+  lemma modular_2 : forall x y :int. 0<=x<k_states -> 0<=y<k_states ->
+     (x>=y ->  mod (x-y) k_states = x-y)
+     /\
+     (x<y ->  mod (x-y) k_states = k_states-y+x)
+
+  lemma modular_3 : forall base delta :int. 0<=base<k_states -> 1<=delta<k_states ->
+     k_states-delta = mod (base - mod (base + delta) k_states) k_states
+
+
+  let predicate case_node (_node) = true
+  let predicate case_state (_state) = true
+
+
+
+  (* clone World theory to get additional types/functions *)
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+
+  (* System initialization: node states and messages      *)
+  let function initState (n:node) : state
+  = if n=n_nodes-1 || n=0 then 0
+    else n
+
+  (* defining when a node in the ring has the token *)
+  predicate has_token (lS:map node state) (i:node) =
+  (i = 0 /\  lS i =  lS (n_nodes-1))
+  \/
+  (i > 0 /\ i < n_nodes /\ lS i <> lS (i-1))
+
+
+
+
+
+   (* Expressing that there exist no occurrences of a state
+      from a given node on
+    *)
+  let rec ghost predicate noOcc_from (w:world) (a:state) (i:node)
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    requires { 0 <= a < k_states }
+    requires { 0 <= i <= n_nodes}
+    ensures { result <-> forall j :int. i<=j<n_nodes -> w j <> a }
+    variant { n_nodes-i }
+  = i=n_nodes || (w i <> a && noOcc_from w a (i+1))
+
+
+  let ghost predicate noOcc (w:world) (a:state)
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    requires { 0 <= a < k_states }
+    ensures { result <-> forall j :int. 0<=j<n_nodes -> w j <> a }
+  = noOcc_from w a 0
+
+
+
+  (* PIGEONHOLE principle
+     we construct the set of unused states and prove a lower
+     bound on its cardinality. This entails that when the entire ring
+     is considered there is at least one unused state since k_states > n_nodes,
+     which we formulate as a lemma function.
+   *)
+
+  let rec ghost setUnused_from (w :world) (i:node) : fset node
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    requires { 0 <= i <= n_nodes }
+    ensures  { forall st :state. mem st result <-> 0<=st<k_states /\ noOcc_from w st i }
+    ensures  { cardinal result >= k_states - (n_nodes-i) > 0 }
+    variant  { n_nodes-i }
+  = if i=n_nodes then interval 0 k_states
+    else let r = setUnused_from w (i+1) in
+           if mem (w i) r then diff r (singleton (w i))
+	   else r
+
+  let ghost function setUnused (w :world) : fset node
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    ensures  { forall st :state. mem st result <-> 0<=st<k_states /\ noOcc w st }
+    ensures  { cardinal result > 0 }
+  = setUnused_from w 0
+
+
+  (* It is not required to formulate the lemma; the lemma function will do
+   *)
+  (* lemma pigeonHole_lm : forall w :world. *)
+  (*   (forall n :node. validNd n -> 0 <= w n < k_states) -> exists st :state. 0<=st<k_states /\ noOcc w st *)
+
+
+
+
+  (* In the target configuration for the convergence phase
+     all nodes have the same state, thus (only) node zero holds a token
+   *)
+  predicate converged (w :world) =
+    forall i :node. validNd i -> w i = w 0
+
+  lemma converged_0hastoken : forall w :world.
+    converged w <-> (has_token w 0 /\ forall i :int. 0<i<n_nodes -> not (has_token w i))
+
+  predicate initConv (w:world) =
+    exists j : int. 0<=j<n_nodes /\ (forall k :int. 0<k<=j -> w k = w 0) /\ noOcc_from w (w 0) (j+1)
+
+
+
+  let ghost function diffZero (w :world) (s :state)
+    requires { 0 <= w 0 < k_states /\ 0 <= s < k_states }
+    ensures  { 0 <= result < k_states }
+    ensures  { w 0 <= s < k_states -> result = s - w 0 }
+    ensures  { 0 <= s < w 0 -> result = k_states + s - w 0 }
+  = mod (s - w 0) k_states
+
+
+
+  let rec ghost function convState_hlpr (w:world) (base:state) (delta:int) : state
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    requires { 0 <= base < k_states /\ 1 <= delta < k_states }
+    requires { base + delta <  k_states ->
+               (forall s :state. base<=s<base+delta -> not (noOcc w s))
+               /\
+    	       exists c :state. (base + delta <= c < k_states \/ 0 <= c < base) /\ noOcc w c }
+    requires { base + delta >= k_states ->
+               (forall s :state. base<=s<k_states -> not (noOcc w s))
+               /\
+               (forall s :state. 0<=s<base+delta-k_states -> not (noOcc w s))
+               /\
+    	       exists c :state. base+delta-k_states <= c < base /\ noOcc w c }
+    ensures  { base+delta < k_states -> base+delta <= result < k_states \/ 0<=result<base }
+    ensures  { base+delta < k_states -> base+delta <= result < k_states -> forall s :state. base<=s<result -> not (noOcc w s) }
+    ensures  { base+delta < k_states -> 0<=result<base -> forall s :state. base<=s<k_states \/ 0<=s<result -> not (noOcc w s) }
+    ensures  { base+delta >= k_states -> base+delta-k_states <= result < base  }
+    ensures  { base+delta >= k_states -> forall s :state. base<=s<k_states -> not (noOcc w s) }
+    ensures  { base+delta >= k_states -> forall s :state. 0<=s<result -> not (noOcc w s) }
+    ensures  { noOcc w result }
+    variant  { k_states-delta }
+    = let s = mod (base + delta) k_states
+    in if delta+1 = k_states then s
+      else if (noOcc w s) then s
+        else convState_hlpr w base (delta+1)
+
+
+
+  (* The convergence state is the non-occurring state that is closer to w 0
+   *)
+  let ghost function convState (w:world) : state
+    requires { forall n :int. validNd n -> 0 <= w n < k_states }
+    ensures  { 0 <= result < k_states }
+    ensures  { not (initConv w) -> noOcc w result }
+    ensures  { noOcc_from w (w 0) 1 -> result = w 0 }
+    ensures  { initConv w <-> result = w 0 }
+    ensures  { w 0 <= result < k_states ->  forall s :state. w 0<=s<result -> not (noOcc w s) }
+    ensures  { 0 <= result < w 0 -> forall s :state. w 0<=s<k_states \/ 0<=s<result -> not (noOcc w s) }
+    ensures  { forall s :state. 0<=s<k_states -> s<>result -> noOcc w s -> diffZero w result < diffZero w s }
+  = if (initConv w) then (w 0) else convState_hlpr w (w 0) 1
+
+
+
+  (* enabling predicate for a given node
+     ensures that the transition relation being considered here
+     indeed terminates when the target legal configuration is reached
+   *)
+  let ghost predicate enabled (lS:map node state) (i:node)
+  = has_token lS i && not (converged lS)
+
+  (* handling function *)
+  let function handleEnbld (h:node) (lS:map node state) : state
+  = if h = 0 then incre (lS (n_nodes-1))
+             else lS (h-1)
+
+
+
+  (* candidate invariant predicate *)
+  predicate inv (lS:map node state) =
+    (forall n :int. validNd n -> 0 <= lS n < k_states)
+
+  let ghost predicate indpred (w:world) = inv (w)
+
+
+
+  (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
+  clone modelReadallEnabled.Steps with
+    type node,
+    type state,
+    val validNd,
+    val case_node,
+    val case_state,
+    val initState,
+    val indpred,
+    val enabled,
+    val handleEnbld
+
+
+  (* A few obvious facts when node 0 steps:
+       surely w is not an initConv config
+       the state of node 0 is not the convergence state.
+       Thus, the latter may not occur in the configuration.
+   *)
+  lemma step_obvious : forall w w' :world .
+    indpred w -> step w 0 w' -> not (initConv w) /\ convState w <> w 0 /\ noOcc w (convState w) /\
+      w' 0 = incre (w 0) /\ w' 0 = incre (w (n_nodes -1))
+
+  lemma step_noOcc : forall w w' :world, k :node, s :state.
+    indpred w -> step w k w' -> 0<=s<k_states -> w k <> s -> noOcc w' s -> noOcc w s
+
+  (* Important lemma to prove the next one.
+     Requires use of interactive proof transformations:
+     unfolding of initConv predicate; case analysis; existential witnesses
+   *)
+  lemma step_initConv : forall w w' :world, k :node.
+    indpred w -> step w k w' -> initConv w -> initConv w'
+
+  lemma step_changes_convState : forall w w' :world, k :node.
+    indpred w -> step w k w' -> convState w' <> convState w -> noOcc w' (convState w)
+
+
+
+
+
+  (* measure of a single node
+   *)
+  let ghost function measureNode (w:world) (i:int) : int
+    requires { indpred w }
+    requires { validNd i }
+    ensures  { result >= 0 }
+    ensures  { i=0 -> convState w >= w i -> result = n_nodes * (convState w - w i) }
+    ensures  { i=0 -> convState w <  w i -> result = n_nodes * (k_states - w i + convState w) }
+  = let p = if i=0 then diffZero w (convState w)
+                   else if has_token w i then 1 else 0
+    in (n_nodes-i) * p
+
+
+  (* measure of nodes 0 to n-1
+   *)
+  let rec ghost function measureNodes (w:world) (n:int) : int
+    requires { indpred w }
+    requires { 0 <= n <= n_nodes }
+    ensures  { result >= 0 }
+    ensures  { result = 0 -> forall i :int. 0<=i<n -> measureNode w i = 0 }
+    variant  { n }
+  = if n=0 then 0
+    else measureNode w (n-1) + measureNodes w (n-1)
+
+
+  (* measure of entire ring
+     This function is a fundamental part of the specification
+     PROPERTY 1 - Before convergence, the measure (which is always non-negative) has a positive value
+   *)
+  let ghost function measureAllNodes (w:world) : int
+    requires { indpred w }
+    ensures  { result >= 0 }
+    (* ensures  { result = 0 -> converged w } *)
+    ensures  { not (converged w) -> result > 0 }   (* equivalent to the previous formulation *)
+  = measureNodes w n_nodes
+
+
+  (* The above definitions are sufficient to express ou final goal step_decreasesMeasure below.
+     However, rather than write lemmas to allow us to prove the goal, we will define a let function
+     measureDeltaNodes that calculates the decrement of the measure when a node steps, and tie it
+     to the above defs with the postcond  { result = measureNodes w' n - measureNodes w n }, and write
+     lemmas about this function in the form of postconditions.
+     measureDeltaNodes in turn uses another let function measureDeltaNode, again annotated with
+     appropriate postconditions.
+  *)
+
+
+  (* delta of a single node i, when k is the stepping node
+   *)
+  let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+    requires { indpred w }
+    requires { validNd i /\ validNd k }
+    requires { step w k w' }
+    ensures  { i = 0 -> k = 0 -> convState w' = convState w -> result + n_nodes = 0 }
+    ensures  { i = 0 -> k = 0 -> convState w' <> convState w -> result + n_nodes * (diffZero w (convState w)) = 0 }
+    ensures  { i = 0 -> k > 0 -> result + n_nodes * mod (convState w - convState w') k_states = 0 }
+    ensures  { i > 0 -> k = i-1 -> i-n_nodes <= result <= n_nodes-i }
+    ensures  { i > 0 -> k = i -> result = i-n_nodes }
+    ensures  { i > 0 -> k<>i-1 -> k<>i -> result = 0 }
+  = assert  { 0 <= convState w' < k_states} ;
+    measureNode w' i - measureNode w i
+
+
+   lemma prod : forall x y :int. x > 0 -> y > 0 -> x * y >= x /\ x * y >= y
+
+  (* delta of first n nodes, when k is the stepping node
+   *)
+  let rec ghost function measureDeltaNodes (w:world) (w':world) (n:int) (k:node) : int
+    requires { indpred w }
+    requires { 1 <= n <= n_nodes }
+    requires { validNd k }
+    requires { step w k w' }
+    ensures  { result = measureNodes w' n - measureNodes w n }
+    ensures  { 0 <= n-1 < k -> result + n_nodes * mod (convState w - convState w') k_states = 0 }
+    ensures  { n>1 -> k = n-1 -> result + n_nodes * mod (convState w - convState w') k_states = n-1-n_nodes }
+    ensures  { n>0 -> k = 0 -> convState w' <> convState w -> result + n_nodes * (diffZero w (convState w)) <= 0 }
+    ensures  { n>0 -> k = 0 -> convState w' =  convState w -> result < 0 }
+    ensures  { 0 <= k < n-1 -> result < 0 }
+    ensures  { n = n_nodes -> result < 0 }
+    variant  { n }
+  = if n=1 then measureDeltaNode w w' 0 k
+    else measureDeltaNode w w' (n-1) k + measureDeltaNodes w w' (n-1) k
+
+
+  (* PROPERTY 2 - the measure strictly decreases with every step of the system
+   *)
+  goal step_decreasesMeasure : forall w w' :world, k :node.
+    indpred w -> step w k w' -> measureAllNodes w' < measureAllNodes w
+
+
+  (* helper definitions for legal configurations *)
+  let rec ghost predicate atLeastOneToken (lS:map node state) (n:int)
+    requires { 0 <= n <= n_nodes }
+    ensures  { result <-> exists k :int. 0<=k<n /\ has_token lS k }
+    variant  { n }
+  = n > 0 && (has_token lS (n-1) || atLeastOneToken lS (n-1))
+
+  val ghost predicate atMostOneToken (lS:map node state) (n:int)
+    requires { 0 <= n <= n_nodes }
+    ensures { result <-> forall i j :int. 0<=i<n -> 0<=j<n -> has_token lS i -> has_token lS j -> i=j }
+
+  predicate oneToken (w:world) = atMostOneToken w n_nodes /\ atLeastOneToken w n_nodes
+
+
+  (* PROPERTY 3 - final confuguration of convergence phase is legal
+     and first node holds the token
+  *)
+  goal converged_oneToken : forall w :world. converged w -> oneToken w /\ has_token w 0
+
+end

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Vampire" version="4.5.1" timelimit="300" steplimit="0" memlimit="5000"/>
+<prover id="1" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Alt-Ergo" version="2.4.0" timelimit="120" steplimit="0" memlimit="1000"/>
+<prover id="4" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="CVC4" version="1.8" alternative="strings+counterexamples" timelimit="120" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="leaderlect-ring.mlw"/>
+<theory name="LeaderElectRing" proved="true">
+ <goal name="next&#39;vc" expl="VC for next" proved="true">
+ <proof prover="5"><result status="valid" time="0.05" steps="8789"/></proof>
+ </goal>
+ <goal name="maxId_fn&#39;vc" expl="VC for maxId_fn" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="0.03" steps="25971"/></proof>
+ </goal>
+ <goal name="btw_next_lm" proved="true">
+ <proof prover="3"><result status="valid" time="0.21" steps="1843"/></proof>
+ </goal>
+ <goal name="initMsgs_fn&#39;vc" expl="VC for initMsgs_fn" proved="true">
+ <proof prover="1"><result status="timeout" time="1.00" steps="112447"/></proof>
+ <proof prover="3" timelimit="1"><result status="timeout" time="1.00"/></proof>
+ <proof prover="4"><result status="timeout" time="1.00" steps="1484243"/></proof>
+ <transf name="split_vc" proved="true" >
+  <goal name="initMsgs_fn&#39;vc.0" expl="variant decrease" proved="true">
+  <proof prover="4"><result status="valid" time="0.02" steps="19234"/></proof>
+  </goal>
+  <goal name="initMsgs_fn&#39;vc.1" expl="precondition" proved="true">
+  <proof prover="4"><result status="valid" time="0.03" steps="37523"/></proof>
+  </goal>
+  <goal name="initMsgs_fn&#39;vc.2" expl="postcondition" proved="true">
+  <proof prover="1"><result status="timeout" time="1.00" steps="118309"/></proof>
+  <proof prover="3" timelimit="1"><result status="timeout" time="1.00"/></proof>
+  <proof prover="4"><result status="timeout" time="1.00" steps="8811916"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="initMsgs_fn&#39;vc.2.0" expl="postcondition" proved="true">
+   <proof prover="4"><result status="valid" time="0.06" steps="104698"/></proof>
+   </goal>
+   <goal name="initMsgs_fn&#39;vc.2.1" expl="postcondition" proved="true">
+   <proof prover="4"><result status="valid" time="0.07" steps="149365"/></proof>
+   </goal>
+   <goal name="initMsgs_fn&#39;vc.2.2" expl="postcondition" proved="true">
+   <proof prover="4"><result status="valid" time="0.05" steps="80142"/></proof>
+   </goal>
+   <goal name="initMsgs_fn&#39;vc.2.3" expl="postcondition" proved="true">
+   <proof prover="4"><result status="valid" time="0.05" steps="82070"/></proof>
+   </goal>
+   <goal name="initMsgs_fn&#39;vc.2.4" expl="postcondition" proved="true">
+   <proof prover="4" timelimit="300" memlimit="5000"><result status="valid" time="2.03" steps="21909231"/></proof>
+   </goal>
+   <goal name="initMsgs_fn&#39;vc.2.5" expl="postcondition" proved="true">
+   <proof prover="4"><result status="valid" time="0.22" steps="897558"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="initMsgs&#39;vc" expl="VC for initMsgs" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="0.05" steps="40758"/></proof>
+ <proof prover="5"><result status="valid" time="0.05" steps="13790"/></proof>
+ </goal>
+ <goal name="Steps.case_node&#39;refn&#39;vc" expl="VC for case_node&#39;refn" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="0.03" steps="3861"/></proof>
+ </goal>
+ <goal name="Steps.case_state&#39;refn&#39;vc" expl="VC for case_state&#39;refn" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="0.03" steps="3861"/></proof>
+ </goal>
+ <goal name="Steps.case_msg&#39;refn&#39;vc" expl="VC for case_msg&#39;refn" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="0.03" steps="3861"/></proof>
+ </goal>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
+ <proof prover="4" timelimit="120"><result status="valid" time="1.01" steps="2222590"/></proof>
+ </goal>
+ <goal name="Steps.handleMsg&#39;refn&#39;vc" expl="VC for handleMsg&#39;refn" proved="true">
+ <transf name="unfold" proved="true" arg1="handleMsg">
+  <goal name="handleMsg&#39;refn&#39;vc.0" expl="VC for handleMsg&#39;refn" proved="true">
+  <transf name="unfold" proved="true" arg1="indpred">
+   <goal name="handleMsg&#39;refn&#39;vc.0.0" expl="VC for handleMsg&#39;refn" proved="true">
+   <transf name="unfold" proved="true" arg1="inv">
+    <goal name="handleMsg&#39;refn&#39;vc.0.0.0" expl="VC for handleMsg&#39;refn" proved="true">
+    <transf name="split_vc" proved="true" >
+     <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0" expl="postcondition" proved="true">
+     <transf name="split_vc" proved="true" >
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0" expl="postcondition" proved="true">
+      <transf name="inline_goal" proved="true" >
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0" expl="postcondition" proved="true">
+       <transf name="split_all_full" proved="true" >
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0.0" expl="VC for handleMsg&#39;refn" proved="true">
+        <proof prover="3"><result status="valid" time="0.57" steps="9818"/></proof>
+        </goal>
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0.1" expl="VC for handleMsg&#39;refn" proved="true">
+        <proof prover="3"><result status="valid" time="0.71" steps="10151"/></proof>
+        </goal>
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0.2" expl="VC for handleMsg&#39;refn" proved="true">
+        <proof prover="3"><result status="valid" time="0.62" steps="11688"/></proof>
+        </goal>
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0.3" expl="VC for handleMsg&#39;refn" proved="true">
+        <proof prover="3"><result status="valid" time="0.51" steps="9847"/></proof>
+        </goal>
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0.0.4" expl="VC for handleMsg&#39;refn" proved="true">
+        <proof prover="3"><result status="valid" time="0.94" steps="18803"/></proof>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.1" expl="postcondition" proved="true">
+      <proof prover="3"><result status="valid" time="0.54" steps="10295"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.2" expl="postcondition" proved="true">
+      <proof prover="3"><result status="valid" time="0.60" steps="11794"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.3" expl="postcondition" proved="true">
+      <transf name="remove" proved="true" arg1="zero,one,(-),(&gt;),(&lt;=),(&gt;=),abs,get,set,(!),map,ok_NodeState,case_node,case_state,case_msg,dest1,src2,payload1,initState,initMsgs,handleMsg,inv,indpred,dest,src1,payload,localState,eq_pckt,initWorld,remove_one,s1,Assoc1,Unit_def_l,Unit_def_r,Inv_def_l,Inv_def_r,Comm1,Assoc,Mul_distr_l,Mul_distr_r,Comm,Unitary,NonTrivialRing,Refl,Trans,Antisymm,Total,ZeroLessOne,CompatOrderAdd,CompatOrderMult,Abs_le,Mod_bound,Mod_1,Div_1_left,Div_minus1_left,Mod_1_left,Mod_minus1_left,is_nil&#39;spec,maxId_fn&#39;def,btw_next_lm,initMsgs_fn&#39;spec,initMsgs_fn&#39;def,Requires5,Requires4,Requires3,Requires2,Requires1,Requires,H4,H2">
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.3.0" expl="postcondition" proved="true">
+       <proof prover="3"><result status="valid" time="0.22" steps="3946"/></proof>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.4" expl="postcondition" proved="true">
+      <transf name="remove" proved="true" arg1="maxId_fn&#39;def">
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.4.0" expl="postcondition" proved="true">
+       <transf name="inline_goal" proved="true" >
+        <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.4.0.0" expl="postcondition" proved="true">
+        <transf name="split_all_full" proved="true" >
+         <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.4.0.0.0" expl="postcondition" proved="true">
+         <proof prover="3"><result status="valid" time="0.63" steps="11366"/></proof>
+         </goal>
+        </transf>
+        </goal>
+       </transf>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.5" expl="postcondition" proved="true">
+      <proof prover="0"><result status="valid" time="9.57"/></proof>
+      <transf name="remove" proved="true" arg1="zero,one,(-),(&gt;),(&lt;=),(&gt;=),abs,get,is_nil,length,mem,(++),map,next,maxId_global,ok_NodeState,ok_Msg,case_node,case_state,case_msg,dest1,src2,payload1,between,initState,initMsgs,handleMsg,inv,indpred,src1,payload,inFlightMsgs,eq_pckt,initWorld,remove_one,s,Assoc1,Unit_def_l,Unit_def_r,Inv_def_l,Inv_def_r,Comm1,Assoc,Mul_distr_l,Mul_distr_r,Comm,Unitary,NonTrivialRing,Refl,Trans,Antisymm,Total,ZeroLessOne,CompatOrderAdd,CompatOrderMult,Abs_le,Abs_pos,Div_mod,Mod_bound,Div_unique,Div_bound,Mod_1,Div_1,Div_inf,Div_inf_neg,Mod_0,Div_1_left,Div_minus1_left,Mod_1_left,Mod_minus1_left,Div_mult,Mod_mult,is_nil&#39;spec,Length_nonnegative,Length_nil,nth_cons_0,Append_assoc,Append_l_nil,Append_length,mem_append,mem_decomp,uniqueIds,maxId_fn&#39;spec,btw_next_lm,initMsgs_fn&#39;spec,initMsgs_fn&#39;def,remove_one&#39;spec,Requires5,Requires4,Requires3,Requires2,Requires1,Requires">
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.5.0" expl="postcondition" proved="true">
+       <proof prover="0"><result status="valid" time="0.22"/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="uniqueLeader" proved="true">
+ <proof prover="3"><result status="valid" time="0.09" steps="361"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

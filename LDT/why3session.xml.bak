@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="1" name="Alt-Ergo" version="2.3.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="LDT.mlw"/>
+<theory name="Lock" proved="true">
+ <goal name="next&#39;vc" expl="VC for next" proved="true">
+ <proof prover="2"><result status="valid" time="0.04" steps="6713"/></proof>
+ </goal>
+ <goal name="zeroHeld&#39;vc" expl="VC for zeroHeld" proved="true">
+ <proof prover="2"><result status="valid" time="0.09" steps="14352"/></proof>
+ </goal>
+ <goal name="oneHeld&#39;vc" expl="VC for oneHeld" proved="true">
+ <proof prover="2"><result status="valid" time="0.30" steps="44475"/></proof>
+ </goal>
+ <goal name="ok_trace&#39;vc" expl="VC for ok_trace" proved="true">
+ <proof prover="2"><result status="valid" time="0.14" steps="23164"/></proof>
+ </goal>
+ <goal name="Steps.case_node&#39;refn&#39;vc" expl="VC for case_node&#39;refn" proved="true">
+ <proof prover="2"><result status="valid" time="0.05" steps="13784"/></proof>
+ </goal>
+ <goal name="Steps.case_state&#39;refn&#39;vc" expl="VC for case_state&#39;refn" proved="true">
+ <proof prover="2"><result status="valid" time="0.05" steps="13784"/></proof>
+ </goal>
+ <goal name="Steps.case_msg&#39;refn&#39;vc" expl="VC for case_msg&#39;refn" proved="true">
+ <proof prover="2"><result status="valid" time="0.05" steps="13784"/></proof>
+ </goal>
+ <goal name="Steps.case_output&#39;refn&#39;vc" expl="VC for case_output&#39;refn" proved="true">
+ <proof prover="2"><result status="valid" time="0.05" steps="13784"/></proof>
+ </goal>
+ <goal name="Steps.record_outputs&#39;refn&#39;vc" expl="VC for record_outputs&#39;refn" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="record_outputs&#39;refn&#39;vc.0" expl="postcondition" proved="true">
+  <proof prover="2" timelimit="5"><result status="valid" time="0.06" steps="15014"/></proof>
+  </goal>
+ </transf>
+ <transf name="unfold" proved="true" arg1="record_outputs">
+  <goal name="record_outputs&#39;refn&#39;vc.0" expl="VC for record_outputs&#39;refn" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="record_outputs&#39;refn&#39;vc.0.0" expl="postcondition" proved="true">
+   <proof prover="2" timelimit="5"><result status="valid" time="0.06" steps="15146"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="indpred&#39;refn&#39;vc.0" expl="postcondition" proved="true">
+  <transf name="inline_goal" proved="true" >
+   <goal name="indpred&#39;refn&#39;vc.0.0" expl="postcondition" proved="true">
+   <transf name="split_all_full" proved="true" >
+    <goal name="indpred&#39;refn&#39;vc.0.0.0" expl="postcondition" proved="true">
+    <transf name="inline_goal" proved="true" >
+     <goal name="indpred&#39;refn&#39;vc.0.0.0.0" expl="postcondition" proved="true">
+     <transf name="split_all_full" proved="true" >
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.0" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.14" steps="21644"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.1" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.17" steps="21512"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.2" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2" timelimit="5" memlimit="2000"><result status="valid" time="1.07" steps="192314"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.3" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.17" steps="21883"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.4" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.28" steps="31714"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.5" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.16" steps="23350"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.6" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.20" steps="23539"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.7" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.13" steps="21830"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.8" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.13" steps="21813"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.9" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.14" steps="22292"/></proof>
+      </goal>
+      <goal name="indpred&#39;refn&#39;vc.0.0.0.0.10" expl="VC for indpred&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.13" steps="21346"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="indpred&#39;refn&#39;vc.1" expl="postcondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.16" steps="18170"/></proof>
+  </goal>
+  <goal name="indpred&#39;refn&#39;vc.2" expl="postcondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.05" steps="14545"/></proof>
+  </goal>
+  <goal name="indpred&#39;refn&#39;vc.3" expl="postcondition" proved="true">
+  <proof prover="2"><result status="valid" time="0.16" steps="23784"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
+ <proof prover="2" timelimit="5"><result status="valid" time="1.61" steps="203684"/></proof>
+ </goal>
+ <goal name="Steps.handleMsg&#39;refn&#39;vc" expl="VC for handleMsg&#39;refn" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="handleMsg&#39;refn&#39;vc.0" expl="postcondition" proved="true">
+  <transf name="inline_goal" proved="true" >
+   <goal name="handleMsg&#39;refn&#39;vc.0.0" expl="postcondition" proved="true">
+   <transf name="split_all_full" proved="true" >
+    <goal name="handleMsg&#39;refn&#39;vc.0.0.0" expl="postcondition" proved="true">
+    <transf name="inline_goal" proved="true" >
+     <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0" expl="postcondition" proved="true">
+     <transf name="split_all_full" proved="true" >
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.0" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.34" steps="42294"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.1" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.42" steps="40320"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.2" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="4.08" steps="963620"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.3" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.33" steps="46303"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.4" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="1" timelimit="1"><result status="valid" time="0.76" steps="2539"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.5" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="1"><result status="valid" time="0.64" steps="2216"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.6" expl="VC for handleMsg&#39;refn" proved="true">
+      <transf name="split_vc" proved="true" >
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.6.0" expl="VC for handleMsg&#39;refn" proved="true">
+       <proof prover="2" timelimit="5"><result status="valid" time="0.96" steps="117514"/></proof>
+       </goal>
+      </transf>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.7" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.53" steps="61769"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.8" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.54" steps="61705"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.9" expl="VC for handleMsg&#39;refn" proved="true">
+      <proof prover="2" timelimit="5"><result status="valid" time="0.47" steps="66191"/></proof>
+      </goal>
+      <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.10" expl="VC for handleMsg&#39;refn" proved="true">
+      <transf name="unfold" proved="true" arg1="ok_trace">
+       <goal name="handleMsg&#39;refn&#39;vc.0.0.0.0.10.0" expl="VC for handleMsg&#39;refn" proved="true">
+       <proof prover="2" timelimit="5"><result status="valid" time="0.58" steps="69812"/></proof>
+       </goal>
+      </transf>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="handleMsg&#39;refn&#39;vc.1" expl="postcondition" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="handleMsg&#39;refn&#39;vc.1.0" expl="postcondition" proved="true">
+   <proof prover="1"><result status="valid" time="0.02" steps="64"/></proof>
+   </goal>
+   <goal name="handleMsg&#39;refn&#39;vc.1.1" expl="postcondition" proved="true">
+   <proof prover="1"><result status="valid" time="0.02" steps="103"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

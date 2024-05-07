@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="5" steplimit="0" memlimit="2000"/>
+<prover id="1" name="CVC4" version="1.7" alternative="counterexamples" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="3" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="selfstab-biarray.mlw"/>
+<theory name="SelfStab_Biarray" proved="true">
+ <goal name="state_lm" proved="true">
+ <proof prover="3"><result status="valid" time="0.11" steps="1885"/></proof>
+ </goal>
+ <goal name="noTokens&#39;vc" expl="VC for noTokens" proved="true">
+ <proof prover="3"><result status="valid" time="0.10" steps="8916"/></proof>
+ </goal>
+ <goal name="atLeastOneToken&#39;vc" expl="VC for atLeastOneToken" proved="true">
+ <proof prover="2"><result status="valid" time="0.03" steps="32122"/></proof>
+ <proof prover="3"><result status="timeout" time="1.00" steps="50992"/></proof>
+ </goal>
+ <goal name="atMostOneToken&#39;vc" expl="VC for atMostOneToken" proved="true">
+ <proof prover="3"><result status="valid" time="0.85" steps="54151"/></proof>
+ </goal>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
+ <proof prover="3"><result status="valid" time="0.36" steps="34386"/></proof>
+ </goal>
+ <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
+ <proof prover="0" timelimit="1" memlimit="1000" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="1680362"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="54478"/></proof>
+ <transf name="split_vc" proved="true" >
+  <goal name="handleEnbld&#39;refn&#39;vc.0" expl="postcondition" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="7542939"/></proof>
+  <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="250713"/></proof>
+  <transf name="inline_goal" proved="true" >
+   <goal name="handleEnbld&#39;refn&#39;vc.0.0" expl="postcondition" proved="true">
+   <transf name="split_all_full" proved="true" >
+    <goal name="handleEnbld&#39;refn&#39;vc.0.0.0" expl="postcondition" proved="true">
+    <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+    <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="10619924"/></proof>
+    <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="250524"/></proof>
+    <transf name="inline_goal" proved="true" >
+     <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0" expl="postcondition" proved="true">
+     <transf name="split_all_full" proved="true" >
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.0" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="3"><result status="valid" time="0.07" steps="11530"/></proof>
+      </goal>
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.1" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.03" steps="51457"/></proof>
+      <proof prover="3"><result status="timeout" time="1.00" steps="60501"/></proof>
+      </goal>
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.2" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="2"><result status="valid" time="0.20" steps="182058"/></proof>
+      <proof prover="3"><result status="timeout" time="1.00" steps="66732"/></proof>
+      </goal>
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.3" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="3"><result status="valid" time="0.11" steps="15091"/></proof>
+      </goal>
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.4" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="3"><result status="valid" time="0.15" steps="15447"/></proof>
+      </goal>
+      <goal name="handleEnbld&#39;refn&#39;vc.0.0.0.0.5" expl="VC for handleEnbld&#39;refn" proved="true">
+      <proof prover="0" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+      <proof prover="2"><result status="valid" time="0.20" steps="259876"/></proof>
+      <proof prover="3"><result status="timeout" time="1.00" steps="71711"/></proof>
+      </goal>
+     </transf>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="oneToken" proved="true">
+ <proof prover="0" timelimit="1" memlimit="1000" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="59271"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="1747158"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="65840"/></proof>
+ <transf name="split_vc" proved="true" >
+  <goal name="oneToken.0" proved="true">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="6786939"/></proof>
+  <proof prover="3" timelimit="5" memlimit="2000" obsolete="true"><result status="timeout" time="5.00" steps="164820"/></proof>
+  <transf name="inline_goal" proved="true" >
+   <goal name="oneToken.0.0" proved="true">
+   <transf name="split_all_full" proved="true" >
+    <goal name="oneToken.0.0.0" proved="true">
+    <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><undone/></proof>
+    <proof prover="3"><result status="valid" time="0.12" steps="11894"/></proof>
+    </goal>
+    <goal name="oneToken.0.0.1" proved="true">
+    <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+    <proof prover="2" timelimit="30" memlimit="4000" obsolete="true"><result status="valid" time="17.23" steps="25213840"/></proof>
+    <proof prover="3"><result status="valid" time="0.12" steps="11815"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

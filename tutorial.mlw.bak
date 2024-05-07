@@ -1,0 +1,10 @@
+theory Bijection
+  type t
+  type u
+
+  function of t : u
+  function to_ u : t
+
+  axiom To_of : forall x : t. to_ (of x) = x
+  axiom Of_to : forall y : u. of (to_ y) = y
+end
