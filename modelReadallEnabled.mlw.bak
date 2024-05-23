@@ -50,7 +50,7 @@ module Steps
   (* candidate inductive predicate
      contract ensures initial world satifies the predicate *)
   val ghost predicate indpred (w:world)
-    ensures { w=initWorld -> result }
+    ensures { forall w_init: world. w=w_init -> result }
 
 
   (* handleEnbld-enabling predicate, to be instantiated when cloning *)

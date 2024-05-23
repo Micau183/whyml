@@ -42,15 +42,10 @@ module Steps
   (* product types *)
   type world = map node state
 
-  (* components of the initial world, defined for each system *)
-  val function initState (node) : state
-
-  constant initWorld : world = initState
-
   (* candidate inductive predicate
      contract ensures initial world satifies the predicate *)
   val ghost predicate indpred (w:world)
-    ensures { w=initWorld -> result }
+    ensures { w=initworld -> result }
 
 
   (* handleEnbld-enabling predicate, to be instantiated when cloning *)
@@ -106,7 +101,7 @@ module Steps
   lemma noNegative_step_TR : forall w w' :world, steps :int.
     step_TR w w' steps -> steps >= 0
 
-  predicate reachable (w:world) = exists steps :int. step_TR initWorld w steps
+  predicate reachable (w:world) = exists steps :int. forall w_init:world. step_TR w_init w steps
 
   (* inductive predicate is preserved by many steps and holds
      in reachable worlds *)

@@ -1,23 +1,98 @@
+module FreeSet
+  use int.Int
+  use set.SetAppInt
+
+let function free (colors: set) (k:int) : int =
+  requires { 1 < k }
+  requires  { subset colors (interval 0 k) }
+  requires  { not  colors == (interval 0 k) }
+  ensures { 0 <= result < k }
+  ensures { not mem result colors }
+  ensures { forall x. (0 <= x <=k /\ not mem x colors) -> result <= x }
+  min_elt (diff  (interval 0 k) colors)
+
+end
+
+
+module PigeonholeProof
+
+  use int.Int
+  use list.List
+  use map.Map
+  use pigeon.Pigeonhole
+  use list.Mem
+  use list.Length
+    let rec function mem_list (x: int) (l: list int) : bool 
+  ensures {result <-> mem x l}=
+    match l with
+    |Nil  -> false
+    |Cons y r -> x = y || mem_list x r 
+    end
+    
+    use list.NthNoOpt
+
+  let k_color = 10 
+
+  let  min_color_list(l: list int): int
+    requires { forall i. 0 <= i < length l -> 0 <= nth i l <= k_color }
+  =
+    let rec aux(liste: list int)(i: int)
+      variant { k_color - i }
+    =
+      if mem_list i liste then aux liste (i + 1)
+      else i
+    in
+    aux l 0
+
+
+end
+
 module Testing
   use real.Real
   use int.Int
+
+use array.Array
+  use ref.Ref
+  use array.ArraySwap
+use array.ArrayPermut
+use random.Random
+use random.State
   use export list.List
-  use export list.Length
+  use list.Length
   use export list.Nth
   use option.Option
   use list.Mem
   use list.Append
   use list.Nth
-    use array.Array
-  use ref.Ref
-  use array.ArraySwap
-use array.ArrayPermut
+
+  use pigeon.Pigeonhole
+
+  
+  
   
 axiom cons: forall x:int. forall l: list int. mem x (Cons x l) = true
 
 val constant k_color : int
  
 val constant max_array : int 
+
+val s : state
+
+  (* Pure function to generate a random number between 0 and n *)
+let random_number_between_0_and_n (n: int) : int
+    requires { n > 0 }  (* Ensuring n is positive *)
+    ensures { 0 <= result < n }  (* Ensuring the result is between 0 and n *)
+    = let r  = State.random_int s n  in r 
+
+ 
+let random_example (n: int) : int 
+requires{n>0}
+ensures{0<=result <= n}=
+  let a =  Random.self_init () in 
+  Random.random_int n
+
+    
+  
 
   let test2 (l:list int) =
   match l with
@@ -37,7 +112,7 @@ val constant max_array : int
     if i = 0 then (Cons i l) else Cons i (aux l ((i-1)))
       in aux Nil k  
    
-   
+ (*  
   let function contains (a: array int) (x: int) : bool
     ensures { exists i. 0 <= i < length a /\ a[i] = x  <-> result = true}
   =
@@ -49,9 +124,9 @@ val constant max_array : int
     done;
     !found
     
-
+*)
     
-
+(*
 let min_color(tab: array int) : int =
       (*ensures {0 <= result <= length tab /\ not (contains tab result)}*)
       ensures {forall i. 0 <= i < result -> contains tab i}
@@ -67,8 +142,7 @@ let min_color(tab: array int) : int =
     done;
     !mini
     
-    
-
+  *)  
 
 
 
@@ -80,7 +154,22 @@ let min_color(tab: array int) : int =
     |Nil  -> false
     |Cons y r -> x = y || mem_list x r 
     end
+    
+    use list.NthNoOpt
+    
+  let function min_color_list( l: list int ) : int 
+  requires{ forall i. 0<= i <= length l -> 0 <= (nth i l) <= k_color} =
+  let rec aux (liste : list int)(i : int) 
+  variant{ k_color - i} =
+    if mem_list i liste 
+      then aux liste (i+1)
+      else i 
+  in aux l 0
   
+  
+
+
+
   
 let function get_free_state (l:list int) : (list int)=
   let color_liste = n_list 5 in 

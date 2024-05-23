@@ -2,49 +2,49 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
-<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="3" steplimit="0" memlimit="1000"/>
-<prover id="1" name="CVC4" version="1.8" timelimit="3" steplimit="0" memlimit="1000"/>
-<prover id="2" name="Z3" version="4.8.6" timelimit="3" steplimit="0" memlimit="1000"/>
+<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
-<path name=".."/><path name="selfstab-ring.mlw"/>
+<path name=".."/><path name="selfstab-ring-slowfast.mlw"/>
 <theory name="SelfStab_Ring_Closure" proved="true">
  <goal name="incre&#39;vc" expl="VC for incre" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.05" steps="21475"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="21475"/></proof>
  </goal>
  <goal name="atLeastOneToken&#39;vc" expl="VC for atLeastOneToken" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.05" steps="27762"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="27762"/></proof>
  </goal>
  <goal name="first_last" proved="true">
  <transf name="split_vc" proved="true" >
   <goal name="first_last.0" proved="true">
   <transf name="induction" proved="true" arg1="n">
    <goal name="first_last.0.0" expl="base case" proved="true">
-   <proof prover="2" timelimit="7"><result status="valid" time="0.05" steps="29883"/></proof>
+   <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="29883"/></proof>
    </goal>
    <goal name="first_last.0.1" expl="recursive case" proved="true">
-   <proof prover="2" timelimit="7"><result status="valid" time="0.05" steps="32459"/></proof>
+   <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="32459"/></proof>
    </goal>
   </transf>
   </goal>
  </transf>
  </goal>
  <goal name="atLeastOneTokenLm" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.05" steps="33062"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="33062"/></proof>
  </goal>
  <goal name="Steps.case_node&#39;refn&#39;vc" expl="VC for case_node&#39;refn" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.04" steps="2422"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="2422"/></proof>
  </goal>
  <goal name="Steps.case_state&#39;refn&#39;vc" expl="VC for case_state&#39;refn" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.03" steps="2422"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.03" steps="2422"/></proof>
  </goal>
  <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.07" steps="65988"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.07" steps="65988"/></proof>
  </goal>
  <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.08" steps="125483"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.08" steps="125483"/></proof>
  </goal>
  <goal name="oneToken" proved="true">
- <proof prover="2" timelimit="7"><result status="valid" time="0.04" steps="41637"/></proof>
+ <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="41637"/></proof>
  </goal>
 </theory>
 <theory name="SelfStab_Ring_Convergence" proved="true">
@@ -343,7 +343,7 @@
  <goal name="step_changes_convState" proved="true">
  <transf name="split_vc" proved="true" >
   <goal name="step_changes_convState.0" proved="true">
-  <proof prover="1" timelimit="7" memlimit="2000"><result status="valid" time="2.35" steps="240389"/></proof>
+  <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="2.35" steps="240389"/></proof>
   </goal>
  </transf>
  </goal>
@@ -453,7 +453,7 @@
   <goal name="measureDeltaNode&#39;vc.7" expl="postcondition" proved="true">
   <transf name="split_vc" proved="true" >
    <goal name="measureDeltaNode&#39;vc.7.0" expl="postcondition" proved="true">
-   <proof prover="0" timelimit="45" memlimit="4000"><result status="valid" time="9.73" steps="59205"/></proof>
+   <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="9.73" steps="59205"/></proof>
    </goal>
   </transf>
   </goal>
@@ -516,7 +516,14 @@
   <proof prover="2"><result status="valid" time="0.07" steps="146020"/></proof>
   </goal>
   <goal name="measureDeltaNodes&#39;vc.14" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.04" steps="190"/></proof>
+  <transf name="split_vc" proved="true" >
+   <goal name="measureDeltaNodes&#39;vc.14.0" expl="postcondition" proved="true">
+   <proof prover="2"><result status="valid" time="0.03" steps="17038"/></proof>
+   </goal>
+   <goal name="measureDeltaNodes&#39;vc.14.1" expl="postcondition" proved="true">
+   <proof prover="0"><result status="valid" time="0.04" steps="182"/></proof>
+   </goal>
+  </transf>
   </goal>
   <goal name="measureDeltaNodes&#39;vc.15" expl="postcondition" proved="true">
   <proof prover="0"><result status="valid" time="0.25" steps="1544"/></proof>
