@@ -60,11 +60,11 @@ let function free (colors: set) (k:int) : int =
     type node,
     type state
     
-  
+ (* 
 (*On renvoie 0 par défaut *)
   let function initState (k:node) : state =
   0
-  
+  *)
  
 (* renvoie true si l'un des voisins à la même couleur *)
   predicate conflict (lS: map node state) (i:node) = 
@@ -105,7 +105,7 @@ predicate inv (lS: map node state) =
   let ghost predicate indpred (w:world) = inv ( w)
 
   clone modelReadallEnabled.Steps with
-    type node, type state, val validNd, val initState, val indpred, val enabled, val handleEnbld
+    type node, type state, val validNd, val indpred, val enabled, val handleEnbld
     
 (* tout les noeuds sont bien coloriés *)
 predicate colored (w: world) =

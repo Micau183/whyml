@@ -13,19 +13,19 @@
  <proof prover="3"><result status="valid" time="0.12"/></proof>
  </goal>
  <goal name="handleEnbld&#39;vc" expl="VC for handleEnbld" proved="true">
- <proof prover="3"><result status="valid" time="0.10"/></proof>
+ <proof prover="3" timelimit="5"><result status="valid" time="0.10"/></proof>
  </goal>
  <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
- <proof prover="3"><result status="valid" time="0.06"/></proof>
+ <proof prover="3" timelimit="5"><result status="valid" time="0.06"/></proof>
  </goal>
  <goal name="Steps.enabled&#39;refn&#39;vc" expl="VC for enabled&#39;refn" proved="true">
- <proof prover="3"><result status="valid" time="0.01"/></proof>
+ <proof prover="3" timelimit="5"><result status="valid" time="0.01"/></proof>
  </goal>
  <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
- <proof prover="3"><result status="valid" time="0.03"/></proof>
+ <proof prover="3" timelimit="5"><result status="valid" time="0.03"/></proof>
  </goal>
  <goal name="colored" proved="true">
- <proof prover="3"><result status="valid" time="0.08"/></proof>
+ <proof prover="3" timelimit="5"><result status="valid" time="0.08"/></proof>
  </goal>
 </theory>
 <theory name="ColoringTerminaisonRing" proved="true">

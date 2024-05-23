@@ -56,15 +56,15 @@ let function free (colors: set) (k:int) : int =
 
 
 
-  clone modelReadallEnabled.World with
+  clone modelReadallEnabledDemon.World with
     type node,
     type state
     
-  
+ (* 
 (*On renvoie 0 par défaut *)
   let function initState (k:node) : state =
   0
-  
+  *)
  
 (* renvoie true si l'un des voisins à la même couleur *)
   predicate conflict (lS: map node state) (i:node) = 
