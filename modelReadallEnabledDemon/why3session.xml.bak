@@ -4,52 +4,40 @@
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="5" steplimit="0" memlimit="1000"/>
 <prover id="1" name="CVC4" version="1.8" timelimit="5" steplimit="0" memlimit="1000"/>
-<prover id="2" name="CVC4" version="1.8" alternative="strings" timelimit="5" steplimit="0" memlimit="1000"/>
-<prover id="6" name="Z3" version="4.8.4" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Vampire" version="4.5.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="modelReadallEnabledDemon.mlw"/>
-<theory name="Steps">
- <goal name="indpred_step">
- <proof prover="0"><result status="valid" time="0.01" steps="37"/></proof>
+<theory name="Steps" proved="true">
+ <goal name="indpred_step" proved="true">
+ <proof prover="2"><result status="valid" time="0.02"/></proof>
  </goal>
- <goal name="step_preserves_states">
- <proof prover="0"><result status="valid" time="0.00" steps="8"/></proof>
- </goal>
- <goal name="noNegative_step_TR">
- <transf name="induction_pr" >
-  <goal name="noNegative_step_TR.0">
-  <proof prover="6"><result status="valid" time="0.03" steps="16064"/></proof>
-  </goal>
-  <goal name="noNegative_step_TR.1">
-  <transf name="split_vc" >
-   <goal name="noNegative_step_TR.1.0">
-   <transf name="inline_goal" >
-    <goal name="noNegative_step_TR.1.0.0">
-    <transf name="split_all_full" >
-     <goal name="noNegative_step_TR.1.0.0.0">
-     <proof prover="1"><result status="valid" time="0.05" steps="5246"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+ <goal name="step_preserves_states" proved="true">
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
+ <transf name="induction_pr" proved="true" >
+  <goal name="step_preserves_states.0" proved="true">
+  <proof prover="1"><result status="valid" time="0.06" steps="14023"/></proof>
   </goal>
  </transf>
  </goal>
- <goal name="indpred_manySteps">
- <transf name="induction_pr" >
-  <goal name="indpred_manySteps.0">
-  <proof prover="1"><result status="valid" time="0.05" steps="5142"/></proof>
-  <proof prover="2" obsolete="true"><result status="valid" time="0.04" steps="5070"/></proof>
+ <goal name="noNegative_step_TR" proved="true">
+ <proof prover="1"><result status="timeout" time="5.00" steps="905221"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
+ <transf name="induction_pr" proved="true" >
+  <goal name="noNegative_step_TR.0" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="6"/></proof>
+  <proof prover="1"><result status="valid" time="0.06" steps="10884"/></proof>
   </goal>
-  <goal name="indpred_manySteps.1">
-  <proof prover="1"><result status="valid" time="0.05" steps="5701"/></proof>
+  <goal name="noNegative_step_TR.1" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="12"/></proof>
+  <proof prover="1"><result status="valid" time="0.07" steps="11512"/></proof>
   </goal>
  </transf>
  </goal>
- <goal name="indpred_reachable">
- <proof prover="0"><result status="valid" time="0.00" steps="50"/></proof>
+ <goal name="indpred_manySteps" proved="true">
+ <proof prover="2"><result status="valid" time="0.01"/></proof>
+ </goal>
+ <goal name="indpred_reachable" proved="true">
+ <proof prover="2"><result status="valid" time="0.01"/></proof>
  </goal>
 </theory>
 </file>
