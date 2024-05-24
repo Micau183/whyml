@@ -2,65 +2,42 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
-<prover id="3" name="Vampire" version="4.5.1" timelimit="60" steplimit="0" memlimit="1000"/>
+<prover id="0" name="Vampire" version="4.5.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="coloring.mlw"/>
-<theory name="ColoringClosureRing">
- <goal name="neighbor_set&#39;vc" expl="VC for neighbor_set">
- <proof prover="3"><result status="valid" time="0.05"/></proof>
+<theory name="Coloring_Ring" proved="true">
+ <goal name="neighbor_set&#39;vc" expl="VC for neighbor_set" proved="true">
+ <proof prover="0"><result status="valid" time="0.03"/></proof>
  </goal>
- <goal name="free&#39;vc" expl="VC for free">
- <proof prover="3"><result status="valid" time="0.12"/></proof>
+ <goal name="free&#39;vc" expl="VC for free" proved="true">
+ <proof prover="0"><result status="valid" time="0.15"/></proof>
  </goal>
- <goal name="handleEnbld&#39;vc" expl="VC for handleEnbld">
- <proof prover="3" timelimit="5"><result status="valid" time="0.10"/></proof>
+ <goal name="handleEnbld&#39;vc" expl="VC for handleEnbld" proved="true">
+ <proof prover="0"><result status="valid" time="0.06"/></proof>
  </goal>
- <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn">
- <proof prover="3" timelimit="5"><result status="valid" time="0.06"/></proof>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
+ <proof prover="0"><result status="valid" time="0.07"/></proof>
  </goal>
- <goal name="Steps.enabled&#39;refn&#39;vc" expl="VC for enabled&#39;refn">
- <proof prover="3" timelimit="5"><result status="valid" time="0.01"/></proof>
+ <goal name="Steps.enabled&#39;refn&#39;vc" expl="VC for enabled&#39;refn" proved="true">
+ <proof prover="0"><result status="valid" time="0.02"/></proof>
  </goal>
- <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn">
- <proof prover="3" timelimit="5"><result status="valid" time="0.03"/></proof>
+ <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
+ <proof prover="0"><result status="valid" time="0.03"/></proof>
  </goal>
- <goal name="colored">
- <proof prover="3" timelimit="5"><result status="valid" time="0.08"/></proof>
+ <goal name="colored" proved="true">
+ <proof prover="0"><result status="valid" time="0.05"/></proof>
  </goal>
-</theory>
-<theory name="ColoringTerminaisonRing">
- <goal name="neighbor_set&#39;vc" expl="VC for neighbor_set">
- <proof prover="3"><result status="valid" time="0.05"/></proof>
+ <goal name="energy&#39;vc" expl="VC for energy" proved="true">
+ <proof prover="0"><result status="valid" time="0.10"/></proof>
  </goal>
- <goal name="free&#39;vc" expl="VC for free">
- <proof prover="3"><result status="valid" time="0.18"/></proof>
+ <goal name="deltaEnergy&#39;vc" expl="VC for deltaEnergy" proved="true">
+ <proof prover="0"><result status="valid" time="0.08"/></proof>
  </goal>
- <goal name="handleEnbld&#39;vc" expl="VC for handleEnbld">
- <proof prover="3"><result status="valid" time="0.08"/></proof>
+ <goal name="step_decreasesEnergy" proved="true">
+ <proof prover="0"><result status="valid" time="0.09"/></proof>
  </goal>
- <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn">
- <proof prover="3"><result status="valid" time="0.06"/></proof>
- </goal>
- <goal name="Steps.enabled&#39;refn&#39;vc" expl="VC for enabled&#39;refn">
- <proof prover="3"><result status="valid" time="0.02"/></proof>
- </goal>
- <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn">
- <proof prover="3"><result status="valid" time="0.02"/></proof>
- </goal>
- <goal name="colored">
- <proof prover="3"><result status="valid" time="0.06"/></proof>
- </goal>
- <goal name="energy&#39;vc" expl="VC for energy">
- <proof prover="3"><result status="valid" time="0.09"/></proof>
- </goal>
- <goal name="deltaEnergy&#39;vc" expl="VC for deltaEnergy">
- <proof prover="3"><result status="valid" time="0.12"/></proof>
- </goal>
- <goal name="step_decreasesEnergy">
- <proof prover="3"><result status="valid" time="0.11"/></proof>
- </goal>
- <goal name="converged">
- <proof prover="3"><result status="valid" time="0.08"/></proof>
+ <goal name="converged" proved="true">
+ <proof prover="0"><result status="valid" time="0.07"/></proof>
  </goal>
 </theory>
 </file>
