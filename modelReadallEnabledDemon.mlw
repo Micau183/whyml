@@ -24,10 +24,10 @@ module Steps
   use int.Int
   use map.Map
   use list.List
-  use list.Mem
+  use list.Mem as Meml
   use list.Append
   use list.Map as Lmap
-  use set.Fset
+  use set.Fset 
 
 
  
@@ -59,19 +59,48 @@ module Steps
   val ghost predicate enabled (map node state) (i:node)
     requires { validNd i }
 
-
   (* function specifying how the outputs of the handlers are used
      both in the handler's contract and in the transition relation *)
      
-     
-     
-  function step_enbld (w:world) (n:node) (st:state) : world =
+    function map2 (f: 'a -> 'b) (u: fset 'a) : fset 'b
+    axiom map2_def:
+      forall f: 'a -> 'b, u: fset 'a, y: 'b.
+      mem y (map2 f u) <-> exists x: 'a. mem x u /\ y = f x
+      
+     function double_plus (i: int) (x: int) : int = x * 2 + i
+
+
+(* Example usage of map *)
+let ghost example_map (s: fset int) : fset int
+ensures {forall x. mem x s <-> mem (2*x + 1) result}
+= map2 (double_plus 1)s 
+ 
+ 
+ 
+let ghost s1 = add 1 empty
+let ghost s2 = add 2 s1
+let ghost s3 = add 3 s2  
+
+
+  function step_enbld_syn_l (w:world) (nl : list node) (handle : node -> world -> state ): world = 
+    match nl with 
+    |Nil -> w
+    |Cons n q -> step_enbld_syn_l (set w n (handle n w)) q handle
+    end
+
+  function step_enbld (w:world) (n:node) (st:state): world =
   
     set w n st
-
+  
+  (*  
+  function step_enbld_syn (w:world) (ns: fset node) (st:state) : world =
+    map (step_enbld w st) ns
+*)
+    
   (* handler to be executed at node h when it is enabled
      in the world lS. Preservation of the inductive predicate
      is enforced *)
+     
   val function handleEnbld (h:node) (lS:map node state) : state
     requires { validNd h }
     requires { enabled lS h}
@@ -79,10 +108,25 @@ module Steps
     requires { case_node h }
     ensures  { indpred (step_enbld lS h result) }
 
+  val function handleEnbld_syn (h:node) (lS:map node state) : state
+    requires { validNd h }
+    requires { enabled lS h}
+    requires { indpred lS }
+    requires { case_node h }
+    ensures  { indpred (step_enbld_syn_l lS h result) }
 
   (* Transition semantics, in the form of an inductive invariant *)
-
+   
   
+  inductive step_syn_l (w: world) (nl: list node) (w': world) =
+  | step_enbld_syn: forall w: world, n: node, nl: list node.
+      validNd n ->
+      enabled w n ->
+      (nl <> Nil) ->  
+      Meml.mem n nl ->
+          step_syn_l w nl (step_enbld_syn_l w nl handleEnbld)
+
+ 
     inductive step (w: world) (ns: fset node) (w': world) =
   | step_enbld: forall w: world, n: node, ns: fset node.
       validNd n ->
@@ -90,20 +134,8 @@ module Steps
       not (is_empty ns) ->
       mem n ns ->
           step w ns (step_enbld w n (handleEnbld n w))
- 
- (* Essai pas ouf
- let rec ghost function step_enbld_all (w:world) (ns:fset node) : world 
-     ensures { is_empty ns -> result = w }
-    ensures { not (is_empty ns) -> indpred result }
-    variant { cardinal ns }=
-    if is_empty ns then
-      w
-    else
-      let n = pick ns in
-      let w' = step_enbld w n (handleEnbld n w) in
-      step_enbld_all w' (remove n ns)
-     *) 
 
+(* version avec les ensembles 
   lemma indpred_step :
     forall w w' :world, ns :fset node. step w ns w' -> indpred w -> indpred w'
 
@@ -117,6 +149,46 @@ module Steps
   | base : forall w :world. step_TR w w 0
   | step : forall w w' w'' :world, ns :fset node, steps :int.
     step_TR w w' steps -> step w' ns w'' -> step_TR w w'' (steps+1)
+    
+    
+   
+  (* many steps relation [reflexive transitive closure]
+     and reachable worlds *)
+  inductive step_TR world world int =
+  | base : forall w :world. step_TR w w 0
+  | step : forall w w' w'' :world, ns :fset node, steps :int.
+    step_TR w w' steps -> step w' ns w'' -> step_TR w w'' (steps+1)
+
+  lemma noNegative_step_TR : forall w w' :world, steps :int.
+    step_TR w w' steps -> steps >= 0
+
+  predicate reachable (w:world) = exists steps :int. forall w_init:world. step_TR w_init w steps
+
+  (* inductive predicate is preserved by many steps and holds
+     in reachable worlds *)
+
+  lemma indpred_manySteps :
+    forall w w' :world, steps :int . step_TR w w' steps -> indpred w -> indpred w'
+
+  lemma indpred_reachable :
+    forall w :world. reachable w -> indpred w
+
+    *)
+    
+  (* version liste *)
+  lemma indpred_step :
+    forall w w' :world, nl :list node. step_syn_l w nl w' -> indpred w -> indpred w'
+
+  lemma step_preserves_states :
+    forall w w' :world, nl: list node,  i :node. step_syn_l w nl w' -> not(Meml.mem i nl) -> w i = w' i
+    
+
+  (* many steps relation [reflexive transitive closure]
+     and reachable worlds *)
+  inductive step_TR world world int =
+  | base : forall w :world. step_TR w w 0
+  | step : forall w w' w'' :world, nl :list node, steps :int.
+    step_TR w w' steps -> step_syn_l w' nl w'' -> step_TR w w'' (steps+1)
 
   lemma noNegative_step_TR : forall w w' :world, steps :int.
     step_TR w w' steps -> steps >= 0
