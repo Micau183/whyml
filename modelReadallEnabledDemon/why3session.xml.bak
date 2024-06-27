@@ -8,21 +8,20 @@
 <path name=".."/><path name="modelReadallEnabledDemon.mlw"/>
 <theory name="Steps" proved="true">
  <goal name="step_enbld_syn_l&#39;vc" expl="VC for step_enbld_syn_l" proved="true">
- <proof prover="0"><result status="valid" time="0.01" steps="24"/></proof>
+ <proof prover="0"><result status="valid" time="0.02" steps="24"/></proof>
  </goal>
  <goal name="handleEnbld_syn&#39;vc" expl="VC for handleEnbld_syn" proved="true">
- <proof prover="0"><result status="valid" time="0.02" steps="6"/></proof>
+ <proof prover="0"><result status="valid" time="0.01" steps="6"/></proof>
  </goal>
  <goal name="indpred_step" proved="true">
  <proof prover="0"><result status="valid" time="0.02" steps="6"/></proof>
  </goal>
  <goal name="step_preserves_states" proved="true">
- <proof prover="0"><result status="valid" time="0.03" steps="12"/></proof>
- <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ <proof prover="0"><result status="valid" time="0.02" steps="12"/></proof>
  </goal>
  <goal name="noNegative_step_TR" proved="true">
- <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
- <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ <proof prover="0"><result status="timeout" time="5.00"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  <transf name="induction_pr" proved="true" >
   <goal name="noNegative_step_TR.0" proved="true">
   <proof prover="0"><result status="valid" time="0.02" steps="6"/></proof>
@@ -34,14 +33,9 @@
  </goal>
  <goal name="indpred_manySteps" proved="true">
  <proof prover="0"><result status="valid" time="0.02" steps="7"/></proof>
- <proof prover="2" obsolete="true"><result status="valid" time="0.01"/></proof>
  </goal>
  <goal name="indpred_reachable" proved="true">
  <proof prover="0"><result status="valid" time="0.02" steps="4"/></proof>
- <proof prover="2" obsolete="true"><result status="valid" time="0.01"/></proof>
- </goal>
- <goal name="example_map&#39;vc" expl="VC for example_map">
- <proof prover="0"><undone/></proof>
  </goal>
 </theory>
 </file>

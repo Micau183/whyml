@@ -3,589 +3,293 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="1" steplimit="0" memlimit="1000"/>
-<prover id="1" name="CVC4" version="1.8" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="2" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
-<file format="whyml" proved="true">
-<path name=".."/><path name="selfstab-ring-slowfast.mlw"/>
-<theory name="SelfStab_Ring_Closure" proved="true">
+<prover id="6" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml">
+<path name=".."/><path name="selfstab-ring.mlw"/>
+<theory name="SelfStab_Ring_Closure">
  <goal name="incre&#39;vc" expl="VC for incre" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="21475"/></proof>
+ <transf name="inline_all" proved="true" >
+  <goal name="incre&#39;vc.0" expl="VC for incre" proved="true">
+  <transf name="split_vc" proved="true" >
+   <goal name="incre&#39;vc.0.0" expl="precondition" proved="true">
+   <proof prover="6"><result status="valid" time="0.08" steps="5540"/></proof>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
  </goal>
  <goal name="atLeastOneToken&#39;vc" expl="VC for atLeastOneToken" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="27762"/></proof>
+ <proof prover="6"><result status="valid" time="0.12" steps="8748"/></proof>
  </goal>
  <goal name="first_last" proved="true">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="5349320"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="69470"/></proof>
  <transf name="split_vc" proved="true" >
   <goal name="first_last.0" proved="true">
+  <proof prover="0" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+  <proof prover="2" timelimit="10" memlimit="4000"><result status="timeout" time="10.00" steps="2064764532"/></proof>
+  <proof prover="6" timelimit="10" memlimit="4000"><result status="timeout" time="10.00" steps="773577"/></proof>
   <transf name="induction" proved="true" arg1="n">
    <goal name="first_last.0.0" expl="base case" proved="true">
-   <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="29883"/></proof>
+   <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="31011"/></proof>
    </goal>
    <goal name="first_last.0.1" expl="recursive case" proved="true">
-   <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="32459"/></proof>
+   <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="33587"/></proof>
    </goal>
   </transf>
   </goal>
  </transf>
  </goal>
  <goal name="atLeastOneTokenLm" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.05" steps="33062"/></proof>
+ <proof prover="2"><result status="valid" time="0.05" steps="34190"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="109827"/></proof>
  </goal>
  <goal name="Steps.case_node&#39;refn&#39;vc" expl="VC for case_node&#39;refn" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="2422"/></proof>
+ <proof prover="6"><result status="valid" time="0.04" steps="6446"/></proof>
  </goal>
  <goal name="Steps.case_state&#39;refn&#39;vc" expl="VC for case_state&#39;refn" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.03" steps="2422"/></proof>
+ <proof prover="6"><result status="valid" time="0.04" steps="6446"/></proof>
  </goal>
- <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.07" steps="65988"/></proof>
- </goal>
- <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.08" steps="125483"/></proof>
- </goal>
- <goal name="oneToken" proved="true">
- <proof prover="2" timelimit="5"><result status="valid" time="0.04" steps="41637"/></proof>
- </goal>
-</theory>
-<theory name="SelfStab_Ring_Convergence" proved="true">
- <goal name="incre&#39;vc" expl="VC for incre" proved="true">
- <proof prover="2"><result status="valid" time="0.04" steps="52528"/></proof>
- </goal>
- <goal name="first_last" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="first_last.0" proved="true">
-  <transf name="induction" proved="true" arg1="n">
-   <goal name="first_last.0.0" expl="base case" proved="true">
-   <proof prover="2"><result status="valid" time="0.05" steps="51329"/></proof>
-   </goal>
-   <goal name="first_last.0.1" expl="recursive case" proved="true">
-   <proof prover="2"><result status="valid" time="0.05" steps="53489"/></proof>
-   </goal>
-  </transf>
-  </goal>
- </transf>
- </goal>
- <goal name="modular_1" proved="true">
- <proof prover="1"><result status="valid" time="0.70" steps="61960"/></proof>
- </goal>
- <goal name="modular_2" proved="true">
- <proof prover="2"><result status="valid" time="0.05" steps="86721"/></proof>
- </goal>
- <goal name="modular_3" proved="true">
- <proof prover="1"><result status="valid" time="0.42" steps="44425"/></proof>
- </goal>
- <goal name="noOcc_from&#39;vc" expl="VC for noOcc_from" proved="true">
- <proof prover="2"><result status="valid" time="0.05" steps="62785"/></proof>
- </goal>
- <goal name="noOcc&#39;vc" expl="VC for noOcc" proved="true">
- <proof prover="2"><result status="valid" time="0.05" steps="61791"/></proof>
- </goal>
- <goal name="setUnused_from&#39;vc" expl="VC for setUnused_from" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="setUnused_from&#39;vc.0" expl="variant decrease" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="31387"/></proof>
-  </goal>
-  <goal name="setUnused_from&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="64836"/></proof>
-  </goal>
-  <goal name="setUnused_from&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="63218"/></proof>
-  </goal>
-  <goal name="setUnused_from&#39;vc.3" expl="postcondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.53" steps="77892"/></proof>
-  </goal>
-  <goal name="setUnused_from&#39;vc.4" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.04" steps="262"/></proof>
-  </goal>
- </transf>
- </goal>
- <goal name="setUnused&#39;vc" expl="VC for setUnused" proved="true">
- <proof prover="2"><result status="valid" time="0.09" steps="167939"/></proof>
- </goal>
- <goal name="converged_0hastoken" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="converged_0hastoken.0" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="67276"/></proof>
-  </goal>
-  <goal name="converged_0hastoken.1" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="71108"/></proof>
-  </goal>
-  <goal name="converged_0hastoken.2" proved="true">
-  <transf name="inline_goal" proved="true" >
-   <goal name="converged_0hastoken.2.0" proved="true">
-   <transf name="split_all_full" proved="true" >
-    <goal name="converged_0hastoken.2.0.0" proved="true">
-    <transf name="split_vc" proved="true" >
-     <goal name="converged_0hastoken.2.0.0.0" proved="true">
-     <proof prover="2"><result status="valid" time="0.07" steps="93244"/></proof>
-     </goal>
-    </transf>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2" timelimit="5"><result status="timeout" time="5.00" steps="50043619"/></proof>
+ <proof prover="6" obsolete="true"><result status="timeout" time="1.00" steps="118525"/></proof>
+ <transf name="split_vc" >
+  <goal name="indpred&#39;refn&#39;vc.0" expl="postcondition">
+  <transf name="inline_all" >
+   <goal name="indpred&#39;refn&#39;vc.0.0" expl="postcondition">
+   <transf name="split_vc" >
+    <goal name="indpred&#39;refn&#39;vc.0.0.0" expl="postcondition">
+    <proof prover="0" timelimit="10" memlimit="4000"><result status="timeout" time="10.00"/></proof>
+    <proof prover="2" timelimit="10" memlimit="4000"><result status="timeout" time="10.00" steps="752612072"/></proof>
+    <proof prover="6" timelimit="10" memlimit="4000"><result status="unknown" time="0.12" steps="13210"/></proof>
+    </goal>
+    <goal name="indpred&#39;refn&#39;vc.0.0.1" expl="postcondition" proved="true">
+    <proof prover="0" timelimit="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
+    <proof prover="2" timelimit="5" obsolete="true"><result status="timeout" time="5.00" steps="14065109"/></proof>
+    <proof prover="6"><result status="valid" time="0.12" steps="10576"/></proof>
     </goal>
    </transf>
    </goal>
   </transf>
   </goal>
  </transf>
+ </goal>
+ <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2" timelimit="5"><result status="timeout" time="5.00" steps="28264533"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="84399"/></proof>
+ </goal>
+ <goal name="oneToken" proved="true">
+ <proof prover="6"><result status="valid" time="0.10" steps="8885"/></proof>
+ </goal>
+</theory>
+<theory name="SelfStab_Ring_Convergence">
+ <goal name="incre&#39;vc" expl="VC for incre" proved="true">
+ <proof prover="6"><result status="valid" time="0.11" steps="10597"/></proof>
+ </goal>
+ <goal name="first_last">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="13817537"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="56347"/></proof>
+ </goal>
+ <goal name="modular_1" proved="true">
+ <proof prover="6"><result status="valid" time="0.50" steps="44000"/></proof>
+ </goal>
+ <goal name="modular_2" proved="true">
+ <proof prover="2"><result status="valid" time="0.07" steps="86721"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="100074"/></proof>
+ </goal>
+ <goal name="modular_3">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="3655504"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="98878"/></proof>
+ </goal>
+ <goal name="noOcc_from&#39;vc" expl="VC for noOcc_from" proved="true">
+ <proof prover="6"><result status="valid" time="0.25" steps="28014"/></proof>
+ </goal>
+ <goal name="noOcc&#39;vc" expl="VC for noOcc" proved="true">
+ <proof prover="6"><result status="valid" time="0.14" steps="14783"/></proof>
+ </goal>
+ <goal name="setUnused_from&#39;vc" expl="VC for setUnused_from" proved="true">
+ <proof prover="0"><result status="valid" time="0.26" steps="1208"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="817612"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="75601"/></proof>
+ </goal>
+ <goal name="setUnused&#39;vc" expl="VC for setUnused" proved="true">
+ <proof prover="6"><result status="valid" time="0.18" steps="19603"/></proof>
+ </goal>
+ <goal name="converged_0hastoken" proved="true">
+ <proof prover="2"><result status="valid" time="0.06" steps="72803"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="98689"/></proof>
  </goal>
  <goal name="diffZero&#39;vc" expl="VC for diffZero" proved="true">
  <proof prover="2"><result status="valid" time="0.05" steps="74578"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="67866"/></proof>
  </goal>
- <goal name="convState_hlpr&#39;vc" expl="VC for convState_hlpr" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="convState_hlpr&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="11466"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="76503"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="77467"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.3" expl="variant decrease" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="79364"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="80690"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="81515"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.6" expl="precondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="convState_hlpr&#39;vc.6.0" expl="precondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.05" steps="89490"/></proof>
-   </goal>
-   <goal name="convState_hlpr&#39;vc.6.1" expl="precondition" proved="true">
-   <transf name="inline_goal" proved="true" >
-    <goal name="convState_hlpr&#39;vc.6.1.0" expl="precondition" proved="true">
-    <transf name="split_all_full" proved="true" >
-     <goal name="convState_hlpr&#39;vc.6.1.0.0" expl="precondition" proved="true">
-     <transf name="inline_goal" proved="true" >
-      <goal name="convState_hlpr&#39;vc.6.1.0.0.0" expl="precondition" proved="true">
-      <proof prover="2"><result status="valid" time="0.06" steps="120724"/></proof>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.43" steps="6579"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.8" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="92750"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.9" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.09" steps="151107"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.10" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="105500"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.11" expl="postcondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="convState_hlpr&#39;vc.11.0" expl="postcondition" proved="true">
-   <transf name="split_vc" proved="true" >
-    <goal name="convState_hlpr&#39;vc.11.0.0" expl="postcondition" proved="true">
-    <proof prover="0"><result status="valid" time="0.04" steps="378"/></proof>
-    </goal>
-    <goal name="convState_hlpr&#39;vc.11.0.1" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.06" steps="87519"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="convState_hlpr&#39;vc.11.1" expl="postcondition" proved="true">
-   <transf name="split_vc" proved="true" >
-    <goal name="convState_hlpr&#39;vc.11.1.0" expl="postcondition" proved="true">
-    <proof prover="0"><result status="valid" time="0.05" steps="514"/></proof>
-    </goal>
-    <goal name="convState_hlpr&#39;vc.11.1.1" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.06" steps="85939"/></proof>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.12" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="87712"/></proof>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.13" expl="postcondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="convState_hlpr&#39;vc.13.0" expl="postcondition" proved="true">
-   <transf name="split_vc" proved="true" >
-    <goal name="convState_hlpr&#39;vc.13.0.0" expl="postcondition" proved="true">
-    <proof prover="2"><result status="valid" time="0.05" steps="90013"/></proof>
-    </goal>
-   </transf>
-   </goal>
-   <goal name="convState_hlpr&#39;vc.13.1" expl="postcondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.11" steps="343739"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="convState_hlpr&#39;vc.14" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.08" steps="139320"/></proof>
-  </goal>
- </transf>
+ <goal name="convState_hlpr&#39;vc" expl="VC for convState_hlpr">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="1333341"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="59822"/></proof>
  </goal>
- <goal name="convState&#39;vc" expl="VC for convState" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="convState&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="87010"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="87865"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.24" steps="33597"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="1"><result status="valid" time="0.25" steps="34588"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.4" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="102519"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.5" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="10353"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.6" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.03" steps="113"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.7" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="97806"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.8" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="98766"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.9" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="107176"/></proof>
-  </goal>
-  <goal name="convState&#39;vc.10" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="108142"/></proof>
-  </goal>
- </transf>
+ <goal name="convState&#39;vc" expl="VC for convState">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="17222519"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="61455"/></proof>
  </goal>
  <goal name="Steps.case_node&#39;refn&#39;vc" expl="VC for case_node&#39;refn" proved="true">
- <proof prover="2"><result status="valid" time="0.03" steps="7358"/></proof>
+ <proof prover="6"><result status="valid" time="0.13" steps="18982"/></proof>
  </goal>
  <goal name="Steps.case_state&#39;refn&#39;vc" expl="VC for case_state&#39;refn" proved="true">
- <proof prover="2"><result status="valid" time="0.04" steps="7358"/></proof>
+ <proof prover="6"><result status="valid" time="0.17" steps="18982"/></proof>
  </goal>
  <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn" proved="true">
- <proof prover="2"><result status="valid" time="0.07" steps="107826"/></proof>
+ <proof prover="6"><result status="valid" time="0.24" steps="22124"/></proof>
  </goal>
  <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn" proved="true">
- <proof prover="2"><result status="valid" time="0.08" steps="145074"/></proof>
+ <proof prover="6"><result status="valid" time="0.43" steps="36041"/></proof>
  </goal>
  <goal name="step_obvious" proved="true">
- <proof prover="2"><result status="valid" time="0.25" steps="335447"/></proof>
+ <proof prover="6"><result status="valid" time="0.56" steps="48808"/></proof>
  </goal>
  <goal name="step_noOcc" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="step_noOcc.0" proved="true">
-  <proof prover="1"><result status="valid" time="0.40" steps="46768"/></proof>
-  </goal>
- </transf>
+ <proof prover="6"><result status="valid" time="0.54" steps="45145"/></proof>
  </goal>
- <goal name="step_initConv" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="step_initConv.0" proved="true">
-  <transf name="unfold" proved="true" arg1="initConv" arg2="in" arg3="H">
-   <goal name="step_initConv.0.0" proved="true">
-   <transf name="destruct" proved="true" arg1="H">
-    <goal name="step_initConv.0.0.0" proved="true">
-    <transf name="split_vc" proved="true" >
-     <goal name="step_initConv.0.0.0.0" proved="true">
-     <transf name="inline_goal" proved="true" >
-      <goal name="step_initConv.0.0.0.0.0" proved="true">
-      <transf name="case" proved="true" arg1="(k=j+1)">
-       <goal name="step_initConv.0.0.0.0.0.0" expl="true case" proved="true">
-       <transf name="exists" proved="true" arg1="(j+1)">
-        <goal name="step_initConv.0.0.0.0.0.0.0" proved="true">
-        <proof prover="0"><result status="valid" time="0.33" steps="2702"/></proof>
-        </goal>
-       </transf>
-       </goal>
-       <goal name="step_initConv.0.0.0.0.0.1" expl="false case" proved="true">
-       <transf name="exists" proved="true" arg1="j">
-        <goal name="step_initConv.0.0.0.0.0.1.0" proved="true">
-        <transf name="split_vc" proved="true" >
-         <goal name="step_initConv.0.0.0.0.0.1.0.0" proved="true">
-         <proof prover="2"><result status="valid" time="0.03" steps="8098"/></proof>
-         </goal>
-         <goal name="step_initConv.0.0.0.0.0.1.0.1" proved="true">
-         <proof prover="2"><result status="valid" time="0.03" steps="8098"/></proof>
-         </goal>
-         <goal name="step_initConv.0.0.0.0.0.1.0.2" proved="true">
-         <proof prover="2"><result status="valid" time="0.09" steps="160203"/></proof>
-         </goal>
-         <goal name="step_initConv.0.0.0.0.0.1.0.3" proved="true">
-         <proof prover="0"><result status="valid" time="0.38" steps="2794"/></proof>
-         </goal>
-        </transf>
-        </goal>
-       </transf>
-       </goal>
-      </transf>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
+ <goal name="step_initConv">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="638240"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="67016"/></proof>
  </goal>
- <goal name="step_changes_convState" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="step_changes_convState.0" proved="true">
-  <proof prover="1" timelimit="5" memlimit="2000"><result status="valid" time="2.35" steps="240389"/></proof>
-  </goal>
- </transf>
+ <goal name="step_changes_convState">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="highfailure" time="0.75" steps="692749"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="55738"/></proof>
  </goal>
  <goal name="measureNode&#39;vc" expl="VC for measureNode" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="measureNode&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="116682"/></proof>
+ <proof prover="0"><result status="valid" time="0.16" steps="1019"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="832947"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="74152"/></proof>
+ <transf name="split_vc" >
+  <goal name="measureNode&#39;vc.0" expl="precondition">
   </goal>
-  <goal name="measureNode&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="126022"/></proof>
+  <goal name="measureNode&#39;vc.1" expl="precondition">
   </goal>
-  <goal name="measureNode&#39;vc.2" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="122262"/></proof>
+  <goal name="measureNode&#39;vc.2" expl="postcondition">
   </goal>
-  <goal name="measureNode&#39;vc.3" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.03" steps="68"/></proof>
+  <goal name="measureNode&#39;vc.3" expl="postcondition">
   </goal>
-  <goal name="measureNode&#39;vc.4" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="34566"/></proof>
+  <goal name="measureNode&#39;vc.4" expl="postcondition">
   </goal>
  </transf>
  </goal>
  <goal name="measureNodes&#39;vc" expl="VC for measureNodes" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="measureNodes&#39;vc.0" expl="variant decrease" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8321"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8055"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="119132"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8117"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="119845"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.5" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="122026"/></proof>
-  </goal>
-  <goal name="measureNodes&#39;vc.6" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.05" steps="127262"/></proof>
-  </goal>
- </transf>
+ <proof prover="2"><result status="valid" time="0.09" steps="121558"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="76239"/></proof>
  </goal>
  <goal name="measureAllNodes&#39;vc" expl="VC for measureAllNodes" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="measureAllNodes&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8194"/></proof>
+ <proof prover="2"><result status="valid" time="0.13" steps="144331"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="79617"/></proof>
+ <transf name="split_vc" >
+  <goal name="measureAllNodes&#39;vc.0" expl="precondition">
   </goal>
-  <goal name="measureAllNodes&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="120637"/></proof>
+  <goal name="measureAllNodes&#39;vc.1" expl="precondition">
   </goal>
-  <goal name="measureAllNodes&#39;vc.2" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8250"/></proof>
+  <goal name="measureAllNodes&#39;vc.2" expl="postcondition">
   </goal>
-  <goal name="measureAllNodes&#39;vc.3" expl="postcondition" proved="true">
-  <transf name="inline_goal" proved="true" >
-   <goal name="measureAllNodes&#39;vc.3.0" expl="postcondition" proved="true">
-   <transf name="split_all_full" proved="true" >
-    <goal name="measureAllNodes&#39;vc.3.0.0" expl="postcondition" proved="true">
-    <transf name="split_vc" proved="true" >
-     <goal name="measureAllNodes&#39;vc.3.0.0.0" expl="postcondition" proved="true">
-     <proof prover="2"><result status="valid" time="0.17" steps="500069"/></proof>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
+  <goal name="measureAllNodes&#39;vc.3" expl="postcondition">
   </goal>
  </transf>
  </goal>
  <goal name="measureDeltaNode&#39;vc" expl="VC for measureDeltaNode" proved="true">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="highfailure" time="0.62" steps="455856"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="75621"/></proof>
  <transf name="split_vc" proved="true" >
   <goal name="measureDeltaNode&#39;vc.0" expl="assertion" proved="true">
-  <proof prover="2"><result status="valid" time="0.10" steps="148364"/></proof>
+  <proof prover="6"><result status="valid" time="0.58" steps="55278"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8306"/></proof>
+  <proof prover="6"><result status="valid" time="0.12" steps="21686"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="8553"/></proof>
+  <proof prover="6"><result status="valid" time="0.11" steps="21831"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.3" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.08" steps="122125"/></proof>
+  <proof prover="6"><result status="valid" time="0.19" steps="23051"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="8678"/></proof>
+  <proof prover="6"><result status="valid" time="0.12" steps="22010"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.5" expl="postcondition" proved="true">
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="2"><result status="timeout" time="1.00" steps="1878711"/></proof>
+  <proof prover="6"><result status="timeout" time="1.00" steps="85758"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="measureDeltaNode&#39;vc.5.0" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.73" steps="10052"/></proof>
+   <proof prover="0" timelimit="5"><result status="valid" time="1.04" steps="10052"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="measureDeltaNode&#39;vc.6" expl="postcondition" proved="true">
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="2"><result status="timeout" time="1.00" steps="1044168"/></proof>
+  <proof prover="6"><result status="timeout" time="1.00" steps="76657"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="measureDeltaNode&#39;vc.6.0" expl="postcondition" proved="true">
-   <proof prover="0" timelimit="300" memlimit="5000"><result status="valid" time="147.20" steps="448913"/></proof>
+   <proof prover="0" timelimit="130" memlimit="3500"><result status="valid" time="72.96" steps="269634"/></proof>
+   <proof prover="2"><result status="timeout" time="1.00" steps="1167900"/></proof>
+   <proof prover="6"><result status="timeout" time="1.00" steps="73808"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="measureDeltaNode&#39;vc.7" expl="postcondition" proved="true">
+  <proof prover="0"><result status="timeout" time="1.00"/></proof>
+  <proof prover="2"><result status="timeout" time="1.00" steps="926628"/></proof>
+  <proof prover="6"><result status="timeout" time="1.00" steps="69998"/></proof>
   <transf name="split_vc" proved="true" >
    <goal name="measureDeltaNode&#39;vc.7.0" expl="postcondition" proved="true">
-   <proof prover="0" timelimit="30" memlimit="4000"><result status="valid" time="9.73" steps="59205"/></proof>
+   <proof prover="0" timelimit="130" memlimit="3500"><result status="valid" time="21.66" steps="64422"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="measureDeltaNode&#39;vc.8" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.19" steps="270546"/></proof>
+  <proof prover="6"><result status="valid" time="0.40" steps="39569"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.9" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.10" steps="153048"/></proof>
+  <proof prover="6"><result status="valid" time="0.48" steps="50772"/></proof>
   </goal>
   <goal name="measureDeltaNode&#39;vc.10" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.37" steps="539299"/></proof>
+  <proof prover="6"><result status="valid" time="0.33" steps="39488"/></proof>
   </goal>
  </transf>
  </goal>
  <goal name="prod" proved="true">
- <proof prover="2"><result status="valid" time="0.07" steps="126918"/></proof>
+ <proof prover="6"><result status="valid" time="0.29" steps="28826"/></proof>
  </goal>
- <goal name="measureDeltaNodes&#39;vc" expl="VC for measureDeltaNodes" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="measureDeltaNodes&#39;vc.0" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8706"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.1" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.06" steps="135520"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.2" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8722"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.3" expl="variant decrease" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="127098"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.4" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8710"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.5" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.08" steps="128066"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.6" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="8976"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.7" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="8739"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.8" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.03" steps="9006"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.9" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.08" steps="131443"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.10" expl="precondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.04" steps="9022"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.11" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.12" steps="176980"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.12" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.10" steps="160610"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.13" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.07" steps="146020"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.14" expl="postcondition" proved="true">
-  <transf name="split_vc" proved="true" >
-   <goal name="measureDeltaNodes&#39;vc.14.0" expl="postcondition" proved="true">
-   <proof prover="2"><result status="valid" time="0.03" steps="17038"/></proof>
-   </goal>
-   <goal name="measureDeltaNodes&#39;vc.14.1" expl="postcondition" proved="true">
-   <proof prover="0"><result status="valid" time="0.04" steps="182"/></proof>
-   </goal>
-  </transf>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.15" expl="postcondition" proved="true">
-  <proof prover="0"><result status="valid" time="0.25" steps="1544"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.16" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.19" steps="323864"/></proof>
-  </goal>
-  <goal name="measureDeltaNodes&#39;vc.17" expl="postcondition" proved="true">
-  <proof prover="2"><result status="valid" time="0.09" steps="209324"/></proof>
+ <goal name="measureDeltaNodes&#39;vc" expl="VC for measureDeltaNodes">
+ <proof prover="0"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2"><result status="timeout" time="1.00" steps="858955"/></proof>
+ <proof prover="6"><result status="timeout" time="1.00" steps="76596"/></proof>
+ </goal>
+ <goal name="step_decreasesMeasure">
+ <proof prover="0" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="1016400"/></proof>
+ <proof prover="6" obsolete="true"><result status="timeout" time="1.00" steps="82701"/></proof>
+ <transf name="split_vc" >
+  <goal name="step_decreasesMeasure.0">
+  <proof prover="0" timelimit="10" memlimit="4000" obsolete="true"><undone/></proof>
+  <proof prover="2" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="10507532"/></proof>
+  <proof prover="6" timelimit="10" memlimit="4000" obsolete="true"><result status="timeout" time="10.00" steps="383282"/></proof>
   </goal>
  </transf>
  </goal>
- <goal name="step_decreasesMeasure" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="step_decreasesMeasure.0" proved="true">
-  <proof prover="0"><result status="valid" time="0.06" steps="122"/></proof>
-  </goal>
- </transf>
+ <goal name="atLeastOneToken&#39;vc" expl="VC for atLeastOneToken">
+ <proof prover="6" obsolete="true"><result status="valid" time="0.39" steps="39590"/></proof>
  </goal>
- <goal name="atLeastOneToken&#39;vc" expl="VC for atLeastOneToken" proved="true">
- <proof prover="2"><result status="valid" time="0.08" steps="135214"/></proof>
- </goal>
- <goal name="converged_oneToken" proved="true">
- <transf name="split_vc" proved="true" >
-  <goal name="converged_oneToken.0" proved="true">
-  <proof prover="2"><result status="valid" time="0.14" steps="139479"/></proof>
-  </goal>
-  <goal name="converged_oneToken.1" proved="true">
-  <transf name="inline_goal" proved="true" >
-   <goal name="converged_oneToken.1.0" proved="true">
-   <transf name="split_all_full" proved="true" >
-    <goal name="converged_oneToken.1.0.0" proved="true">
-    <proof prover="2"><result status="valid" time="0.05" steps="38752"/></proof>
-    </goal>
-    <goal name="converged_oneToken.1.0.1" proved="true">
-    <proof prover="2"><result status="valid" time="0.05" steps="38752"/></proof>
-    </goal>
-    <goal name="converged_oneToken.1.0.2" proved="true">
-    <proof prover="2"><result status="valid" time="0.05" steps="38752"/></proof>
-    </goal>
-    <goal name="converged_oneToken.1.0.3" proved="true">
-    <proof prover="2"><result status="valid" time="0.14" steps="418149"/></proof>
-    </goal>
-    <goal name="converged_oneToken.1.0.4" proved="true">
-    <proof prover="2"><result status="valid" time="0.15" steps="416132"/></proof>
-    </goal>
-    <goal name="converged_oneToken.1.0.5" proved="true">
-    <transf name="split_vc" proved="true" >
-     <goal name="converged_oneToken.1.0.5.0" proved="true">
-     <transf name="inline_goal" proved="true" >
-      <goal name="converged_oneToken.1.0.5.0.0" proved="true">
-      <proof prover="2"><result status="valid" time="0.15" steps="418688"/></proof>
-      </goal>
-     </transf>
-     </goal>
-    </transf>
-    </goal>
-   </transf>
-   </goal>
-  </transf>
-  </goal>
- </transf>
+ <goal name="converged_oneToken">
+ <proof prover="6" obsolete="true"><result status="valid" time="0.28" steps="29481"/></proof>
  </goal>
 </theory>
 </file>

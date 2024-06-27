@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<file format="whyml">
+<path name=".."/><path name="coloring_syn.mlw"/>
+<theory name="Coloring_Ring2">
+ <goal name="neighbor_set&#39;vc" expl="VC for neighbor_set">
+ </goal>
+ <goal name="free&#39;vc" expl="VC for free">
+ </goal>
+ <goal name="handleEnbld&#39;vc" expl="VC for handleEnbld">
+ </goal>
+ <goal name="Steps.indpred&#39;refn&#39;vc" expl="VC for indpred&#39;refn">
+ </goal>
+ <goal name="Steps.enabled&#39;refn&#39;vc" expl="VC for enabled&#39;refn">
+ </goal>
+ <goal name="Steps.handleEnbld&#39;refn&#39;vc" expl="VC for handleEnbld&#39;refn">
+ </goal>
+ <goal name="colored">
+ </goal>
+ <goal name="energy&#39;vc" expl="VC for energy">
+ </goal>
+ <goal name="deltaEnergy&#39;vc" expl="VC for deltaEnergy">
+ </goal>
+ <goal name="step_decreasesEnergy">
+ </goal>
+ <goal name="converged">
+ </goal>
+</theory>
+</file>
+</why3session>

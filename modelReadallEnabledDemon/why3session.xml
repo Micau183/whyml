@@ -3,12 +3,11 @@
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="6">
 <prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="5" steplimit="0" memlimit="1000"/>
-<prover id="2" name="Vampire" version="4.5.1" timelimit="5" steplimit="0" memlimit="1000"/>
 <file format="whyml" proved="true">
 <path name=".."/><path name="modelReadallEnabledDemon.mlw"/>
 <theory name="Steps" proved="true">
  <goal name="step_enbld_syn_l&#39;vc" expl="VC for step_enbld_syn_l" proved="true">
- <proof prover="0"><result status="valid" time="0.02" steps="24"/></proof>
+ <proof prover="0"><result status="valid" time="0.05" steps="24"/></proof>
  </goal>
  <goal name="handleEnbld_syn&#39;vc" expl="VC for handleEnbld_syn" proved="true">
  <proof prover="0"><result status="valid" time="0.01" steps="6"/></proof>
@@ -21,13 +20,12 @@
  </goal>
  <goal name="noNegative_step_TR" proved="true">
  <proof prover="0"><result status="timeout" time="5.00"/></proof>
- <proof prover="2"><result status="timeout" time="5.00"/></proof>
  <transf name="induction_pr" proved="true" >
   <goal name="noNegative_step_TR.0" proved="true">
-  <proof prover="0"><result status="valid" time="0.02" steps="6"/></proof>
+  <proof prover="0"><result status="valid" time="0.01" steps="6"/></proof>
   </goal>
   <goal name="noNegative_step_TR.1" proved="true">
-  <proof prover="0"><result status="valid" time="0.02" steps="12"/></proof>
+  <proof prover="0"><result status="valid" time="0.01" steps="12"/></proof>
   </goal>
  </transf>
  </goal>
@@ -35,7 +33,7 @@
  <proof prover="0"><result status="valid" time="0.02" steps="7"/></proof>
  </goal>
  <goal name="indpred_reachable" proved="true">
- <proof prover="0"><result status="valid" time="0.02" steps="4"/></proof>
+ <proof prover="0"><result status="valid" time="0.01" steps="4"/></proof>
  </goal>
 </theory>
 </file>

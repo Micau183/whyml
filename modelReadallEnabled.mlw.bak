@@ -43,14 +43,14 @@ module Steps
   type world = map node state
 
   (* components of the initial world, defined for each system *)
-  val function initState (node) : state
+    val function initState (node) : state
 
-  constant initWorld : world = initState
+    constant initWorld : world = initState
 
   (* candidate inductive predicate
      contract ensures initial world satifies the predicate *)
   val ghost predicate indpred (w:world)
-    ensures { forall w_init: world. w=w_init -> result }
+    ensures { w=initWorld -> result }
 
 
   (* handleEnbld-enabling predicate, to be instantiated when cloning *)
@@ -60,7 +60,7 @@ module Steps
 
   (* function specifying how the outputs of the handlers are used
      both in the handler's contract and in the transition relation *)
-  function step_enbld (w:world) (n:node) (st:state) : world =
+  let ghost function step_enbld (w:world) (n:node) (st:state) : world =
     set w n st
 
   (* handler to be executed at node h when it is enabled
@@ -94,7 +94,7 @@ module Steps
 
   lemma step_preserves_states :
     forall w w' :world, n i :node. step w n w' -> i<>n -> w i = w' i
-
+  
 
   (* many steps relation [reflexive transitive closure]
      and reachable worlds *)

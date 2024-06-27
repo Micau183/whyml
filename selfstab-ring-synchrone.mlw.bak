@@ -1,5 +1,5 @@
 (** {1 Self-stabilizing mutual exclusion on a ring (Closure)} *)
-module SelfStab_Ring_Closure
+module SelfStab_Ring_Closure_Synchrone
 
   use int.Int
   use int.EuclideanDivision
@@ -8,7 +8,7 @@ module SelfStab_Ring_Closure
   use list.Mem
   use list.Map as Lmap
   use map.Map
-  use ref.Ref
+
   (* Basic Setup: nodes, packets, inputs, outputs, states *)
 
   type node = int
@@ -34,18 +34,11 @@ module SelfStab_Ring_Closure
   let predicate case_state (_state) = true
 
   (* clone World theory to get additional types/functions *)
-  clone modelReadallEnabled.World with
+  clone modelReadAllEnabledSynchrone.World with
     type node,
     type state
 
- 
 
-  let predicate validWorld (w:world) = let res = ref true in 
-   for i = 0 to n_nodes - 1 do
-    res := (!res && (0 <= w i < k_states))
-    done;
-    !res
-  
   (* System initialization: node states and messages      *)
   let function initState (n:node) : state
   = if n=n_nodes-1 then 1 else 0
@@ -72,7 +65,6 @@ module SelfStab_Ring_Closure
     variant { n }
   = n > 0 && (has_token lS (n-1) || atLeastOneToken lS (n-1))
 
-(*n est censé être le nombre de noeuds *) 
   val ghost predicate atMostOneToken (lS:map node state) (n:int)
     requires { 0 <= n <= n_nodes }
     ensures { result <-> forall i j :int. 0<=i<n -> 0<=j<n -> has_token lS i -> has_token lS j -> i=j }
@@ -91,9 +83,8 @@ module SelfStab_Ring_Closure
 
   (* candidate invariant predicate *)
   predicate inv (lS:map node state) =
-    validWorld lS /\
-   (* (forall n :int. 0 <= n < n_nodes -> 0 <= lS n < k_states)
-    /\*)
+    (forall n :int. 0 <= n < n_nodes -> 0 <= lS n < k_states)
+    /\
     atMostOneToken lS n_nodes
     (* /\ *)
     (* atLeastOneToken lS n_nodes *)
@@ -102,14 +93,13 @@ module SelfStab_Ring_Closure
 
 
   (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
-  clone modelReadallEnabled.Steps with
+  clone modelReadAllEnabledSynchrone.Steps with
     type node,
     type state,
     val validNd,
     val case_node,
     val case_state,
     val initState,
-    (*val validWorld,*)
     val indpred,
     val enabled,
     val handleEnbld
@@ -117,20 +107,19 @@ module SelfStab_Ring_Closure
   (* SYSTEM PROPERTIES TO BE PROVED FROM INVARIANT *)
   predicate oneToken (w:world) = atMostOneToken w n_nodes /\ atLeastOneToken w n_nodes
 
-  goal oneToken : forall w, w_init:world. reachable (*w_init*) w -> oneToken w
-
- (*goal oneToken : forall w :world. reachable w -> oneToken w *)
+  goal oneToken : forall w :world. reachable w -> oneToken w
 
 end
 
+(*
 (** {2 Self-stabilizing mutual exclusion on a ring (Convergence)} *)
-module SelfStab_Ring_Convergence
+module SelfStab_Ring_Convergence_Synchrone
 
   use int.Int
   use int.EuclideanDivision
   use list.List
   use list.Append
-  use list.Mem
+  use list.Mem as Meml
   use list.Map as Lmap
   use map.Map
   use set.FsetInt
@@ -188,7 +177,7 @@ module SelfStab_Ring_Convergence
 
 
   (* clone World theory to get additional types/functions *)
-  clone modelReadallEnabled.World with
+  clone modelReadAllEnabledSynchrone.World with
     type node,
     type state
 
@@ -351,7 +340,7 @@ module SelfStab_Ring_Convergence
 
 
   (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
-  clone modelReadallEnabled.Steps with
+  clone modelReadAllEnabledSynchrone.Steps with
     type node,
     type state,
     val validNd,
@@ -369,21 +358,21 @@ module SelfStab_Ring_Convergence
        Thus, the latter may not occur in the configuration.
    *)
   lemma step_obvious : forall w w' :world .
-    indpred w -> step w 0 w' -> not (initConv w) /\ convState w <> w 0 /\ noOcc w (convState w) /\
+    indpred w -> step w (Cons 0 Nil) w' -> not (initConv w) /\ convState w <> w 0 /\ noOcc w (convState w) /\
       w' 0 = incre (w 0) /\ w' 0 = incre (w (n_nodes -1))
 
-  lemma step_noOcc : forall w w' :world, k :node, s :state.
-    indpred w -> step w k w' -> 0<=s<k_states -> w k <> s -> noOcc w' s -> noOcc w s
+  lemma step_noOcc : forall w w' :world, lk : list node, s :state.
+    indpred w -> step w lk w' -> 0<=s<k_states -> forall k: node. Meml.mem k lk -> w k <> s -> noOcc w' s -> noOcc w s
 
   (* Important lemma to prove the next one.
      Requires use of interactive proof transformations:
      unfolding of initConv predicate; case analysis; existential witnesses
    *)
-  lemma step_initConv : forall w w' :world, k :node.
-    indpred w -> step w k w' -> initConv w -> initConv w'
+  lemma step_initConv : forall w w' :world, lk :list node.
+    indpred w -> step w lk w' -> initConv w -> initConv w'
 
-  lemma step_changes_convState : forall w w' :world, k :node.
-    indpred w -> step w k w' -> convState w' <> convState w -> noOcc w' (convState w)
+  lemma step_changes_convState : forall w w' :world, lk :list node.
+    indpred w -> step w lk w' -> convState w' <> convState w -> noOcc w' (convState w)
 
 
 
@@ -438,10 +427,10 @@ module SelfStab_Ring_Convergence
 
   (* delta of a single node i, when k is the stepping node*)
    
-  let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+  let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (lk:node) : int
     requires { indpred w }
     requires { validNd i /\ validNd k }
-    requires { step w k w' }
+    requires { step w lk w' }
     ensures  { i = 0 -> k = 0 -> convState w' = convState w -> result + n_nodes = 0 }
     ensures  { i = 0 -> k = 0 -> convState w' <> convState w -> result + n_nodes * (diffZero w (convState w)) = 0 }
     ensures  { i = 0 -> k > 0 -> result + n_nodes * mod (convState w - convState w') k_states = 0 }
@@ -499,3 +488,4 @@ module SelfStab_Ring_Convergence
   goal converged_oneToken : forall w :world. converged w -> oneToken w /\ has_token w 0
 
 end
+*)

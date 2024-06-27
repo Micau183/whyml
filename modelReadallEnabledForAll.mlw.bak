@@ -1,5 +1,5 @@
 (** {1 Locally shared memory model - World Theory} *)
-module World
+module WorldForAll
   use int.Int
   use map.Map
   use list.List
@@ -18,7 +18,7 @@ module World
 end
 
 (** {2 Locally shared memory model - Network Theory} *)
-module Steps
+module StepsForAll
   use int.Int
   use map.Map
   use list.List
@@ -30,6 +30,7 @@ module Steps
 
   type node
   val predicate validNd (n:node)
+
   type state
 
 
@@ -42,18 +43,13 @@ module Steps
   (* product types *)
   type world = map node state
 
-  (* components of the initial world, defined for each system *)
-    val function initState (node) : state
+  val predicate validWorld (w : world)
+  val predicate legitimate (w : world)
 
-    constant initWorld : world = initState
-
-  (* candidate inductive predicate
-     contract ensures initial world satifies the predicate *)
-     (*devrait s'appeler legitimate *)
   val ghost predicate indpred (w:world)
-    ensures { w=initWorld -> result }
+    ensures { validWorld w -> result }
 
-
+(* rajouter une condition valid sur w_init *)
   (* handleEnbld-enabling predicate, to be instantiated when cloning *)
   val ghost predicate enabled (map node state) (i:node)
     requires { validNd i }
@@ -61,7 +57,7 @@ module Steps
 
   (* function specifying how the outputs of the handlers are used
      both in the handler's contract and in the transition relation *)
-  let ghost function step_enbld (w:world) (n:node) (st:state) : world =
+  function step_enbld (w:world) (n:node) (st:state) : world =
     set w n st
 
   (* handler to be executed at node h when it is enabled
@@ -95,7 +91,7 @@ module Steps
 
   lemma step_preserves_states :
     forall w w' :world, n i :node. step w n w' -> i<>n -> w i = w' i
-  
+
 
   (* many steps relation [reflexive transitive closure]
      and reachable worlds *)
@@ -107,7 +103,7 @@ module Steps
   lemma noNegative_step_TR : forall w w' :world, steps :int.
     step_TR w w' steps -> steps >= 0
 
-  predicate reachable (w:world) = exists steps :int. step_TR initWorld w steps
+  predicate reachable (w_init:world) (w :world) = exists steps :int. step_TR w_init w steps
 
   (* inductive predicate is preserved by many steps and holds
      in reachable worlds *)
@@ -116,6 +112,8 @@ module Steps
     forall w w' :world, steps :int . step_TR w w' steps -> indpred w -> indpred w'
 
   lemma indpred_reachable :
-    forall w :world. reachable w -> indpred w
+    forall w_init, w :world. validWorld w_init -> reachable w_init w -> indpred w
+
 
 end
+

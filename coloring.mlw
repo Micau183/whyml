@@ -10,19 +10,11 @@
   use set.SetAppInt
   
  (*PARTIE 1: CLOSURE *)
- 
- 
-  (* Basic Setup: nodes, packets, inputs, outputs, states 
-  Nos noeuds et nos couleurs sont des entiers *)
 
-  type node = int
-  
-  type state = int
+
 
   (* number of processes*)
   val constant n_nodes : int
-
-  let predicate validNd (n:node) = 0 <= n 
 
   axiom at_least_two : 2 < n_nodes
 
@@ -30,97 +22,119 @@
   (* Nombre de couleur *)
   val constant k_color : int
   
-  val color : int
 
   (* On suppose qu'il y a plus de couleur que de noeuds (une couleur par noeud) *)
   axiom k_color_bound : n_nodes <= k_color  
   
-  (*Peu importe le graphe, un noeud doit avoir une valeur comprise entre 0 et k_color 
-  peu probablement être changé en lemma et prouvé (sert à prouver enabled'refnvc) *)
-  axiom max_color : forall lS: map node state. forall i. 0<=lS i <k_color 
+    type node = int
 
 
-(* Fonction qui renvoie l'ensemble des voisins d'un noeud dans un anneau *)
 
-let function neighbor_set (lS:map node state) (i:node): set
-requires {forall i. 0<= (lS i) < k_color } 
-ensures {forall v. mem v result -> (0<= v < k_color)} 
-ensures { mem (lS (mod(i-1) n_nodes)) result}
-ensures { mem (lS (mod(i+1) n_nodes)) result}
-ensures {cardinal result < n_nodes} =
-add (lS (mod(i-1) n_nodes)) (add (lS (mod(i+1) n_nodes)) (empty()))
+
+ 
+
+
+  (*axiom max_color : forall lS: map node state. forall i. 0 <= lS i<k *)
+  
+  
+  (* On définit le type state avec un invariant pour remplacer l'axiome ci-dessus qui est un true=false *)
+    type state = {k: int}
+  invariant{ 0<=k<k_color}
+  
+  
+  
+lemma test : forall s1,s2:state . s1=s2 <-> s1.k=s2.k
+
+  let predicate validNd (n:node) = 0<= n < n_nodes
+  
+ 
+
+(* Fonction qui renvoie l'ensemble des couleurs(type int et non state) des voisins d'un noeud dans un anneau *)
+
+
+  let function neighbor_set (lS:map node state) (i:node): set 
+  requires {forall n. 0<= (lS n).k < k_color } 
+  ensures {forall v. mem v result -> (0<= v < k_color)} 
+  ensures { mem (lS (mod(i-1) n_nodes)).k result}
+  ensures { mem (lS (mod(i+1) n_nodes)).k result}
+  ensures {cardinal result < n_nodes} =
+  add (lS (mod(i-1) n_nodes)).k (add (lS (mod(i+1) n_nodes)).k (empty()))
 
 
 (* Fonction qui calcule la plus petite couleur disponible *)
+(*prouvable avec Cvc 5 sur la machine d'Erwan, j'ai pas réussi sur cette version de Why3 avec ces solveurs *)
 let function free (colors: set) (k:int) : int =
-  requires { 1 < k }
-  requires  { subset colors (interval 0 k) }
-  requires  { not  colors == (interval 0 k) }
-  ensures { 0 <= result < k }
+(*requires { 1 < k } *)
+requires { subset colors (interval 0 k) }
+requires { not (colors == (interval 0 k)) }
+(*requires { not colors == empty }*)
   ensures { not mem result colors }
   ensures { forall x. (0 <= x <=k /\ not mem x colors) -> result <= x }
+  ensures { 0 <= result < k}
   min_elt (diff  (interval 0 k) colors)
-
 
 
 (* modelReadallEnabledDemon est ma version modifié de modelReadallEnabled *)
 
-  clone modelReadallEnabledDemon.World with
+  clone modelReadallEnabled.World with
     type node,
     type state
     
   
 (* Dans modelReadallEnabledDemon, il n'y a plus d'état initial, je laisse la fonction initState en commentaire pour l'instant *)
 
-(*
+
   let function initState (k:node) : state =
-  0
-  *)
+  {k=0}
+  
  
- 
-(* renvoie true si l'un des voisins à la même couleur *)
+
+(* pour un noeud, on regarde ses voisins et on vérifie s'il en existe un qui a la même couleur *)
   predicate conflict (lS: map node state) (i:node) = 
-  exists v :state. mem v (neighbor_set lS i) -> lS i = lS v
+  exists v :state. mem v.k (neighbor_set lS i) -> (lS i).k = v.k
+
 
 
  
   (* enabling predicate *)
-  let ghost predicate enabled (lS:map node state) (i:node) 
-  requires{forall i. 0<= lS i < k_color} =
-  (* let nl = neighbor_set lS i in *) 
+  let ghost predicate enabled (lS:map node state) (i:node) =
+
   conflict lS i 
   
 
   
  (* handling function *)
+ (* c'est la fonction step de sasa *)
+ (* k est la couleur de l'état (par rapport à l'invariant de définition ) *)
+ 
   let function handleEnbld (h:node) (lS:map node state) : state
-    requires{forall i. 0 <= lS i <k_color} 
-    requires{ exists i. conflict lS i }
-    
-  = free (neighbor_set lS h) k_color 
+    requires{ exists i. conflict lS i } 
+
+  = {k=(free (neighbor_set lS h) k_color)} 
   
 
 
-predicate couleurDifferentes (lS: map node state) (n1: node) = 
-forall n2: node. mem n2 (neighbor_set lS n1) -> lS n1 <> lS n2
+(*littéralement la négation de conflict *)
+predicate couleurDifferentes (lS: map node state) (i: node) =
+  forall v: state. mem v.k (neighbor_set lS i) -> (lS i).k <> v.k
 
 
 
+(* C'est une tautologie, Il est nécessaire de donner un invariant au modele *)
 
 predicate inv (lS: map node state) =
   (* Garantir que les états des nœuds sont valides *)
-  (forall n: node. 0 <= n < n_nodes -> 0 <= lS n < k_color) 
+  (forall n: node. 0 <= n < n_nodes -> 0 <= (lS n).k < k_color) 
   (* S'ils sont voisins alors ils ont des couleurs différentes ou alors il y a conflict entre n1 n2 donc on appelle conflict sur n1 ou n2 *)
-  /\ (forall n1: node. (validNd n1 -> couleurDifferentes lS n1)
-  \/ conflict lS n1)
+  /\ (forall n1: node. validNd n1 -> (couleurDifferentes lS n1 \/ conflict lS n1))
   
 
   
   let ghost predicate indpred (w:world) = inv ( w)
 
 
-  clone modelReadallEnabledDemon.Steps with
-    type node, type state, val validNd, val indpred, val enabled, val handleEnbld
+  clone modelReadallEnabled.Steps with
+    type node, type state, val validNd, val indpred, val enabled, val handleEnbld, val initState
     
 (* tout les noeuds sont bien coloriés *)
 predicate colored (w: world) =
@@ -128,46 +142,178 @@ predicate colored (w: world) =
     validNd n1 ->
     couleurDifferentes w n1 
     
-
+ 
 (* renvoie true si pour tout les noeuds il n'y a pas pas de conflits *)
 predicate no_conflict (w: world) = forall n: node. not(conflict w n)
     
     
-    
-
-  goal colored : forall w :world. reachable w -> no_conflict w -> colored w
+  goal goal_colored : forall w, w_init :world. reachable w -> no_conflict w -> colored w
   
   
  (*PARTIE 2: TERMINAISON *)
   
-  (* On va utiliser une fonction de potentiel energy qui compte le nombre de conflit  *)
- let ghost function energy (w:world) : int 
-     requires { indpred w }
-     ensures  { result >= 0 }
-     ensures { exists i: node. conflict w i -> result > 0 }
-     =
-  let energy_count = ref 0 in 
-  for i = 0 to n_nodes - 1 do 
-    if conflict w i then energy_count := !energy_count + 1
-  done;
-  !energy_count 
-  
-  (*On calcule le delta entre chaque step*)
-  (*Dans modelReadallEnabledDemon, step n'a plus la signature step world node world mais step world fset node world 
-  où fset node est un ensemble de noeud *)
-  
-  let ghost function deltaEnergy (w:world) (w':world) (ns:fset node) : int
-    requires { indpred w }
-    requires { step w ns w' } 
-    ensures { if energy w = 0 then result = 0 else result <> 0}
-    = energy w - energy w'
- 
- (*On montre que à chaque step fait décroitre strictement la valeur d'energy. 
-  De plus nous avons définit que energy était strictement positif dans sa définition *)
+  (* On va utiliser une fonction de measureNode qui compte le nombre de conflit  *)
 
-   goal step_decreasesEnergy : forall w w' :world, ns :fset node.
-    indpred w -> step w ns w' -> energy w' < energy w
+  let ghost function measureNode (w:world) (n:int) : int 
+  requires { indpred w }
+  requires { validNd n }
+  ensures {result >=0}
+  ensures{result = 1 <-> conflict w n} 
+  ensures{result = 0 <-> not(conflict w n)} =
+  if (conflict w n )then 1 else 0
+  
+    (* measure of nodes 0 to n-1
+   *)
+  let rec ghost function measureNodes (w:world) (n:int) : int
+    requires { indpred w }
+    requires { 0 <= n <= n_nodes }
+    ensures  { result >= 0 }
+    ensures  { result = 0 -> forall i :int. 0<=i<n -> measureNode w i = 0 }
+    variant  { n }
+  = if n=0 then 0
+    else measureNode w (n-1) + measureNodes w (n-1)
     
-   goal converged : forall w : world. (energy w = 0) <-> colored w 
+    (* measure of entire ring
+     This function is a fundamental part of the specification
+     PROPERTY 1 - Before convergence, the measure (which is always non-negative) has a positive value
+   *)
+   
+   
+  let ghost function measureAllNodes (w:world) : int
+    requires { indpred w }
+    ensures  { result >= 0 }
+    (* si je mets juste ensures{ not(colored w) -> result > 0} il réussi pas *)
+    ensures  { not(colored w) -> exists n:node. not(couleurDifferentes w n) -> (measureNode w n = 1) -> (result> 0)}
+
+  = measureNodes w n_nodes
+  
+    (* delta of a single node i, when k is the stepping node   *)
+
+
+
+
+
+
+
+
+
+(* Lemmes pour essayer de prouver les derniers theorems/ voir là où ça ne marche pas *)
+
+lemma sub_helper3: forall w, w' k. indpred w /\ (validNd k ) /\  ( step w k w') 
+->not (mem (free (neighbor_set w k) k_color) (neighbor_set w k)) /\ (handleEnbld k w).k = (free (neighbor_set w k) k_color)
+(*
+ -> couleurDifferentes w (free (neighbor_set w k) k_color)
+*)
+
+lemma sub_helper4: forall w, w' k. indpred w /\ (validNd k ) /\  ( step w k w') 
+/\ not (mem (free (neighbor_set w k) k_color) (neighbor_set w k)) /\ (handleEnbld k w).k = (free (neighbor_set w k) k_color)
+ -> not (mem (handleEnbld k w).k (neighbor_set w k))
+ 
+ (* (* c'est un true = false *)
+ 
+ lemma sub_helper5:  forall w, w' k. indpred w /\ (validNd k ) /\  ( step w k w') 
+/\ not (mem (free (neighbor_set w k) k_color) (neighbor_set w k)) /\ (handleEnbld k w).k = (free (neighbor_set w k) k_color)
+ /\ not (mem (handleEnbld k w).k (neighbor_set w k)) 
+ -> couleurDifferentes w (handleEnbld k w).k
+*)
+
+ 
+ (*
+(* c'est un true = false  aussi *)
+
+
+lemma sub_helper2: forall w, w' k. indpred w /\ (validNd k ) /\  ( step w k w') /\ conflict w k 
+-> not(conflict w' k)
+*)
+
+lemma sub_helper1: forall w, w' k. indpred w /\ (validNd k ) /\  ( step w k w') 
+-> w' k = handleEnbld k w  /\ (handleEnbld k w).k = (free (neighbor_set w k) k_color) -> couleurDifferentes w (free (neighbor_set w k) k_color)
+
+
+
+
+
+predicate conflict2 (lS: world) (n:node) =
+   exists c : int.  mem c (neighbor_set lS n) /\ (lS n).k = c
+
+predicate conflict_alt (lS: world) (n:node) =
+   exists st : state. mem st.k (neighbor_set lS n) /\ (lS n).k = st.k
+
+lemma check_alt :
+    forall w : world. forall n:node.  conflict2 w n <-> conflict_alt w n
+
+(* à mettre en lemme et à prouver *)
+lemma helper: forall w, w', k. indpred w /\ (validNd k ) /\  ( step w k w') -> measureNode w' k = 0
+lemma helper2: forall w, w', i, k. indpred w /\ (validNd k ) /\  ( step w k w') -> i <> k /\ measureNode w i = 0 -> measureNode w' i =0 
+
+
+
+
+
+
+
+
+
+    let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+    requires { indpred w }
+    requires { validNd i /\ validNd k }
+    requires { step w k w' }
+    ensures {  i = k -> measureNode w i = 1 /\  measureNode w' i =0 -> result = 1 }
+    ensures { i <> k /\ measureNode w i = 0 -> measureNode w' i =0 }
+    ensures { i <> k /\ measureNode w i = 1 -> (measureNode w' i =0 \/measureNode w' i =1)}
+  = 
+    measureNode w i - measureNode w' i
     
+    
+   lemma prod : forall x y :int. x > 0 -> y > 0 -> x * y >= x /\ x * y >= y
+    
+    
+    
+   let rec ghost function measureDeltaNodes (w:world) (w':world) (n:int) (k:node) : int
+    requires { indpred w }
+    requires { 0 <= n <= n_nodes}
+    requires { 0 <= n <= n_nodes -> validNd n}
+    requires { validNd k }
+    requires { step w k w' }
+   
+    variant  { n }
+    
+
+  = if n = 0 then measureDeltaNode w w' 0 k 
+  else measureDeltaNode w w' n k + measureDeltaNodes w w' (n-1) k 
+  
+  
+  let ghost function measureAllDeltaNodes (w:world) (w':world) (k:node) : int
+   requires { indpred w }
+    requires { validNd k }
+    requires { validNd n_nodes}
+    requires { step w k w' }
+   ensures  { result > 0 }
+   ensures {result = measureAllNodes w - measureAllNodes w'}
+  = measureDeltaNodes w w' n_nodes k
+    
+    
+    
+    
+   lemma helper_decrease: forall w, w' k. indpred w /\ (validNd k ) /\ (validNd n_nodes)/\   ( step w k w') 
+   -> measureAllDeltaNodes w w' k = measureAllNodes w - measureAllNodes w' 
+   
+   
+   goal goal_decreasesMeasure : forall w w' :world, k :node.
+    indpred w /\ validNd n_nodes -> step w k w' -> measureAllNodes w > measureAllNodes w' 
+ 
+ 
+ 
+(* Facilement prouvable en coq je pense mais je n'y arrive pas sur why3 *)
+lemma help_goal : forall w : world. (measureAllNodes w = 0) -> (forall n: node. measureNode w n = 0) 
+
+goal goal_converged : forall w : world. (measureAllNodes w = 0) -> colored w 
+
+
+
+(*Controle pour voir s'il n'y a pas de true = false dans le code *)
+     goal trivial : 1+1= 3    
+   
+
+
 end

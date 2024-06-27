@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="2" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<file format="whyml" proved="true">
+<path name=".."/><path name="modelReadallEnabledForAll.mlw"/>
+<theory name="StepsForAll" proved="true">
+ <goal name="indpred_step" proved="true">
+ <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="6"/></proof>
+ <proof prover="2"><result status="valid" time="0.14" steps="4569"/></proof>
+ </goal>
+ <goal name="step_preserves_states" proved="true">
+ <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="6"/></proof>
+ <proof prover="2"><result status="valid" time="0.08" steps="4601"/></proof>
+ </goal>
+ <goal name="noNegative_step_TR" proved="true">
+ <transf name="induction_pr" proved="true" >
+  <goal name="noNegative_step_TR.0" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.00" steps="6"/></proof>
+  <proof prover="2"><result status="valid" time="0.04" steps="4582"/></proof>
+  </goal>
+  <goal name="noNegative_step_TR.1" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="12"/></proof>
+  <proof prover="2"><result status="valid" time="0.07" steps="5229"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="indpred_manySteps" proved="true">
+ <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="1524266"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="1.00" steps="50169"/></proof>
+ <transf name="induction_pr" proved="true" >
+  <goal name="indpred_manySteps.0" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="10"/></proof>
+  <proof prover="2"><result status="valid" time="0.05" steps="4728"/></proof>
+  </goal>
+  <goal name="indpred_manySteps.1" proved="true">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="20"/></proof>
+  <proof prover="2"><result status="valid" time="0.06" steps="5404"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="indpred_reachable" proved="true">
+ <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="1779744"/></proof>
+ <proof prover="2"><result status="valid" time="0.06" steps="5263"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

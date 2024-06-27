@@ -436,7 +436,7 @@ module SelfStab_Ring_Convergence
   *)
 
 
-  (* delta of a single node i, when k is the stepping node*)
+  (* delta of a single node i, when k is the stepping node
    
   let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
     requires { indpred w }
@@ -472,7 +472,7 @@ module SelfStab_Ring_Convergence
   = if n=1 then measureDeltaNode w w' 0 k
     else measureDeltaNode w w' (n-1) k + measureDeltaNodes w w' (n-1) k
 
-
+*)
   (* PROPERTY 2 - the measure strictly decreases with every step of the system
    *)
   goal step_decreasesMeasure : forall w w' :world, k :node.
