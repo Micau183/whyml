@@ -1,0 +1,110 @@
+# Time-stamp: <modified the 01/07/2024 (at 10:30) by Erwan Jahier>
+#+LaTeX_CLASS: article
+#+LATEX_HEADER: \input{header}
+#+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,filecolor=blue,urlcolor=blue}
+#+OPTIONS: ::t |:t ^:nil -:t f:t *:t skip:t H:6 LaTeX:t TeX:t ~:t toc:nil
+#+BIND: org-latex-title-command ""
+#+MACRO: red \color{red} $1 \color{black}
+#+AUTHOR: Lilian Derain
+#+TITLE: Rapport de stage
+#+OPTIONS: broken-links:t
+#+LATEX: \input{preambule}
+#+TODO: TODO DOING DONE
+#+LaTeX_HEADER: \DeclareUnicodeCharacter{00A0}{~}
+
+* Remerciement
+* Résumé/Abstract
+* Contexte
+
+** Verimag
+** Organisation de travail
+
+* Algorithme distribué auto-stable
+
+** Définition Algorithme distribué auto-stable (s’aider du livre )
+   - Définitions
+   - Avantages
+   - Steps et exécutions
+   - Démons
+   - Auto-stabilisation
+   - Complexité temporelle/spatiale (optionnel)
+	
+** Example 1 : Coloring
+   - Algorithme
+   - Preuve
+
+** Example 2 : Token Ring Dijkstra
+   - Algorithme
+   - Explication rapide Ocaml
+   - Explication rapide Lustre
+   - Explication Sasa et Salut
+   - Vérification formelle sur Lustre/Salut mais pas Ocaml/Sasa
+
+* Explication des outils
+
+** Logique de Hoare
+** SMT solver
+** Explication Why3
+   - Fonctionnement
+   - IDE
+   - Logique de preuve / informations utiles
+
+* Why3doTheWayOfHarmoniousDistributedSystemProofs
+
+** Explication du modèle : modelReadallEnable
+** Explication de selfstab-ring
+   - Closure
+   - Terminaison
+   - Avantages et Limitations (Comparaison avec Sasa)
+      - Lien direct avec Ocaml
+      - Seulement le démon central
+      - Etat initial fixé
+      - Topologie fixée
+      - Accès à tous les états et pas uniquement les voisins
+
+* Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact
+
+** Essai d'utilisation de org mode
+ #+begin_src python :file test.py :exports code
+ print("hello world")
+ #+end_src
+   #+begin_src why3 :file coloring.mlw :exports code
+   (* On va prouver la closure et la terminaison de l'algo de coloration dans une topologie en anneau *)
+   module Coloring_Ring
+     use list.List
+     use int.Int
+     use int.EuclideanDivision
+     use map.Map
+     use list.Mem
+     use list.Length
+     use ref.Ref
+     use set.SetAppInt
+  
+     (* PARTIE 1: CLOSURE *)
+
+     (* number of processes *)
+     val constant n_nodes : int
+
+     axiom at_least_two : 2 < n_nodes
+  
+     (* Nombre de couleurs *)
+     val constant k_color : int
+
+     (* On suppose qu'il y a plus de couleurs que de noeuds (une couleur par noeud) *)
+     axiom k_color_bound : n_nodes <= k_color
+
+     type node = int
+   }
+   #+end_src
+
+** Explication détaillée
+** Problèmes rencontrés et solutions
+
+* Autres différents essais et faisabilité
+   - Pour tout état initial
+   - Pour toute topologie
+   - Noeuds peuvent accéder uniquement à leurs voisins
+   - Autres démons
+      - Démon 
+
+

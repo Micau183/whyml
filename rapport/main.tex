@@ -1,0 +1,270 @@
+% Created 2024-07-03 Wed 10:53
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\input{header}
+\hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,filecolor=blue,urlcolor=blue}
+\DeclareUnicodeCharacter{00A0}{~}
+\author{Lilian Derain}
+\date{\today}
+\title{Rapport de stage}
+\hypersetup{
+ pdfauthor={Lilian Derain},
+ pdftitle={Rapport de stage},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\input{preambule}
+
+\section{Remerciement}
+\label{sec:org604d041}
+\section{Résumé/Abstract}
+\label{sec:org76c7e88}
+Stage de 3 mois au labo Verimag.
+L'objectif de ce stage est d'utiliser des méthodes formelles pour prouver de façon la plus automatisée possible la correction d'algorithmes distribués auto-stabilisants.
+L'idée de ce stage est d'explorer d'autres techniques de preuves, basées sur la logique de séparation et  des solveurs SMT. 
+En particulier l'article why3-do se présentant comme un modèle pour la preuve d'algorithmes distribués auto-stabilisants basé sur l'outil Why3  
+L'objectif de ce stage  est d'évaluer ce qu'il est possible et impossible  de faire  avec ces  outils compte  tenu de  leur maturité actuelle.
+
+\section{Contexte}
+\label{sec:org8001d29}
+
+\subsection{Verimag}
+\label{sec:orge2e2943}
+
+   Le laboratoire VERIMAG est un centre de recherche en informatique situé à Grenoble. Fondé
+en 1991, le laboratoire est affilié à l’UGA. Le laboratoire vise à produire des outils théoriques
+et techniques sur les systèmes informatisés en mettant en place une rigueur mathématiques.
+Le laboratoire agit sur de nombreux problèmes tels que les circuits, les processeurs, des al-
+gorithmes distribués et des systèmes intégrants de l’IA.
+L’une des spécialités du laboratoire est la vérifcation formelle. Il s’agit d’une approche
+mathématique permettant de garantir que des systèmes répondent bien aux spécifications
+et propriétés. Erwan Jahier et Karine Altisen utilise font de la vérification formelle dans le 
+cadre des algorithmes distribués auto-stabilisants. Ce sont des algorithmes qui peuvent 
+atteindre un état correct depuis n'importe quel état sans intervention externe.
+
+
+\subsection{Organisation de travail}
+\label{sec:org507ffd4}
+
+Au début -> installations des outils (why3 et why3-do ) et apprentissage des connaissances de bases (logique de hoare, smt solver, algo distribué auto-stabilisant)
+
+Echanges fréquents avec Erwan sur les questions/problèmes rencontrés
+
+Et réunion toutes les une semaine ou deux aver Erwan et Karine pour mettre au point les avancements depuis la dernière réunion : 
+\begin{enumerate}
+\item Expliquer ce que j'ai compris -> le fonctionnement et les limitations de ce sur quoi je travaille
+\item Présenter mon avancement actuel : ce que j'ai réussi, ce qui marche (pas), là où je suis bloqué
+\item Avoir un retour sur ce quoi je dois me focaliser pour la prochaine semaine, des nouvelles idées pour faire face aux problèmes que je n'ai pas su résoudre
+\end{enumerate}
+
+\section{Algorithme distribué auto-stable}
+\label{sec:org99d2ae0}
+
+
+\subsection{Définition algorithme distribué auto-stable}
+\label{sec:org3c4bbdd}
+
+
+Le concept s'auto stabilisation a été introduit par Dijkstra en 1973 dans le contexte des systèmes distribués, 
+c'est à dire des systèmes fait d'un ensemble fini de process autonome interconnecté grâce à un réseau de 
+communication, qui a pour but d'atteindre un objectif global. Dans ce cas le design d'un algorithme
+distribué auto-stable peut sembler un peu complexe car chaque process doivent se coordiner entre eux 
+bien que les process ont une vue partielle du système. Son état local et ses informations transmises 
+via des supports de communication, généralement asynchrones, reliant le processus à une partie des autres processus.
+
+
+ Tolérances aux fautes: 
+L'algo converge d'un état illégitime à un état légitime dans un nombre fini d'étape
+ Une fois que l'algo est dans un état légitime, il le reste
+S'il y a une "transient fault" et que l'on retourne dans un état illégitime alors l'algorithme converge de lui-même 
+jusqu'à atteindre un état légitime.
+
+Plein de petits algos simples à la place d'un seul gros qui gère tout.
+
+Un graphe où chaque noeuds contient des variables et une action de la forme guard -> statement .
+Si la guarde vaut true alors l'action est "enabled" 
+Un noeud à accès uniquement aux variables de ses voisins 
+
+A chaque étape "step", on regarde la liste des actions "enabled". 
+Cependant on peut choisir différentes manières de procéder donc concept de de démon
+
+Exemples non exhaustifs de démons :
+\begin{enumerate}
+\item Central : On active un seul noeud parmi la liste des noeuds et on mets à jour la liste des noeuds enabled
+\item Synchrone : On active tous les noeuds de la liste
+\item Distribué : On active au moins un noeuds parmi ceux enabled
+\end{enumerate}
+
+
+3 propriétés
+Closure : depuis un état légitime on reste dans un état légitime
+Convergence : depuis un état illégitime on atteint un état légitime avec un nombre fini d'étape
+Correctness 
+
+\subsection{Example 1 : Coloring}
+\label{sec:orge79b9fb}
+\begin{itemize}
+\item Algorithme
+\item Exemple simple d'execution sous démon centrale
+\item Exemple simple d'execution sous démon synchrone (pour montrer que ça marche pas )
+\item Preuve
+\end{itemize}
+
+\subsection{Example 2 : Token Ring Dijkstra}
+\label{sec:orgf207761}
+\begin{itemize}
+\item Explication de l'algorithme pour pouvoir expliquer Why3do
+\item Exemple d'éxecution simple sous démon central
+\end{itemize}
+
+
+\section{Explication des outils}
+\label{sec:org1acbde8}
+
+\subsection{Logique de Hoare}
+\label{sec:org7d71c98}
+La logique de Hoare est un formalisme utilisé en informatique pour raisonner sur la correction des programmes impératifs. Elle utilise des triples de Hoare, notés \{P\} C \{Q\}, où :
+
+\begin{itemize}
+\item P est la précondition, une assertion sur l'état du programme avant l'exécution de l'instruction ou du bloc d'instructions C.
+\item C est l'instruction ou le bloc d'instructions du programme.
+\item Q est la postcondition, une assertion sur l'état du programme après l'exécution de C.
+\end{itemize}
+
+Un triple de Hoare \{P\} C \{Q\} signifie que si la précondition P est vraie avant l'exécution de C, alors la postcondition Q sera vraie après l'exécution de C, à condition que C termine son exécution.
+
+\#\#\# Principes clés de la logique de Hoare
+\begin{enumerate}
+\item \textbf{\textbf{Règle de l'assignation}} : Pour une instruction d'assignation x := e,
+\begin{itemize}
+\item \{P[e/x]\} x := e \{P\}, où P[e/x] est l'assertion P avec toutes les occurrences de x remplacées par e.
+\end{itemize}
+
+\item \textbf{\textbf{Règle de composition}} : Pour deux instructions C1 et C2,
+\begin{itemize}
+\item Si \{P\} C1 \{Q\} et \{Q\} C2 \{R\}, alors \{P\} C1; C2 \{R\}.
+\end{itemize}
+
+\item \textbf{\textbf{Règle de la conditionnelle}} : Pour une instruction if (b) then C1 else C2,
+\begin{itemize}
+\item \{P ∧ b\} C1 \{Q\} et \{P ∧ ¬b\} C2 \{Q\} impliquent \{P\} if (b) then C1 else C2 \{Q\}.
+\end{itemize}
+
+\item \textbf{\textbf{Règle de la boucle}} : Pour une boucle while (b) do C,
+\begin{itemize}
+\item \{I ∧ b\} C \{I\} implique \{I\} while (b) do C \{I ∧ ¬b\}, où I est un invariant de boucle.
+\end{itemize}
+\end{enumerate}
+
+
+Considérons l'algorithme simple suivant qui incrémente une variable x :
+
+\begin{verbatim}
+{ x = 0 } 
+x := x + 1 
+{ x = 1 }
+\end{verbatim}
+La précondition est x = 0, l'instruction est x := x + 1, et la postcondition est x = 1. Le triple de Hoare correspondant est \{ x = 0 \} x := x + 1 \{ x = 1 \}.
+
+En conclusion, la logique de Hoare permet de structurer le raisonnement sur les programmes en termes de préconditions et de postconditions, facilitant la vérification formelle de leur correction.
+\subsection{SMT solver}
+\label{sec:org6070acb}
+\subsection{Explication Why3}
+\label{sec:org36863b1}
+\begin{itemize}
+\item Fonctionnement
+\item IDE
+\item Logique de preuve / informations utiles
+\end{itemize}
+
+\section{Why3doTheWayOfHarmoniousDistributedSystemProofs}
+\label{sec:orgc3b2159}
+
+\subsection{Explication du modèle : modelReadallEnable}
+\label{sec:org0ff04ea}
+\subsection{Explication de selfstab-ring}
+\label{sec:org68d3d67}
+\begin{itemize}
+\item Closure
+\item Terminaison
+\item Avantages et Limitations (Comparaison avec Sasa)
+\begin{itemize}
+\item Lien direct avec Ocaml
+\item Seulement le démon central
+\item Etat initial fixé
+\item Topologie fixée
+\item Accès à tous les états et pas uniquement les voisins
+\end{itemize}
+\end{itemize}
+
+\section{Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact}
+\label{sec:org6414005}
+
+\subsection{Essai d'utilisation de org mode}
+\label{sec:org51258a9}
+\begin{verbatim}
+print("hello world")
+\end{verbatim}
+\begin{verbatim}
+(* On va prouver la closure et la terminaison de l'algo de coloration dans une topologie en anneau *)
+module Coloring_Ring
+  use list.List
+  use int.Int
+  use int.EuclideanDivision
+  use map.Map
+  use list.Mem
+  use list.Length
+  use ref.Ref
+  use set.SetAppInt
+
+  (* PARTIE 1: CLOSURE *)
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  axiom at_least_two : 2 < n_nodes
+
+  (* Nombre de couleurs *)
+  val constant k_color : int
+
+  (* On suppose qu'il y a plus de couleurs que de noeuds (une couleur par noeud) *)
+  axiom k_color_bound : n_nodes <= k_color
+
+  type node = int
+}
+\end{verbatim}
+
+\subsection{Explication détaillée}
+\label{sec:orgcd34949}
+\subsection{Problèmes rencontrés et solutions}
+\label{sec:org2dc267f}
+
+\section{Autres différents essais et faisabilité}
+\label{sec:org8f6f262}
+\begin{itemize}
+\item Pour tout état initial
+\item Pour toute topologie
+\item Noeuds peuvent accéder uniquement à leurs voisins
+\item Autres démons
+\begin{itemize}
+\item Démon
+\end{itemize}
+\end{itemize}
+\end{document}
