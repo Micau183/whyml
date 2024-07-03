@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="6">
+<prover id="0" name="Alt-Ergo" version="2.4.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="CVC4" version="1.7" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Z3" version="4.8.6" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="5" name="Z3" version="4.8.6" alternative="noBV" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="6" name="CVC4" version="1.8" alternative="strings" timelimit="5" steplimit="0" memlimit="1000"/>
+<file format="whyml">
+<path name=".."/><path name="modelReadAllEnabledSynchrone.mlw"/>
+<theory name="Steps">
+ <goal name="step_enbld_syn_l&#39;vc" expl="VC for step_enbld_syn_l">
+ <proof prover="1" obsolete="true"><result status="valid" time="0.16" steps="16535"/></proof>
+ </goal>
+ <goal name="handleEnbld_syn_rec&#39;vc" expl="VC for handleEnbld_syn_rec">
+ <transf name="split_vc" >
+  <goal name="handleEnbld_syn_rec&#39;vc.0" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.13" steps="12385"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.1" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.14" steps="14317"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.2" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.10" steps="12889"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.3" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.10" steps="11573"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.4" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.10" steps="12955"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.5" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.10" steps="14892"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.6" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.12" steps="11675"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.7" expl="precondition">
+  <proof prover="1" obsolete="true"><result status="valid" time="0.06" steps="12752"/></proof>
+  </goal>
+  <goal name="handleEnbld_syn_rec&#39;vc.8" expl="postcondition">
+  <transf name="inline_all" >
+   <goal name="handleEnbld_syn_rec&#39;vc.8.0" expl="postcondition">
+   <transf name="split_vc" >
+    <goal name="handleEnbld_syn_rec&#39;vc.8.0.0" expl="postcondition">
+    <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+    <proof prover="1" obsolete="true"><result status="valid" time="0.13" steps="15106"/></proof>
+    <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="1937618"/></proof>
+    <proof prover="5" obsolete="true"><result status="timeout" time="5.00"/></proof>
+    <proof prover="6" obsolete="true"><result status="unknown" time="0.27" steps="20706"/></proof>
+    </goal>
+    <goal name="handleEnbld_syn_rec&#39;vc.8.0.1" expl="postcondition">
+    <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="22"/></proof>
+    <proof prover="1" obsolete="true"><result status="valid" time="0.13" steps="15047"/></proof>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="handleEnbld_syn&#39;vc" expl="VC for handleEnbld_syn">
+ <proof prover="1" obsolete="true"><result status="valid" time="0.14" steps="17265"/></proof>
+ </goal>
+ <goal name="indpred_step">
+ <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="valid" time="0.13" steps="15516"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="1889240"/></proof>
+ </goal>
+ <goal name="step_preserves_states">
+ <proof prover="1" obsolete="true"><result status="valid" time="0.14" steps="16250"/></proof>
+ </goal>
+ <goal name="noNegative_step_TR">
+ <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="70801"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="1418691"/></proof>
+ <transf name="induction_pr" >
+  <goal name="noNegative_step_TR.0">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="8"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.11" steps="15370"/></proof>
+  </goal>
+  <goal name="noNegative_step_TR.1">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="14"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.11" steps="16434"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="indpred_manySteps">
+ <proof prover="0" timelimit="1" obsolete="true"><result status="timeout" time="1.00"/></proof>
+ <proof prover="1" obsolete="true"><result status="timeout" time="1.00" steps="101895"/></proof>
+ <proof prover="3" obsolete="true"><result status="timeout" time="1.00" steps="1615045"/></proof>
+ <transf name="induction_pr" >
+  <goal name="indpred_manySteps.0">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="10"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.08" steps="15510"/></proof>
+  </goal>
+  <goal name="indpred_manySteps.1">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.01" steps="22"/></proof>
+  <proof prover="1" obsolete="true"><result status="valid" time="0.10" steps="16613"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="indpred_reachable">
+ <proof prover="1" obsolete="true"><result status="valid" time="0.11" steps="16238"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>

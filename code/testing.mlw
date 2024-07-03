@@ -1,0 +1,10 @@
+module Testing
+
+  use int.Int
+  use fmap.Fmap
+
+  axiom max_color : forall m: fmap int int. forall i. 0 <> m i
+  
+goal trivial: 1+ 1 = 3
+
+end
