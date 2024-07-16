@@ -49,6 +49,7 @@ module Steps
 
   (* candidate inductive predicate
      contract ensures initial world satifies the predicate *)
+     (*devrait s'appeler legitimate *)
   val ghost predicate indpred (w:world)
     ensures { w=initWorld -> result }
 
@@ -103,6 +104,7 @@ module Steps
   | step : forall w w' w'' :world, n :node, steps :int.
     step_TR w w' steps -> step w' n w'' -> step_TR w w'' (steps+1)
 
+    
   lemma noNegative_step_TR : forall w w' :world, steps :int.
     step_TR w w' steps -> steps >= 0
 
@@ -116,5 +118,39 @@ module Steps
 
   lemma indpred_reachable :
     forall w :world. reachable w -> indpred w
+    
+    
+    
+    
+    
+
+(*Essai *)
+  inductive step_TR_max world world int =
+  | base2 : forall w. (forall n. not(enabled w n) ) -> (step_TR_max w w 0)
+  | step2 : forall w w' w'' :world, n :node, k:int.
+    step_TR_max w w' k -> step w' n w'' -> step_TR_max w w'' (k+1)
+    
+
+  lemma noNegative_step_TR_max : forall w w' :world, steps :int.
+    step_TR_max w w' steps -> steps >= 0
+
+  predicate reachable_max (w:world) = exists steps :int. step_TR_max initWorld w steps
+
+  (* inductive predicate is preserved by many steps and holds
+     in reachable worlds *)
+
+  lemma indpred_manySteps_max :
+    forall w w' :world, steps :int . step_TR_max w w' steps -> indpred w -> indpred w'
+
+  lemma indpred_reachable_max :
+    forall w :world. reachable_max w -> indpred w
+
+  lemma test_terminaison : 
+    forall w w' k. step_TR_max w w' k -> (forall n. not(enabled w' n))
+
+(* Fin essai *)
+
+
+   (*lemma test : 1+1 =3*)
 
 end

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-07-03 Wed 10:54 -->
+<!-- 2024-07-16 Tue 11:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rapport de stage</title>
@@ -244,11 +244,11 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Rapport de stage</h1>
 
-<div id="outline-container-org3d64776" class="outline-2">
-<h2 id="org3d64776"><span class="section-number-2">1</span> Remerciement</h2>
+<div id="outline-container-orgc33db18" class="outline-2">
+<h2 id="orgc33db18"><span class="section-number-2">1</span> Remerciement</h2>
 </div>
-<div id="outline-container-orge6fd6b6" class="outline-2">
-<h2 id="orge6fd6b6"><span class="section-number-2">2</span> Résumé/Abstract</h2>
+<div id="outline-container-orgd1b1c99" class="outline-2">
+<h2 id="orgd1b1c99"><span class="section-number-2">2</span> Résumé/Abstract</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Stage de 3 mois au labo Verimag.
@@ -260,12 +260,12 @@ L'objectif de ce stage  est d'évaluer ce qu'il est possible et impossible  de f
 </div>
 </div>
 
-<div id="outline-container-orgd33adfe" class="outline-2">
-<h2 id="orgd33adfe"><span class="section-number-2">3</span> Contexte</h2>
+<div id="outline-container-org4aeff4e" class="outline-2">
+<h2 id="org4aeff4e"><span class="section-number-2">3</span> Contexte</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orga944164" class="outline-3">
-<h3 id="orga944164"><span class="section-number-3">3.1</span> Verimag</h3>
+<div id="outline-container-org74535af" class="outline-3">
+<h3 id="org74535af"><span class="section-number-3">3.1</span> Verimag</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
    Le laboratoire VERIMAG est un centre de recherche en informatique situé à Grenoble. Fondé
@@ -283,8 +283,8 @@ atteindre un état correct depuis n'importe quel état sans intervention externe
 </div>
 
 
-<div id="outline-container-org7fc2553" class="outline-3">
-<h3 id="org7fc2553"><span class="section-number-3">3.2</span> Organisation de travail</h3>
+<div id="outline-container-org7e9a786" class="outline-3">
+<h3 id="org7e9a786"><span class="section-number-3">3.2</span> Organisation de travail</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Au début -&gt; installations des outils (why3 et why3-do ) et apprentissage des connaissances de bases (logique de hoare, smt solver, algo distribué auto-stabilisant)
@@ -306,13 +306,17 @@ Et réunion toutes les une semaine ou deux aver Erwan et Karine pour mettre au p
 </div>
 </div>
 
-<div id="outline-container-org825eeef" class="outline-2">
-<h2 id="org825eeef"><span class="section-number-2">4</span> Algorithme distribué auto-stable</h2>
+<div id="outline-container-org27a7fd5" class="outline-2">
+<h2 id="org27a7fd5"><span class="section-number-2">4</span> Algorithme distribué auto-stable</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org91345d5" class="outline-3">
-<h3 id="org91345d5"><span class="section-number-3">4.1</span> Définition algorithme distribué auto-stable</h3>
+<div id="outline-container-orgc85d9a7" class="outline-3">
+<h3 id="orgc85d9a7"><span class="section-number-3">4.1</span> Définition algorithme distribué auto-stable</h3>
 <div class="outline-text-3" id="text-4-1">
+<p>
+<b>Introduction du livre</b> 
+</p>
+
 <p>
 Le concept s'auto stabilisation a été introduit par Dijkstra en 1973 dans le contexte des systèmes distribués, 
 c'est à dire des systèmes fait d'un ensemble fini de process autonome interconnecté grâce à un réseau de 
@@ -324,6 +328,7 @@ via des supports de communication, généralement asynchrones, reliant le proces
 
 
 <p>
+<b>Avantages</b>
  Tolérances aux fautes: 
 L'algo converge d'un état illégitime à un état légitime dans un nombre fini d'étape
  Une fois que l'algo est dans un état légitime, il le reste
@@ -336,9 +341,17 @@ Plein de petits algos simples à la place d'un seul gros qui gère tout.
 </p>
 
 <p>
+<b>Définition</b>
+</p>
+
+<p>
 Un graphe où chaque noeuds contient des variables et une action de la forme guard -&gt; statement .
 Si la guarde vaut true alors l'action est "enabled" 
 Un noeud à accès uniquement aux variables de ses voisins 
+</p>
+
+<p>
+<b>Steps et exécutions</b>
 </p>
 
 <p>
@@ -347,6 +360,7 @@ Cependant on peut choisir différentes manières de procéder donc concept de de
 </p>
 
 <p>
+<b>Démons</b>
 Exemples non exhaustifs de démons :
 </p>
 <ol class="org-ol">
@@ -357,6 +371,7 @@ Exemples non exhaustifs de démons :
 
 
 <p>
+<b>Auto-stabilisation</b>
 3 propriétés
 Closure : depuis un état légitime on reste dans un état légitime
 Convergence : depuis un état illégitime on atteint un état légitime avec un nombre fini d'étape
@@ -365,8 +380,8 @@ Correctness
 </div>
 </div>
 
-<div id="outline-container-orgac8b5e2" class="outline-3">
-<h3 id="orgac8b5e2"><span class="section-number-3">4.2</span> Example 1 : Coloring</h3>
+<div id="outline-container-org0abd4df" class="outline-3">
+<h3 id="org0abd4df"><span class="section-number-3">4.2</span> Example 1 : Coloring</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Algorithme</li>
@@ -377,8 +392,8 @@ Correctness
 </div>
 </div>
 
-<div id="outline-container-org9a3245a" class="outline-3">
-<h3 id="org9a3245a"><span class="section-number-3">4.3</span> Example 2 : Token Ring Dijkstra</h3>
+<div id="outline-container-orga902f53" class="outline-3">
+<h3 id="orga902f53"><span class="section-number-3">4.3</span> Example 2 : Token Ring Dijkstra</h3>
 <div class="outline-text-3" id="text-4-3">
 <ul class="org-ul">
 <li>Explication de l'algorithme pour pouvoir expliquer Why3do</li>
@@ -388,13 +403,12 @@ Correctness
 </div>
 </div>
 
-
-<div id="outline-container-org8cff284" class="outline-2">
-<h2 id="org8cff284"><span class="section-number-2">5</span> Explication des outils</h2>
+<div id="outline-container-org5f8a71c" class="outline-2">
+<h2 id="org5f8a71c"><span class="section-number-2">5</span> Explication des outils</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgc32f04a" class="outline-3">
-<h3 id="orgc32f04a"><span class="section-number-3">5.1</span> Logique de Hoare</h3>
+<div id="outline-container-orgf82cc2b" class="outline-3">
+<h3 id="orgf82cc2b"><span class="section-number-3">5.1</span> Logique de Hoare</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 La logique de Hoare est un formalisme utilisé en informatique pour raisonner sur la correction des programmes impératifs. Elle utilise des triples de Hoare, notés {P} C {Q}, où :
@@ -454,31 +468,317 @@ En conclusion, la logique de Hoare permet de structurer le raisonnement sur les 
 </p>
 </div>
 </div>
-<div id="outline-container-org7397ef6" class="outline-3">
-<h3 id="org7397ef6"><span class="section-number-3">5.2</span> SMT solver</h3>
-</div>
-<div id="outline-container-orgc86030f" class="outline-3">
-<h3 id="orgc86030f"><span class="section-number-3">5.3</span> Explication Why3</h3>
-<div class="outline-text-3" id="text-5-3">
-<ul class="org-ul">
-<li>Fonctionnement</li>
-<li>IDE</li>
-<li>Logique de preuve / informations utiles</li>
-</ul>
-</div>
+<div id="outline-container-orgb4135ea" class="outline-3">
+<h3 id="orgb4135ea"><span class="section-number-3">5.2</span> SMT solver</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Les SMT (Satisfiability Modulo Theories) solveurs sont des outils puissants utilisés pour vérifier la satisfiabilité d'expressions logiques sous certaines contraintes théoriques. Ils jouent un rôle clé dans de nombreux domaines de l'informatique, y compris la vérification formelle, la synthèse de logiciels, la planification, et la vérification de modèles. Voici une présentation de base des SMT solveurs, de leur fonctionnement et de leurs applications.
+Qu'est-ce qu'un SMT solveur ?
+</p>
+
+<p>
+Un SMT solveur est un outil informatique qui détermine si une formule logique est satisfaisable, c'est-à-dire, s'il existe une affectation des variables qui rend la formule vraie, en tenant compte de certaines théories de fond (comme l'arithmétique, les tableaux, les bit-vectors, etc.).
+Comment fonctionne un SMT solveur ?
+</p>
+
+<p>
+Les SMT solveurs étendent les capacités des solveurs SAT (Satisfiability), qui vérifient la satisfiabilité de formules en logique propositionnelle. Alors que les solveurs SAT se concentrent sur des expressions booléennes, les SMT solveurs traitent des expressions plus complexes en combinant les solveurs SAT avec des solveurs spécifiques pour diverses théories.
+</p>
+
+<p>
+Encodage SAT : Les formules SMT sont souvent converties en une forme équivalente que les solveurs SAT peuvent traiter.
+</p>
+
+<p>
+Théories de fond : Le solveur utilise des modules spécialisés pour traiter des théories spécifiques. Par exemple :
+    Arithmétique linéaire et non linéaire : Pour les expressions impliquant des entiers ou des réels.
+    Théorie des tableaux : Pour les structures de données de type tableau.
+    Bit-vectors : Pour les calculs en binaire.
+    Théorie des ensembles : Pour les opérations sur les ensembles.
+</p>
+
+<p>
+Combinaison de théories : Les SMT solveurs utilisent des algorithmes comme Nelson-Oppen pour combiner différentes théories et vérifier la satisfiabilité de formules complexes.
+</p>
+
+
+<p>
+Exemples de solveurs SMT populaires
+</p>
+
+<p>
+Z3 : Développé par Microsoft Research, c'est l'un des solveurs SMT les plus populaires et largement utilisés.
+CVC4 : Un solveur SMT open-source développé par l'Université de Stanford et d'autres.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org02d9f09" class="outline-2">
-<h2 id="org02d9f09"><span class="section-number-2">6</span> Why3doTheWayOfHarmoniousDistributedSystemProofs</h2>
+<div id="outline-container-orgb697ab2" class="outline-3">
+<h3 id="orgb697ab2"><span class="section-number-3">5.3</span> Explication Why3</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Why3 est un outil puissant et polyvalent pour la vérification formelle de programmes. 
+Il permet de s'assurer que les programmes respectent des propriétés spécifiées et de garantir 
+leur correction grâce à des techniques avancées de vérification.
+</p>
+
+<p>
+Spécification formelle des propriétés attendues
+</p>
+
+<p>
+Why3 permet de spécifier formellement les propriétés que l'on attend d'un programme. 
+Ces spécifications sont écrites sous forme de contrats comprenant des préconditions, des postconditions, des invariants de boucle et des variants. 
+Ces contrats sont ensuite utilisés pour vérifier que le programme respecte bien les propriétés définies.
+</p>
+
+<p>
+Vérification de programme
+</p>
+
+<p>
+La vérification de programme avec Why3 consiste à démontrer que le code implémente correctement les spécifications formelles. 
+Pour ce faire, Why3 utilise des techniques de logique de Hoare, en générant des obligations de preuve (POs) pour chaque point critique du programme. 
+Ces POs sont ensuite prouvées automatiquement ou manuellement.
+</p>
+
+<p>
+Utilisation de l'IDE
+</p>
+
+<p>
+L'IDE de Why3 facilite l'écriture, l'édition et la vérification de programmes. 
+Il permet de visualiser les spécifications, les obligations de preuve et leur état (prouvé/non prouvé). 
+L'IDE offre également des outils pour interagir avec différents prouveurs automatiques et pour guider les preuves interactives, 
+rendant le processus de vérification plus intuitif et efficace.
+</p>
+
+<p>
+Langage WhyML
+</p>
+
+<p>
+WhyML est le langage de programmation utilisé dans Why3, conçu spécifiquement pour la vérification formelle. 
+Il s'inspire de OCaml et permet d'écrire des programmes tout en intégrant directement les spécifications formelles.
+Les programmes WhyML peuvent être extraits en code OCaml, facilitant ainsi l'intégration de code prouvé dans des applications réelles.
+</p>
+
+<p>
+Proche d'OCaml
+</p>
+
+<p>
+WhyML partage de nombreuses similitudes avec OCaml, ce qui permet aux développeurs familiarisés avec OCaml de s'adapter rapidement à WhyML. 
+De plus, l'extraction de code prouvé WhyML vers OCaml est possible, ce qui permet d'utiliser le code vérifié dans des projets OCaml existants.
+</p>
+
+<p>
+Logique de Hoare
+</p>
+
+<p>
+Why3 utilise la logique de Hoare pour la vérification des programmes. 
+Cela inclut l'utilisation de préconditions et postconditions pour définir le comportement attendu des fonctions,
+ainsi que des invariants de boucle et des variants pour s'assurer de la correction des boucles. 
+Ces éléments de spécification permettent de formuler et de vérifier des propriétés de manière systématique.
+</p>
+
+<p>
+Interaction avec prouveurs SMT et assistant de preuve
+</p>
+
+<p>
+Why3 peut interagir avec plusieurs prouveurs SMT (Satisfiability Modulo Theories), tels que Z3, CVC4 et Alt-Ergo, 
+pour prouver automatiquement les obligations de preuve. 
+En outre, Why3 peut être utilisé en conjonction avec des assistants de preuve interactifs comme Coq ou Isabelle, 
+offrant ainsi une grande flexibilité pour le processus de vérification formelle.
+</p>
+</div>
+</div>
+<div id="outline-container-orgec4c745" class="outline-3">
+<h3 id="orgec4c745"><span class="section-number-3">5.4</span> </h3>
+</div>
+</div>
+<div id="outline-container-org1cd3168" class="outline-2">
+<h2 id="org1cd3168"><span class="section-number-2">6</span> Why3doTheWayOfHarmoniousDistributedSystemProofs</h2>
 <div class="outline-text-2" id="text-6">
+<p>
+Dans la partie 6 du papier, ils proposent une implémentation de la preuve du Token Ring de Disjkstra à l'aide d'un modèle à instancier.
+</p>
 </div>
-<div id="outline-container-org72f69c6" class="outline-3">
-<h3 id="org72f69c6"><span class="section-number-3">6.1</span> Explication du modèle : modelReadallEnable</h3>
+<div id="outline-container-org63967a3" class="outline-3">
+<h3 id="org63967a3"><span class="section-number-3">6.1</span> Explication du modèle : modelReadallEnable</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Ils commencent par créer le module Config (nommé World dans leur papier) qui représente le graphe de noeud et d'état du système.
+Les types node et state sont à instancier.  
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">module Config
+  use int.Int
+  use map.Map
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+
+  type node
+  type state
+  type config =  map node state
+
+end
+
+</pre>
 </div>
-<div id="outline-container-org83afb25" class="outline-3">
-<h3 id="org83afb25"><span class="section-number-3">6.2</span> Explication de selfstab-ring</h3>
-<div class="outline-text-3" id="text-6-2">
+
+<p>
+Le second module est un modèle de mémoire localement partagé.
+De la même manière que Config c'est un modèle à instancier,
+on retrouve les types node et state et différentes fonctions ou prédicats à instancier grâce au mot clé "val" 
+Le prédicat validNd indique si un noeud n est valide, ce prédicat permet de mettre des conditions sur les noeuds 
+case_node et case_state assurent que le résultat est toujours vrai pour un noeud/état donné.
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+module Steps
+  use int.Int
+  use map.Map
+  use list.List
+  use list.Mem
+  use list.Append
+  use list.Map as Lmap
+
+
+  type node
+  type state
+  type config = map node state
+
+  val predicate validNd (n:node)
+
+  val predicate case_node (node)
+    ensures { result }
+
+  val predicate case_state (state)
+    ensures { result }
+
+</pre>
+</div>
+
+<p>
+On remarque un premier problème dans le modèle de .., l'état initial est fixé et doit être instancié,
+ce qui est en contradiction avec le principe l'algorithme stabilisant auto-stable. 
+indpred est un prédicat inductif qui va faire office d'invariant dans la preuve des programmes instanciés, 
+de plus ce prédicat doit être vrai pour la configuration initial. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+
+val function initState (node) : state
+
+constant initConfig : config = initState
+
+val ghost predicate indpred (c : config)
+  ensures { c=initConfig -&gt; result }
+
+</pre>
+</div>
+<p>
+Le prédicat enabled est la condition pour laquelle le noeud est enabled.
+let ghost function step_enbld (c: config) (n: node) (s: state): config: met à jour la configuration c en remplaçant l'état du nœud n par s.
+handleEnbld est une fonction qui gère un nœud activé dans une configuration, c'est la fonction qui va choisir la nouvelle valeur de l'état pour un noeud
+en s'assurant la préservation du prédicat inductif après la mise à jour. 
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+val ghost predicate enabled (config) (n:node)
+  requires { validNd n }
+
+let ghost function step_enbld (c:config) (n:node) (s:state) : config =
+  set c n s
+
+val function handleEnbld (n:node) (c : config) : state
+  requires { validNd n }
+  requires { enabled c n}
+  requires { indpred c }
+  requires { case_node n }
+  ensures  { indpred (step_enbld c n result) }
+
+</pre>
+</div>
+
+<p>
+step est un invariant inductif qui décrit la une transition d'une configuration à une autre après l'activation d'un noeud.
+La ligne step c n (step_enbld c n (handleEnbld n c)) signifie que l'on passe de la configuration c à la configuration dans laquelle le noeud n a été mis à jour. 
+Cela implique qu'il n'y a qu'un seul noeud qui peut être activé au même moment, donc cela fixe le démon comme un démon central. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+inductive step config node config =
+| step_enbld : forall c: config , n :node.
+    validNd n -&gt;
+      enabled c n -&gt;
+	step c n (step_enbld c n (handleEnbld n c))
+
+</pre>
+</div>
+<p>
+Le premier lemme assure que le prédicat inductiv est conservé après un step ce qui est facilement prouvable grâce au ensure de handleEnbld.
+Le second assure que lorsque un noeud est modifié alors tout les autres n'ont pas changé. 
+step_TR est la fermeture transitive de step : 
+</p>
+<ul class="org-ul">
+<li>Cas de base : Pour toute configuration c peut s'atteindre elle-même en 0 étape.</li>
+<li>Cas inductif : Pour toute configuration c, c', et c'' il existe une séquence de steps pour aller de c à c' et il existe une transition unique pour aller de c' à c'' via le noeud n.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-why3">
+lemma indpred_step :
+  forall c c' :config, n :node. step c n c' -&gt; indpred c -&gt; indpred c'
+
+lemma step_preserves_states :
+  forall c c' :config, n1 n2 :node. step c n1 c' -&gt; n2&lt;&gt;n1 -&gt; c n2 = c' n2
+
+
+inductive step_TR config config int =
+| base : forall c: config. step_TR c c 0
+| step : forall c c' c'' :config, n :node, steps :int.
+  step_TR c c' steps -&gt; step c' n c'' -&gt; step_TR c c'' (steps+1)
+
+</pre>
+</div>
+<p>
+Le lemme noNegative_step_TR assure que le nombre de steps pour passer d'une configuration à une autre est toujours positif.
+Le prédicat reachable vaut vrai s'il existe un nombre d'étape pour atteindre la configuration c depuis la configuration initiale.
+indpred_manySteps assure que le prédicat inductif est conservé par plusieurs étapes.
+indpred_reachable étend le lemme précédent à l'aide de reachable en assurant que le prédicat inductif reste vrai pour toutes les configurations atteignables. 
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+lemma noNegative_step_TR : forall c c': config, steps :int.
+  step_TR c c' steps -&gt; steps &gt;= 0
+
+predicate reachable (c:config) = exists steps :int. step_TR initConfig c steps
+
+lemma indpred_manySteps :
+  forall c c' :config, steps :int . step_TR c c' steps -&gt; indpred c -&gt; indpred c'
+
+lemma indpred_reachable :
+  forall c: config. reachable c -&gt; indpred c
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org414074b" class="outline-3">
+<h3 id="org414074b"><span class="section-number-3">6.2</span> </h3>
+</div>
+
+<div id="outline-container-org82e90d9" class="outline-3">
+<h3 id="org82e90d9"><span class="section-number-3">6.3</span> Explication de selfstab-ring</h3>
+<div class="outline-text-3" id="text-6-3">
 <ul class="org-ul">
 <li>Closure</li>
 <li>Terminaison</li>
@@ -495,75 +795,410 @@ En conclusion, la logique de Hoare permet de structurer le raisonnement sur les 
 </div>
 </div>
 
-<div id="outline-container-orgb2976f2" class="outline-2">
-<h2 id="orgb2976f2"><span class="section-number-2">7</span> Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact</h2>
+<div id="outline-container-org1c4a854" class="outline-2">
+<h2 id="org1c4a854"><span class="section-number-2">7</span> Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org9e8112e" class="outline-3">
-<h3 id="org9e8112e"><span class="section-number-3">7.1</span> Essai d'utilisation de org mode</h3>
+<div id="outline-container-org4b21d2b" class="outline-3">
+<h3 id="org4b21d2b"><span class="section-number-3">7.1</span> Essai d'utilisation de org mode</h3>
 <div class="outline-text-3" id="text-7-1">
 <div class="org-src-container">
 <pre class="src src-python">print("hello world")
 </pre>
 </div>
+</div>
+</div>
+
+
+<div id="outline-container-org6412649" class="outline-3">
+<h3 id="org6412649"><span class="section-number-3">7.2</span> Explication détaillée</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Nous allons maintenant implémenter l'algorithme de coloration sur un anneau présenté en partie . dans why3 et prouver la closure et la terminaison. 
+</p>
+
+<p>
+Tout d'abord, nous créons un nouveau module et nous importons les différents bibliothèque dont nous aurons besoin. 
+</p>
+<ul class="org-ul">
+<li>Les listes</li>
+<li>Les entiers</li>
+<li>La division euclidienne pour pouvoir faire des modulos</li>
+<li>Les maps (associations de valeurs d'un type à un autre)</li>
+<li>Les ensembles d'entiers</li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-why3">(* On va prouver la closure et la terminaison de l'algo de coloration dans une topologie en anneau *)
+<pre class="src src-why3">
 module Coloring_Ring
-  use list.List
-  use int.Int
-  use int.EuclideanDivision
-  use map.Map
-  use list.Mem
-  use list.Length
-  use ref.Ref
-  use set.SetAppInt
+ use list.List
+ use int.Int
+ use int.EuclideanDivision
+ use map.Map
+ use list.Mem
+ use set.SetAppInt
+</pre>
+</div>
 
-  (* PARTIE 1: CLOSURE *)
+<p>
+Dans un premier temps, on va montrer la closure.
+Pour cela, on commence à définir les objets et règles avec lesquels on va travailler. 
+On définit n_nodes, une constante entière qui représente le nombre de noeud de notre système. 
+De la même manière on définit k_color qui représente le nombre de couleurs disponibles.
+</p>
 
-  (* number of processes *)
-  val constant n_nodes : int
+<p>
+Ici nous avons besoin de règles de base initiale supplémentaire: 
+Nous nous plaçons dans un anneau donc il nous faut au minimum 3 noeuds. 
+Il faut s'assurer que le graphe soit coloriable, pour cela il suffit de s'assurer qu'il y a plus de couleurs disponibles que de noeuds, c'est à dire au moins une couleur par noeud. 
+Pour cela on utilise le mot clé axiom, il faut être très délicat avec ce mot clé car il est facile d'écrire une contradiction. 
+</p>
 
-  axiom at_least_two : 2 &lt; n_nodes
+<div class="org-src-container">
+<pre class="src src-why3">
+val constant n_nodes : int
 
-  (* Nombre de couleurs *)
-  val constant k_color : int
+axiom at_least_two : 2 &lt; n_nodes
 
-  (* On suppose qu'il y a plus de couleurs que de noeuds (une couleur par noeud) *)
-  axiom k_color_bound : n_nodes &lt;= k_color
+val constant k_color : int
 
+axiom k_color_bound : n_nodes &lt;= k_color
+
+</pre>
+</div>
+<p>
+Puis on définit les types que l'on va utiliser. 
+On choisit de représenter les noeuds par des entiers.
+Pour l'état du noeud (sa couleur) on utilise une structure contenant un entier, on pourrait utiliser seulement un entier mais ça permet d'être plus général.
+Dans d'autres algorithmes on peut avoir des états représentés par deux entiers par exemple.
+Avoir une structure permet également la possibilité de mettre une condition sur l'état sous forme d'invariant (exemple en commentaire)
+</p>
+
+<p>
+On définit alors le type config comme étant le map entre les noeuds et les états.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-why3">
   type node = int
-}
+
+  type state = {k: int}
+(*  invariant{ 0 &lt;= k  *)
+
+  type config = map node state
+
+</pre>
+</div>
+
+<p>
+Pour donner un exemple d'axiome problèmatique, on peut prendre le suivant: 
+Si on souhaite dire que pour toute configuration c, pour tout noeud n, la couleur de ce noeud dans cette configuration c n est positive. 
+On pourrait croire que c'est une possibilité pour ajouter une condition sur notre configuration mais cet axiom est une contradiction car il existe des configurations (ie des map d'int vers {int})
+tel que l'état n'est pas positif.
+Donc si nous écrivons cet axiom nous considérons vrai une contradiction ce qui permet à why3 de prouver sans souci que 1+1 = 3.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">axiom max_color : forall c: config. forall n. 0 &lt;= c n
+</pre>
+</div>
+
+
+<p>
+Pour ajouter des propriétés, il est préférable de définir des prédicats et de vérifier qu'ils soient vrais. 
+Ici nous ajoutons le prédicats qui signifie qu'un noeud est valide s'il est compris entre 0 et n_nodes le nombre de noeuds
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+  let predicate validNd (n:node) = 0 &lt;= n &lt; n_nodes
+
+
+(* Fonction qui renvoie l'ensemble des couleurs(type int et non state) des voisins d'un noeud dans un anneau *)
+let function neighbor_set (i:node): set
+  ensures { forall c. mem c result -&gt; c &lt;&gt; i} (* un noeud n'est pas son propre voisin *)
+  (*ensures { not mem i result }*) (* un noeud n'est pas son propre voisin *)
+  ensures {  cardinal result = 2 } (* XXX pour un anneau seulement ! *)
+  =
+  add (mod (i-1) n_nodes) (add (mod (i+1) n_nodes) (empty()))
+
+
+
+(* Fonction qui calcule la plus petite couleur disponible *)
+(*prouvable avec Cvc 5 sur la machine d'Erwan, j'ai pas réussi sur cette version de Why3 avec ces solveurs
+
+- 3s avec CVC5 (depuis le top)
+*)
+let function free (colors: set) (k:int) : int =
+  requires { cardinal colors &lt; k }
+  ensures { not mem result colors }
+  ensures { forall x. (0 &lt;= x &lt; k /\ not mem x colors) -&gt; result &lt;= x }
+  ensures { 0 &lt;= result &lt; k }
+  min_elt (diff (interval 0 k) colors)
+
+
+(* modelReadallEnabledDemon est ma version modifié de modelReadallEnabled *)
+
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+(* Dans  modelReadallEnabledDemon, il n'y  a plus d'état  initial, je
+laisse la fonction initState en commentaire pour l'instant *)
+
+
+
+
+  let function initState (k:node) : state =
+  {k=0}
+
+let function color (w:world) (n:node)  : int =
+   (w n).k
+
+
+let rec function get_colors (nl:set) (w:world) : set =
+   requires { cardinal nl &lt; 3 }
+   ensures { cardinal result &lt;= cardinal nl }
+
+   (* Nécessaire pour prouver no conflict !! *)
+   ensures { forall c. mem c result &lt;-&gt; exists x. mem x nl /\ c = (w x).k }
+
+   variant { cardinal nl }
+   if is_empty nl then empty () else
+    let n = choose nl in
+    let c = color w n in
+    add c (get_colors (remove n nl) w)
+
+
+(* pour un noeud, on regarde ses voisins et on vérifie s'il en existe un qui a la même couleur *)
+predicate conflict (lS: world) (n:node) =
+   exists c : int.
+    mem c (get_colors (neighbor_set n) lS)
+   /\ (lS n).k = c
+(*   exists c : state. mem c (map lS (neighbor_set n)) /\ (lS n).k = c.k *)
+
+(*   exists c : int. mem c (neighbor_set lS n) /\ (lS n).k = c *)
+
+
+(*littéralement la négation de conflict *)
+predicate couleurDifferentes (w: config) (n: node) = not  conflict w n
+
+(*  forall c: int. mem c (neighbor_set lS i) -&gt; (lS i).k &lt;&gt; c *)
+
+
+
+(* enabling predicate *)
+let ghost predicate enabled (lS:config) (i:node) =
+  conflict lS i
+
+
+ (* handling function *)
+ (* c'est la fonction step de sasa *)
+ (* k est la couleur de l'état (par rapport à l'invariant de définition ) *)
+
+
+
+let function handleEnbld (n:node) (w:world) : state
+  ensures { not mem result.k (get_colors (neighbor_set n) w) }
+  =
+  { k = free (get_colors (neighbor_set n) w) k_color }
+
+
+(* C'est une tautologie, Il est nécessaire de donner un invariant au modele *)
+
+predicate inv (w: config) =
+  (* Garantir que les états des nœuds sont valides *)
+  (*  (forall n: node. 0 &lt;= n &lt; n_nodes ) *)
+  (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; 0 &lt;= (w n).k &lt;= k_color)
+
+ let ghost predicate indpred (w:world) = inv w
+
+
+clone modelReadallEnabled.Steps with
+    type node, type state, val validNd, val indpred, val enabled, val handleEnbld, val initState,
+
+(* tout les noeuds sont bien coloriés *)
+predicate colored (w: world) =
+  forall n1: node.
+    validNd n1 -&gt;
+    couleurDifferentes w n1
+
+
+(* renvoie true si pour tout les noeuds il n'y a pas pas de conflits *)
+predicate no_conflict (w: world) = forall n: node. not(conflict w n)
+  goal goal_colored : forall w, w_init :world. reachable w -&gt; no_conflict w -&gt; colored w
+
+
+ (*PARTIE 2: TERMINAISON *)
+
+  (* On va utiliser une fonction de measureNode qui compte le nombre de conflit  *)
+
+  let ghost function measureNode (w:world) (n:int) : int
+(*  requires { indpred w } *)
+  requires { validNd n }
+  ensures { result &gt;=0 }
+  ensures { result = 1 &lt;-&gt; conflict w n }
+  ensures { result = 0 &lt;-&gt; not(conflict w n) }
+  =
+  if conflict w n then 1 else 0
+
+    (* measure of nodes 0 to n-1
+   *)
+  let rec ghost function measureNodes (w:world) (n:int) : int
+(*    requires { indpred w } *)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures  { result &gt;= 0 }
+    ensures  { result = 0 &lt;-&gt; forall i :int. 0&lt;=i&lt;n -&gt; measureNode w i = 0 }
+    variant  { n }
+  = if n=0 then 0
+    else measureNode w (n-1) + measureNodes w (n-1)
+
+    (* measure of entire ring
+     This function is a fundamental part of the specification
+     PROPERTY 1 - Before convergence, the measure (which is always non-negative) has a positive value
+   *)
+
+
+  let ghost function measureAllNodes (w:world) : int
+(*    requires { indpred w } *)
+    ensures  { result &gt;= 0 }
+    (* si je mets juste ensures{ not(colored w) -&gt; result &gt; 0} il réussi pas *)
+    ensures  { not(colored w) -&gt; exists n:node. not(couleurDifferentes w n) -&gt; (measureNode w n = 1) -&gt; (result&gt; 0)}
+
+    (* R1: j'ai rajouté ca pour pouvoir prouver help_goal *)
+    ensures  { result = 0 &lt;-&gt; forall i :int. 0 &lt;= i &lt; n_nodes -&gt; measureNode w i = 0 }
+
+  = measureNodes w n_nodes
+
+    (* delta of a single node i, when k is the stepping node   *)
+
+
+(* delete me *)
+lemma step_preserves_states_bis :
+    forall w w' :world, n i :node. step w n w' -&gt; i&lt;&gt;n -&gt; w i = w' i
+
+
+(* delete me *)
+lemma no_conflict_after_step_alt:
+      forall w, n.
+	let nc = handleEnbld n w in
+	let w' = set w n nc in
+
+	not(conflict w' n)
+
+lemma no_conflict_after_step:
+      forall w, w', k.
+		step w k w' -&gt; not(conflict w' k)
+	     (* measureNode w' k = 0 *)
+
+(* delete me *)
+lemma measure_null_eq_no_conflict:
+      forall w, k.
+	     validNd k -&gt;
+		(measureNode w k = 0 &lt;-&gt; not(conflict w k))
+
+
+
+(* delete me *)
+lemma measure_null_after_step:
+      forall w, w', k.
+		(step w k w' -&gt; measureNode w' k = 0 )
+
+
+let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+  (*  requires { indpred w } *)
+    requires { validNd i /\ validNd k }
+    requires { step w k w' }
+    ensures {  i =  k /\ measureNode w i = 1 /\  measureNode w' i = 0 -&gt; result = 1 }
+  =
+    measureNode w i - measureNode w' i
+
+
+(* delete me *)
+lemma prod : forall x y :int. x &gt; 0 -&gt; y &gt; 0 -&gt; x * y &gt;= x /\ x * y &gt;= y
+
+ let rec ghost function measureDeltaNodes (w:world) (w':world) (n:int) (k:node) : int
+  (*  requires { indpred w } *)
+    requires { 0 &lt;= n &lt;= n_nodes}
+    requires { 0 &lt;= n &lt;= n_nodes -&gt; validNd n}
+    requires { validNd k }
+    requires { step w k w' }
+    variant  { n }
+
+  = if n = 0 then measureDeltaNode w w' 0 k
+  else measureDeltaNode w w' n k + measureDeltaNodes w w' (n-1) k
+
+
+  let ghost function measureAllDeltaNodes (w:world) (w':world) (k:node) : int
+  (*  requires { indpred w } *)
+   requires { validNd k }
+   requires { validNd n_nodes}
+   requires { step w k w' }
+    ensures { result &gt; 0 }
+    ensures { result = measureAllNodes w - measureAllNodes w'}
+  = measureDeltaNodes w w' n_nodes k
+
+
+
+lemma goal_decreasesMeasure : forall w w' :world, k :node.
+  (* indpred w /\ *)
+  validNd n_nodes -&gt; step w k w' -&gt; measureAllNodes w &gt; measureAllNodes w'
+
+
+
+lemma help_goal :
+  forall w : world. (measureAllNodes w = 0) &lt;-&gt; (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; measureNode w n = 0)
+
+goal goal_converged : forall w : world. (measureAllNodes w = 0) &lt;-&gt; colored w
+
+goal terminated : forall w : world. (measureAllNodes w = 0) &lt;-&gt; (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; not(enabled w n))
+
+goal convergence :
+     (* forall wi : world. *)
+     exists w:world, k:int .  step_TR_max initWorld w k /\ measureAllNodes w = 0 
+     (* colored w *)
+
+(* XXX montrer la convergence
+
+  *)
+
+
+(*Controle pour voir s'il n'y a pas de true = false dans le code
+   goal trivially_false : 1+1= 3
+*)
+
+
+end   
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-org22f4cd0" class="outline-3">
-<h3 id="org22f4cd0"><span class="section-number-3">7.2</span> Explication détaillée</h3>
-</div>
-<div id="outline-container-org3b6272f" class="outline-3">
-<h3 id="org3b6272f"><span class="section-number-3">7.3</span> Problèmes rencontrés et solutions</h3>
+<div id="outline-container-org37ec45d" class="outline-3">
+<h3 id="org37ec45d"><span class="section-number-3">7.3</span> Problèmes rencontrés et solutions</h3>
 </div>
 </div>
 
-<div id="outline-container-org47617ef" class="outline-2">
-<h2 id="org47617ef"><span class="section-number-2">8</span> Autres différents essais et faisabilité</h2>
+<div id="outline-container-org7432255" class="outline-2">
+<h2 id="org7432255"><span class="section-number-2">8</span> Autres différents essais et faisabilité</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
-<li>Pour tout état initial</li>
-<li>Pour toute topologie</li>
-<li>Noeuds peuvent accéder uniquement à leurs voisins</li>
-<li>Autres démons
-<ul class="org-ul">
-<li>Démon</li>
-</ul></li>
+<li>Pour tout état initial -&gt; Angle envisagé mais semble complexe</li>
+<li>Pour toute topologie -&gt; angle pas du tout développé pendant mon stage</li>
+<li>Noeuds peuvent accéder uniquement à leurs voisins -&gt; angle pas du tout développé pendant mon stage</li>
+<li>Pouvoir activer plusieurs noeuds pendant un même step -&gt; développer avec une "implémentation" du model avec démon synchrone (non testé mais pas de smoke et vérifié par why3)</li>
 </ul>
 </div>
+</div>
+
+
+
+<div id="outline-container-org27dc3fb" class="outline-2">
+<h2 id="org27dc3fb"><span class="section-number-2">9</span> Conclusion</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Lilian Derain</p>
-<p class="date">Created: 2024-07-03 Wed 10:54</p>
+<p class="date">Created: 2024-07-16 Tue 11:11</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

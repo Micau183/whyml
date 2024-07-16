@@ -1,5 +1,5 @@
 (** {1 Locally shared memory model - World Theory} *)
-module World
+module Config
   use int.Int
   use map.Map
   use list.List
@@ -13,7 +13,7 @@ module World
   type state
 
   (* product types and their selectors *)
-  type world =  map node state
+  type config =  map node state
 
 end
 
@@ -40,47 +40,47 @@ module Steps
     ensures { result }
 
   (* product types *)
-  type world = map node state
+  type config = map node state
 
   (* components of the initial world, defined for each system *)
     val function initState (node) : state
 
-    constant initWorld : world = initState
+    constant initConfig : config = initState
 
   (* candidate inductive predicate
      contract ensures initial world satifies the predicate *)
      (*devrait s'appeler legitimate *)
-  val ghost predicate indpred (w:world)
-    ensures { w=initWorld -> result }
+  val ghost predicate indpred (c : config)
+    ensures { c=initConfig -> result }
 
 
   (* handleEnbld-enabling predicate, to be instantiated when cloning *)
-  val ghost predicate enabled (map node state) (i:node)
-    requires { validNd i }
+  val ghost predicate enabled (config) (n:node)
+    requires { validNd n }
 
 
   (* function specifying how the outputs of the handlers are used
      both in the handler's contract and in the transition relation *)
-  let ghost function step_enbld (w:world) (n:node) (st:state) : world =
-    set w n st
+  let ghost function step_enbld (c:config) (n:node) (s:state) : config =
+    set c n s
 
   (* handler to be executed at node h when it is enabled
      in the world lS. Preservation of the inductive predicate
      is enforced *)
-  val function handleEnbld (h:node) (lS:map node state) : state
-    requires { validNd h }
-    requires { enabled lS h}
-    requires { indpred lS }
-    requires { case_node h }
-    ensures  { indpred (step_enbld lS h result) }
+  val function handleEnbld (n:node) (c : config) : state
+    requires { validNd n }
+    requires { enabled c n}
+    requires { indpred c }
+    requires { case_node n }
+    ensures  { indpred (step_enbld c n result) }
 
 
   (* Transition semantics, in the form of an inductive invariant *)
-  inductive step world node world =
-  | step_enbld : forall w :world, n :node.
+  inductive step config node config =
+  | step_enbld : forall c: config , n :node.
       validNd n ->
-        enabled w n ->
-          step w n (step_enbld w n (handleEnbld n w))
+        enabled c n ->
+          step c n (step_enbld c n (handleEnbld n c))
 
 
 
@@ -91,31 +91,66 @@ module Steps
      described by the semantics. *)
 
   lemma indpred_step :
-    forall w w' :world, n :node. step w n w' -> indpred w -> indpred w'
+    forall c c' :config, n :node. step c n c' -> indpred c -> indpred c'
 
   lemma step_preserves_states :
-    forall w w' :world, n i :node. step w n w' -> i<>n -> w i = w' i
+    forall c c' :config, n1 n2 :node. step c n1 c' -> n2<>n1 -> c n2 = c' n2
   
 
   (* many steps relation [reflexive transitive closure]
      and reachable worlds *)
-  inductive step_TR world world int =
-  | base : forall w :world. step_TR w w 0
-  | step : forall w w' w'' :world, n :node, steps :int.
-    step_TR w w' steps -> step w' n w'' -> step_TR w w'' (steps+1)
+  inductive step_TR config config int =
+  | base : forall c: config. step_TR c c 0
+  | step : forall c c' c'' :config, n :node, steps :int.
+    step_TR c c' steps -> step c' n c'' -> step_TR c c'' (steps+1)
 
-  lemma noNegative_step_TR : forall w w' :world, steps :int.
-    step_TR w w' steps -> steps >= 0
+    
+  lemma noNegative_step_TR : forall c c': config, steps :int.
+    step_TR c c' steps -> steps >= 0
 
-  predicate reachable (w:world) = exists steps :int. step_TR initWorld w steps
+  predicate reachable (c:config) = exists steps :int. step_TR initConfig c steps
 
   (* inductive predicate is preserved by many steps and holds
      in reachable worlds *)
 
   lemma indpred_manySteps :
-    forall w w' :world, steps :int . step_TR w w' steps -> indpred w -> indpred w'
+    forall c c' :config, steps :int . step_TR c c' steps -> indpred c -> indpred c'
 
   lemma indpred_reachable :
-    forall w :world. reachable w -> indpred w
+    forall c: config. reachable c -> indpred c
+    
+    
+    
+    
+    
+(*
+(*Essai *)
+  inductive step_TR_max world world int =
+  | base2 : forall w. (forall n. not(enabled w n) ) -> (step_TR_max w w 0)
+  | step2 : forall w w' w'' :world, n :node, k:int.
+    step_TR_max w w' k -> step w' n w'' -> step_TR_max w w'' (k+1)
+    
 
+  lemma noNegative_step_TR_max : forall w w' :world, steps :int.
+    step_TR_max w w' steps -> steps >= 0
+
+  predicate reachable_max (w:world) = exists steps :int. step_TR_max initWorld w steps
+
+  (* inductive predicate is preserved by many steps and holds
+     in reachable worlds *)
+
+  lemma indpred_manySteps_max :
+    forall w w' :world, steps :int . step_TR_max w w' steps -> indpred w -> indpred w'
+
+  lemma indpred_reachable_max :
+    forall w :world. reachable_max w -> indpred w
+
+  lemma test_terminaison : 
+    forall w w' k. step_TR_max w w' k -> (forall n. not(enabled w' n))
+
+(* Fin essai *)
+
+
+   (*lemma test : 1+1 =3*)
+*)
 end

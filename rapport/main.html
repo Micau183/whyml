@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-07-03 Wed 11:43 -->
+<!-- 2024-07-16 Tue 14:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rapport de stage</title>
@@ -244,11 +244,11 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Rapport de stage</h1>
 
-<div id="outline-container-orgcb91b2d" class="outline-2">
-<h2 id="orgcb91b2d"><span class="section-number-2">1</span> Remerciement</h2>
+<div id="outline-container-org259f816" class="outline-2">
+<h2 id="org259f816"><span class="section-number-2">1</span> Remerciement</h2>
 </div>
-<div id="outline-container-orgdd01d50" class="outline-2">
-<h2 id="orgdd01d50"><span class="section-number-2">2</span> Résumé/Abstract</h2>
+<div id="outline-container-org3ea1f51" class="outline-2">
+<h2 id="org3ea1f51"><span class="section-number-2">2</span> Résumé/Abstract</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Stage de 3 mois au labo Verimag.
@@ -260,12 +260,12 @@ L'objectif de ce stage  est d'évaluer ce qu'il est possible et impossible  de f
 </div>
 </div>
 
-<div id="outline-container-orgf647d42" class="outline-2">
-<h2 id="orgf647d42"><span class="section-number-2">3</span> Contexte</h2>
+<div id="outline-container-org2d8368b" class="outline-2">
+<h2 id="org2d8368b"><span class="section-number-2">3</span> Contexte</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org058b948" class="outline-3">
-<h3 id="org058b948"><span class="section-number-3">3.1</span> Verimag</h3>
+<div id="outline-container-org4badf6f" class="outline-3">
+<h3 id="org4badf6f"><span class="section-number-3">3.1</span> Verimag</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
    Le laboratoire VERIMAG est un centre de recherche en informatique situé à Grenoble. Fondé
@@ -283,8 +283,8 @@ atteindre un état correct depuis n'importe quel état sans intervention externe
 </div>
 
 
-<div id="outline-container-org5e3ff1e" class="outline-3">
-<h3 id="org5e3ff1e"><span class="section-number-3">3.2</span> Organisation de travail</h3>
+<div id="outline-container-org34d8b07" class="outline-3">
+<h3 id="org34d8b07"><span class="section-number-3">3.2</span> Organisation de travail</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Au début -&gt; installations des outils (why3 et why3-do ) et apprentissage des connaissances de bases (logique de hoare, smt solver, algo distribué auto-stabilisant)
@@ -306,13 +306,17 @@ Et réunion toutes les une semaine ou deux aver Erwan et Karine pour mettre au p
 </div>
 </div>
 
-<div id="outline-container-org399ccdb" class="outline-2">
-<h2 id="org399ccdb"><span class="section-number-2">4</span> Algorithme distribué auto-stable</h2>
+<div id="outline-container-orgeea85b6" class="outline-2">
+<h2 id="orgeea85b6"><span class="section-number-2">4</span> Algorithme distribué auto-stable</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgaa437fd" class="outline-3">
-<h3 id="orgaa437fd"><span class="section-number-3">4.1</span> Définition algorithme distribué auto-stable</h3>
+<div id="outline-container-org86acb68" class="outline-3">
+<h3 id="org86acb68"><span class="section-number-3">4.1</span> Définition algorithme distribué auto-stable</h3>
 <div class="outline-text-3" id="text-4-1">
+<p>
+<b>Introduction du livre</b> 
+</p>
+
 <p>
 Le concept s'auto stabilisation a été introduit par Dijkstra en 1973 dans le contexte des systèmes distribués, 
 c'est à dire des systèmes fait d'un ensemble fini de process autonome interconnecté grâce à un réseau de 
@@ -324,6 +328,7 @@ via des supports de communication, généralement asynchrones, reliant le proces
 
 
 <p>
+<b>Avantages</b>
  Tolérances aux fautes: 
 L'algo converge d'un état illégitime à un état légitime dans un nombre fini d'étape
  Une fois que l'algo est dans un état légitime, il le reste
@@ -336,9 +341,17 @@ Plein de petits algos simples à la place d'un seul gros qui gère tout.
 </p>
 
 <p>
+<b>Définition</b>
+</p>
+
+<p>
 Un graphe où chaque noeuds contient des variables et une action de la forme guard -&gt; statement .
 Si la guarde vaut true alors l'action est "enabled" 
 Un noeud à accès uniquement aux variables de ses voisins 
+</p>
+
+<p>
+<b>Steps et exécutions</b>
 </p>
 
 <p>
@@ -347,6 +360,7 @@ Cependant on peut choisir différentes manières de procéder donc concept de de
 </p>
 
 <p>
+<b>Démons</b>
 Exemples non exhaustifs de démons :
 </p>
 <ol class="org-ol">
@@ -357,6 +371,7 @@ Exemples non exhaustifs de démons :
 
 
 <p>
+<b>Auto-stabilisation</b>
 3 propriétés
 Closure : depuis un état légitime on reste dans un état légitime
 Convergence : depuis un état illégitime on atteint un état légitime avec un nombre fini d'étape
@@ -365,8 +380,8 @@ Correctness
 </div>
 </div>
 
-<div id="outline-container-org2479e9f" class="outline-3">
-<h3 id="org2479e9f"><span class="section-number-3">4.2</span> Example 1 : Coloring</h3>
+<div id="outline-container-org2442c8d" class="outline-3">
+<h3 id="org2442c8d"><span class="section-number-3">4.2</span> Example 1 : Coloring</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Algorithme</li>
@@ -377,8 +392,8 @@ Correctness
 </div>
 </div>
 
-<div id="outline-container-orgd0f148a" class="outline-3">
-<h3 id="orgd0f148a"><span class="section-number-3">4.3</span> Example 2 : Token Ring Dijkstra</h3>
+<div id="outline-container-org2ecd691" class="outline-3">
+<h3 id="org2ecd691"><span class="section-number-3">4.3</span> Example 2 : Token Ring Dijkstra</h3>
 <div class="outline-text-3" id="text-4-3">
 <ul class="org-ul">
 <li>Explication de l'algorithme pour pouvoir expliquer Why3do</li>
@@ -388,12 +403,12 @@ Correctness
 </div>
 </div>
 
-<div id="outline-container-orgfc2db91" class="outline-2">
-<h2 id="orgfc2db91"><span class="section-number-2">5</span> Explication des outils</h2>
+<div id="outline-container-orge3e05b2" class="outline-2">
+<h2 id="orge3e05b2"><span class="section-number-2">5</span> Explication des outils</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgde61268" class="outline-3">
-<h3 id="orgde61268"><span class="section-number-3">5.1</span> Logique de Hoare</h3>
+<div id="outline-container-org9755363" class="outline-3">
+<h3 id="org9755363"><span class="section-number-3">5.1</span> Logique de Hoare</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 La logique de Hoare est un formalisme utilisé en informatique pour raisonner sur la correction des programmes impératifs. Elle utilise des triples de Hoare, notés {P} C {Q}, où :
@@ -453,116 +468,1237 @@ En conclusion, la logique de Hoare permet de structurer le raisonnement sur les 
 </p>
 </div>
 </div>
-<div id="outline-container-org70a40eb" class="outline-3">
-<h3 id="org70a40eb"><span class="section-number-3">5.2</span> SMT solver</h3>
+<div id="outline-container-orgf6da024" class="outline-3">
+<h3 id="orgf6da024"><span class="section-number-3">5.2</span> SMT solver</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
--Reprendre le cours pour expliquer clairement
+Les SMT (Satisfiability Modulo Theories) solveurs sont des outils puissants utilisés pour vérifier la satisfiabilité d'expressions logiques sous certaines contraintes théoriques. Ils jouent un rôle clé dans de nombreux domaines de l'informatique, y compris la vérification formelle, la synthèse de logiciels, la planification, et la vérification de modèles. Voici une présentation de base des SMT solveurs, de leur fonctionnement et de leurs applications.
+Qu'est-ce qu'un SMT solveur ?
+</p>
+
+<p>
+Un SMT solveur est un outil informatique qui détermine si une formule logique est satisfaisable, c'est-à-dire, s'il existe une affectation des variables qui rend la formule vraie, en tenant compte de certaines théories de fond (comme l'arithmétique, les tableaux, les bit-vectors, etc.).
+Comment fonctionne un SMT solveur ?
+</p>
+
+<p>
+Les SMT solveurs étendent les capacités des solveurs SAT (Satisfiability), qui vérifient la satisfiabilité de formules en logique propositionnelle. Alors que les solveurs SAT se concentrent sur des expressions booléennes, les SMT solveurs traitent des expressions plus complexes en combinant les solveurs SAT avec des solveurs spécifiques pour diverses théories.
+</p>
+
+<p>
+Encodage SAT : Les formules SMT sont souvent converties en une forme équivalente que les solveurs SAT peuvent traiter.
+</p>
+
+<p>
+Théories de fond : Le solveur utilise des modules spécialisés pour traiter des théories spécifiques. Par exemple :
+    Arithmétique linéaire et non linéaire : Pour les expressions impliquant des entiers ou des réels.
+    Théorie des tableaux : Pour les structures de données de type tableau.
+    Bit-vectors : Pour les calculs en binaire.
+    Théorie des ensembles : Pour les opérations sur les ensembles.
+</p>
+
+<p>
+Combinaison de théories : Les SMT solveurs utilisent des algorithmes comme Nelson-Oppen pour combiner différentes théories et vérifier la satisfiabilité de formules complexes.
+</p>
+
+
+<p>
+Exemples de solveurs SMT populaires
+</p>
+
+<p>
+Z3 : Développé par Microsoft Research, c'est l'un des solveurs SMT les plus populaires et largement utilisés.
+CVC4 : Un solveur SMT open-source développé par l'Université de Stanford et d'autres.
 </p>
 </div>
 </div>
-<div id="outline-container-org6ab24ed" class="outline-3">
-<h3 id="org6ab24ed"><span class="section-number-3">5.3</span> Explication Why3</h3>
+
+<div id="outline-container-org5c3da4e" class="outline-3">
+<h3 id="org5c3da4e"><span class="section-number-3">5.3</span> Explication Why3</h3>
 <div class="outline-text-3" id="text-5-3">
-<ul class="org-ul">
-<li>Permet de spécifier formellement les propriétés attendues</li>
-<li>Vérification de programme</li>
-<li>Comment utiliser l'IDE</li>
-<li>Langage Whyml (conçu pour la vérification formelle)</li>
-<li>Proche d'ocaml (exctraction de code prouvé possible)</li>
-<li>Logique de Hoare à l'aide de pré/post-conditions et variant/invariants de boucles.</li>
-<li>Interaction avec prouveurs SMT installable et assistant de preuve</li>
+<p>
+Why3 est un outil puissant et polyvalent pour la vérification formelle de programmes. 
+Il permet de s'assurer que les programmes respectent des propriétés spécifiées et de garantir 
+leur correction grâce à des techniques avancées de vérification.
+</p>
 
-<li>Informations et erreurs qui font perdre du temps</li>
-</ul>
+<p>
+Spécification formelle des propriétés attendues
+</p>
+
+<p>
+Why3 permet de spécifier formellement les propriétés que l'on attend d'un programme. 
+Ces spécifications sont écrites sous forme de contrats comprenant des préconditions, des postconditions, des invariants de boucle et des variants. 
+Ces contrats sont ensuite utilisés pour vérifier que le programme respecte bien les propriétés définies.
+</p>
+
+<p>
+Vérification de programme
+</p>
+
+<p>
+La vérification de programme avec Why3 consiste à démontrer que le code implémente correctement les spécifications formelles. 
+Pour ce faire, Why3 utilise des techniques de logique de Hoare, en générant des obligations de preuve (POs) pour chaque point critique du programme. 
+Ces POs sont ensuite prouvées automatiquement ou manuellement.
+</p>
+
+<p>
+Utilisation de l'IDE
+</p>
+
+<p>
+L'IDE de Why3 facilite l'écriture, l'édition et la vérification de programmes. 
+Il permet de visualiser les spécifications, les obligations de preuve et leur état (prouvé/non prouvé). 
+L'IDE offre également des outils pour interagir avec différents prouveurs automatiques et pour guider les preuves interactives, 
+rendant le processus de vérification plus intuitif et efficace.
+</p>
+
+<p>
+Langage WhyML
+</p>
+
+<p>
+WhyML est le langage de programmation utilisé dans Why3, conçu spécifiquement pour la vérification formelle. 
+Il s'inspire de OCaml et permet d'écrire des programmes tout en intégrant directement les spécifications formelles.
+Les programmes WhyML peuvent être extraits en code OCaml, facilitant ainsi l'intégration de code prouvé dans des applications réelles.
+</p>
+
+<p>
+Proche d'OCaml
+</p>
+
+<p>
+WhyML partage de nombreuses similitudes avec OCaml, ce qui permet aux développeurs familiarisés avec OCaml de s'adapter rapidement à WhyML. 
+De plus, l'extraction de code prouvé WhyML vers OCaml est possible, ce qui permet d'utiliser le code vérifié dans des projets OCaml existants.
+</p>
+
+<p>
+Logique de Hoare
+</p>
+
+<p>
+Why3 utilise la logique de Hoare pour la vérification des programmes. 
+Cela inclut l'utilisation de préconditions et postconditions pour définir le comportement attendu des fonctions,
+ainsi que des invariants de boucle et des variants pour s'assurer de la correction des boucles. 
+Ces éléments de spécification permettent de formuler et de vérifier des propriétés de manière systématique.
+</p>
+
+<p>
+Interaction avec prouveurs SMT et assistant de preuve
+</p>
+
+<p>
+Why3 peut interagir avec plusieurs prouveurs SMT (Satisfiability Modulo Theories), tels que Z3, CVC4 et Alt-Ergo, 
+pour prouver automatiquement les obligations de preuve. 
+En outre, Why3 peut être utilisé en conjonction avec des assistants de preuve interactifs comme Coq ou Isabelle, 
+offrant ainsi une grande flexibilité pour le processus de vérification formelle.
+</p>
 </div>
 </div>
+<div id="outline-container-org2bb1fed" class="outline-3">
+<h3 id="org2bb1fed"><span class="section-number-3">5.4</span> </h3>
 </div>
-<div id="outline-container-orgaccf4f0" class="outline-2">
-<h2 id="orgaccf4f0"><span class="section-number-2">6</span> Why3doTheWayOfHarmoniousDistributedSystemProofs</h2>
+</div>
+<div id="outline-container-org36c96c4" class="outline-2">
+<h2 id="org36c96c4"><span class="section-number-2">6</span> Why3doTheWayOfHarmoniousDistributedSystemProofs</h2>
 <div class="outline-text-2" id="text-6">
+<p>
+Dans la partie 6 du papier, ils proposent une implémentation de la preuve du Token Ring de Disjkstra à l'aide d'un modèle à instancier.
+</p>
 </div>
-<div id="outline-container-org7f3a04c" class="outline-3">
-<h3 id="org7f3a04c"><span class="section-number-3">6.1</span> Explication du modèle : modelReadallEnable</h3>
+<div id="outline-container-orgf31a6a6" class="outline-3">
+<h3 id="orgf31a6a6"><span class="section-number-3">6.1</span> Explication du modèle : modelReadallEnable</h3>
 <div class="outline-text-3" id="text-6-1">
+<p>
+Ils commencent par créer le module Config (nommé World dans leur papier) qui représente le graphe de noeud et d'état du système.
+Les types node et state sont à instancier.  
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">module Config
+  use int.Int
+  use map.Map
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+
+  type node
+  type state
+  type config =  map node state
+
+end
+
+</pre>
+</div>
+
+<p>
+Le second module est un modèle de mémoire localement partagé.
+De la même manière que Config c'est un modèle à instancier,
+on retrouve les types node et state et différentes fonctions ou prédicats à instancier grâce au mot clé "val" 
+Le prédicat validNd indique si un noeud n est valide, ce prédicat permet de mettre des conditions sur les noeuds 
+case_node et case_state assurent que le résultat est toujours vrai pour un noeud/état donné.
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+module Steps
+  use int.Int
+  use map.Map
+  use list.List
+  use list.Mem
+  use list.Append
+  use list.Map as Lmap
+
+
+  type node
+  type state
+  type config = map node state
+
+  val predicate validNd (n:node)
+
+  val predicate case_node (node)
+    ensures { result }
+
+  val predicate case_state (state)
+    ensures { result }
+
+</pre>
+</div>
+
+<p>
+On remarque un premier problème dans le modèle de .., l'état initial est fixé et doit être instancié,
+ce qui est en contradiction avec le principe l'algorithme stabilisant auto-stable. 
+indpred est un prédicat inductif qui va faire office d'invariant dans la preuve des programmes instanciés, 
+de plus ce prédicat doit être vrai pour la configuration initial. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+
+val function initState (node) : state
+
+constant initConfig : config = initState
+
+val ghost predicate indpred (c : config)
+  ensures { c=initConfig -&gt; result }
+
+</pre>
+</div>
+<p>
+Le prédicat enabled est la condition pour laquelle le noeud est enabled.
+let ghost function step_enbld (c: config) (n: node) (s: state): config: met à jour la configuration c en remplaçant l'état du nœud n par s.
+handleEnbld est une fonction qui gère un nœud activé dans une configuration, c'est la fonction qui va choisir la nouvelle valeur de l'état pour un noeud
+en s'assurant la préservation du prédicat inductif après la mise à jour. 
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+val ghost predicate enabled (config) (n:node)
+  requires { validNd n }
+
+let ghost function step_enbld (c:config) (n:node) (s:state) : config =
+  set c n s
+
+val function handleEnbld (n:node) (c : config) : state
+  requires { validNd n }
+  requires { enabled c n}
+  requires { indpred c }
+  requires { case_node n }
+  ensures  { indpred (step_enbld c n result) }
+
+</pre>
+</div>
+
+<p>
+step est un invariant inductif qui décrit la une transition d'une configuration à une autre après l'activation d'un noeud.
+La ligne step c n (step_enbld c n (handleEnbld n c)) signifie que l'on passe de la configuration c à la configuration dans laquelle le noeud n a été mis à jour. 
+Cela implique qu'il n'y a qu'un seul noeud qui peut être activé au même moment, donc cela fixe le démon comme un démon central. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+inductive step config node config =
+| step_enbld : forall c: config , n :node.
+    validNd n -&gt;
+      enabled c n -&gt;
+	step c n (step_enbld c n (handleEnbld n c))
+
+</pre>
+</div>
+<p>
+Le premier lemme assure que le prédicat inductiv est conservé après un step ce qui est facilement prouvable grâce au ensure de handleEnbld.
+Le second assure que lorsque un noeud est modifié alors tout les autres n'ont pas changé. 
+step_TR est la fermeture transitive de step : 
+</p>
 <ul class="org-ul">
-<li></li>
+<li>Cas de base : Pour toute configuration c peut s'atteindre elle-même en 0 étape.</li>
+<li>Cas inductif : Pour toute configuration c, c', et c'' il existe une séquence de steps pour aller de c à c' et il existe une transition unique pour aller de c' à c'' via le noeud n.</li>
 </ul>
+<div class="org-src-container">
+<pre class="src src-why3">
+lemma indpred_step :
+  forall c c' :config, n :node. step c n c' -&gt; indpred c -&gt; indpred c'
+
+lemma step_preserves_states :
+  forall c c' :config, n1 n2 :node. step c n1 c' -&gt; n2&lt;&gt;n1 -&gt; c n2 = c' n2
+
+
+inductive step_TR config config int =
+| base : forall c: config. step_TR c c 0
+| step : forall c c' c'' :config, n :node, steps :int.
+  step_TR c c' steps -&gt; step c' n c'' -&gt; step_TR c c'' (steps+1)
+
+</pre>
+</div>
+<p>
+Le lemme noNegative_step_TR assure que le nombre de steps pour passer d'une configuration à une autre est toujours positif.
+Le prédicat reachable vaut vrai s'il existe un nombre d'étape pour atteindre la configuration c depuis la configuration initiale.
+indpred_manySteps assure que le prédicat inductif est conservé par plusieurs étapes.
+indpred_reachable étend le lemme précédent à l'aide de reachable en assurant que le prédicat inductif reste vrai pour toutes les configurations atteignables. 
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+lemma noNegative_step_TR : forall c c': config, steps :int.
+  step_TR c c' steps -&gt; steps &gt;= 0
+
+predicate reachable (c:config) = exists steps :int. step_TR initConfig c steps
+
+lemma indpred_manySteps :
+  forall c c' :config, steps :int . step_TR c c' steps -&gt; indpred c -&gt; indpred c'
+
+lemma indpred_reachable :
+  forall c: config. reachable c -&gt; indpred c
+
+</pre>
+</div>
+<p>
+**
+</p>
 </div>
 </div>
-<div id="outline-container-org1d5391b" class="outline-3">
-<h3 id="org1d5391b"><span class="section-number-3">6.2</span> Explication de selfstab-ring</h3>
+
+<div id="outline-container-org5219d73" class="outline-3">
+<h3 id="org5219d73"><span class="section-number-3">6.2</span> Explication de selfstab-ring</h3>
 <div class="outline-text-3" id="text-6-2">
-<ul class="org-ul">
-<li>Closure</li>
-<li>Terminaison</li>
-<li>Avantages et Limitations (Comparaison avec Sasa)
-<ul class="org-ul">
-<li>Lien direct avec Ocaml</li>
-<li>Seulement le démon central</li>
-<li>Etat initial fixé</li>
-<li>Topologie fixée</li>
-<li>Accès à tous les états et pas uniquement les voisins</li>
-</ul></li>
-</ul>
+<p>
+Nous allons faire une explication rapide de la preuve de l'alogithme de Token Ring de Dijkstra
+</p>
+
+<p>
+La preuve est séparé en deux parties, la closure : depuis un état légitime, on reste dans un état légitime 
+puis la terminaison : à partir d'un état non légitime, en un nombre fini d'étape, on atteint un état légitime.
+</p>
+
+<p>
+Dans un premier temps ils instancient le modèle en suivant la même implémentation que dans la partie 4.3
+Puis définissent has_token, atMostOneToken et atLeastOneToken qui permettent de définir l'invariant indpred.
+L'invariant est alors : les noeuds sont entre 0 et une borne max, et les état sont entre 0 et une borne max et il y a au moins token.
+On note également que l'état initial choisi est la racine vaut 1 et les autres noeuds valent 0.
+L'état initial est donc bien légitime.
+Puis il suffit d'utiliser de prouver que tout état atteignable depuis l'état initial prouve oneToken.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+(** {1 Self-stabilizing mutual exclusion on a ring (Closure)} *)
+module SelfStab_Ring_Closure
+
+  use int.Int
+  use int.EuclideanDivision
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+  use map.Map
+
+  (* Basic Setup: nodes, packets, inputs, outputs, states *)
+
+  type node = int
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  let predicate validNd (n:node) = 0 &lt;= n &lt; n_nodes
+
+  axiom n_nodes_bounds : 2 &lt; n_nodes
+
+
+  type state = int
+
+  val constant k_states : int
+
+  axiom k_states_lower_bound : n_nodes &lt; k_states
+
+  let function incre (x:state) : state
+  = mod (x+1) k_states
+
+  let predicate case_node (_node) = true
+  let predicate case_state (_state) = true
+
+  (* clone World theory to get additional types/functions *)
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+  (* System initialization: node states and messages      *)
+  let function initState (n:node) : state
+  = if n=n_nodes-1 then 1 else 0
+
+  (* defining when a node in the ring has the token *)
+  predicate has_token (lS:map node state) (i:node) =
+  (i = 0 /\  lS i =  lS (n_nodes-1))
+  \/
+  (i &gt; 0 /\ i &lt; n_nodes /\ lS i &lt;&gt; lS (i-1))
+
+  (* enabling predicate *)
+  let ghost predicate enabled (lS:map node state) (i:node)
+  = has_token lS i
+
+  (* handling function *)
+  let function handleEnbld (h:node) (lS:map node state) : state
+  = if h = 0 then incre (lS (n_nodes-1))
+	     else lS (h-1)
+
+  (* helper definitions for invariant predicate *)
+  let rec ghost predicate atLeastOneToken (lS:map node state) (n:int)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures { result &lt;-&gt; exists k :int. 0&lt;=k&lt;n /\ has_token lS k }
+    variant { n }
+  = n &gt; 0 &amp;&amp; (has_token lS (n-1) || atLeastOneToken lS (n-1))
+
+  val ghost predicate atMostOneToken (lS:map node state) (n:int)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures { result &lt;-&gt; forall i j :int. 0&lt;=i&lt;n -&gt; 0&lt;=j&lt;n -&gt; has_token lS i -&gt; has_token lS j -&gt; i=j }
+
+
+  (* crucial lemma to achieve an unbounded proof *)
+  (* of the atLeastOneTokenLm lemma              *)
+  lemma first_last : forall n: int, lS :map node state.
+    n &gt;= 0 -&gt;
+      (forall j :int. 0&lt;j&lt;=n -&gt; lS j = lS (j-1)) -&gt;
+	lS 0 = lS n
+
+  lemma atLeastOneTokenLm : forall w :world. atLeastOneToken w n_nodes
+
+
+
+  (* candidate invariant predicate *)
+  predicate inv (lS:map node state) =
+    (forall n :int. 0 &lt;= n &lt; n_nodes -&gt; 0 &lt;= lS n &lt; k_states)
+    /\
+    atMostOneToken lS n_nodes
+    (* /\ *)
+    (* atLeastOneToken lS n_nodes *)
+
+  let ghost predicate indpred (w:world) = inv ( w)
+
+
+  (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
+  clone modelReadallEnabled.Steps with
+    type node,
+    type state,
+    val validNd,
+    val case_node,
+    val case_state,
+    val initState,
+    val indpred,
+    val enabled,
+    val handleEnbld
+  (* SYSTEM PROPERTIES TO BE PROVED FROM INVARIANT *)
+  predicate oneToken (w:world) = atMostOneToken w n_nodes /\ atLeastOneToken w n_nodes
+
+  goal oneToken : forall w :world. reachable w -&gt; oneToken w
+
+end
+
+
+
+</pre>
+</div>
+
+<p>
+Dans la seconde partie le modèle est réinstancié avec des valeurs initiales différentes (pire cas possible ?)
+L'état initial n'est plus un état légitime et on cherche à atteindre l'état converged qui 
+est défini comme tous les noeuds ont la même valeur. Cet état est un état légitime. 
+Pour prouver qu'en partant d'un état initial, on arrive bien à cet état légitime, 
+la méthode proposée est d'utiliser une fonction de potentiel (ici nommé measureAllNodes)
+qui fait office de variant. On associe une valeur entière positive au graphe en fonction de ses états.
+On montre que lorsque l'on atteint converged alors la mesure vaut 0. 
+Et que cette mesure décroit bien d'au moins 1 à chaque step. 
+Pour faire cela, Wh3do détaillent cas par cas les différentes exécutions possibles
+pour permettre à Why3 de prouver la terminaison.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">
+(** {2 Self-stabilizing mutual exclusion on a ring (Convergence)} *)
+module SelfStab_Ring_Convergence
+
+  use int.Int
+  use int.EuclideanDivision
+  use list.List
+  use list.Append
+  use list.Mem
+  use list.Map as Lmap
+  use map.Map
+  use set.FsetInt
+
+  (* Basic Setup: nodes, packets, inputs, outputs, states *)
+
+  type node = int
+
+  (* number of processes *)
+  val constant n_nodes : int
+
+  let predicate validNd (n:node) = 0 &lt;= n &lt; n_nodes
+
+  axiom n_nodes_bounds : 2 &lt; n_nodes
+
+
+  type state = int
+
+  val constant k_states : int
+
+  axiom k_states_lower_bound : n_nodes &lt; k_states
+
+  (* axiom k_states_lower_bound : k_states = n_nodes + 1 *)
+
+  let function incre (x:state) : state
+  = mod (x+1) k_states
+
+
+  (* crucial lemma for unbounded verification
+     proved by induction on n
+   *)
+  lemma first_last : forall n: int, lS :map node state.
+    n &gt;= 0 -&gt;
+      (forall j :int. 0&lt;j&lt;=n -&gt; lS j = lS (j-1)) -&gt;
+	lS 0 = lS n
+
+
+  (* required modular arithmetic lemmas *)
+
+  lemma modular_1 : forall c s  :state. 0&lt;=s&lt;k_states -&gt; 0&lt;=c&lt;k_states -&gt;  c&lt;&gt;s -&gt;
+     mod (c-(incre s)) k_states - mod (c-s) k_states = -1
+
+  lemma modular_2 : forall x y :int. 0&lt;=x&lt;k_states -&gt; 0&lt;=y&lt;k_states -&gt;
+     (x&gt;=y -&gt;  mod (x-y) k_states = x-y)
+     /\
+     (x&lt;y -&gt;  mod (x-y) k_states = k_states-y+x)
+
+  lemma modular_3 : forall base delta :int. 0&lt;=base&lt;k_states -&gt; 1&lt;=delta&lt;k_states -&gt;
+     k_states-delta = mod (base - mod (base + delta) k_states) k_states
+
+
+  let predicate case_node (_node) = true
+  let predicate case_state (_state) = true
+
+
+
+  (* clone World theory to get additional types/functions *)
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+
+  (* System initialization: node states and messages      *)
+  let function initState (n:node) : state
+  = if n=n_nodes-1 || n=0 then 0
+    else n
+
+  (* defining when a node in the ring has the token *)
+  predicate has_token (lS:map node state) (i:node) =
+  (i = 0 /\  lS i =  lS (n_nodes-1))
+  \/
+  (i &gt; 0 /\ i &lt; n_nodes /\ lS i &lt;&gt; lS (i-1))
+
+
+
+
+
+   (* Expressing that there exist no occurrences of a state
+      from a given node on
+    *)
+  let rec ghost predicate noOcc_from (w:world) (a:state) (i:node)
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    requires { 0 &lt;= a &lt; k_states }
+    requires { 0 &lt;= i &lt;= n_nodes}
+    ensures { result &lt;-&gt; forall j :int. i&lt;=j&lt;n_nodes -&gt; w j &lt;&gt; a }
+    variant { n_nodes-i }
+  = i=n_nodes || (w i &lt;&gt; a &amp;&amp; noOcc_from w a (i+1))
+
+
+  let ghost predicate noOcc (w:world) (a:state)
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    requires { 0 &lt;= a &lt; k_states }
+    ensures { result &lt;-&gt; forall j :int. 0&lt;=j&lt;n_nodes -&gt; w j &lt;&gt; a }
+  = noOcc_from w a 0
+
+
+
+  (* PIGEONHOLE principle
+     we construct the set of unused states and prove a lower
+     bound on its cardinality. This entails that when the entire ring
+     is considered there is at least one unused state since k_states &gt; n_nodes,
+     which we formulate as a lemma function.
+   *)
+
+  let rec ghost setUnused_from (w :world) (i:node) : fset node
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    requires { 0 &lt;= i &lt;= n_nodes }
+    ensures  { forall st :state. mem st result &lt;-&gt; 0&lt;=st&lt;k_states /\ noOcc_from w st i }
+    ensures  { cardinal result &gt;= k_states - (n_nodes-i) &gt; 0 }
+    variant  { n_nodes-i }
+  = if i=n_nodes then interval 0 k_states
+    else let r = setUnused_from w (i+1) in
+	   if mem (w i) r then diff r (singleton (w i))
+	   else r
+
+  let ghost function setUnused (w :world) : fset node
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    ensures  { forall st :state. mem st result &lt;-&gt; 0&lt;=st&lt;k_states /\ noOcc w st }
+    ensures  { cardinal result &gt; 0 }
+  = setUnused_from w 0
+
+
+  (* It is not required to formulate the lemma; the lemma function will do
+   *)
+  (* lemma pigeonHole_lm : forall w :world. *)
+  (*   (forall n :node. validNd n -&gt; 0 &lt;= w n &lt; k_states) -&gt; exists st :state. 0&lt;=st&lt;k_states /\ noOcc w st *)
+
+
+
+
+  (* In the target configurationx for the convergence phase
+     all nodes have the same state, thus (only) node zero holds a token
+   *)
+  predicate converged (w :world) =
+    forall i :node. validNd i -&gt; w i = w 0
+
+  lemma converged_0hastoken : forall w :world.
+    converged w &lt;-&gt; (has_token w 0 /\ forall i :int. 0&lt;i&lt;n_nodes -&gt; not (has_token w i))
+
+  predicate initConv (w:world) =
+    exists j : int. 0&lt;=j&lt;n_nodes /\ (forall k :int. 0&lt;k&lt;=j -&gt; w k = w 0) /\ noOcc_from w (w 0) (j+1)
+
+
+
+  let ghost function diffZero (w :world) (s :state)
+    requires { 0 &lt;= w 0 &lt; k_states /\ 0 &lt;= s &lt; k_states }
+    ensures  { 0 &lt;= result &lt; k_states }
+    ensures  { w 0 &lt;= s &lt; k_states -&gt; result = s - w 0 }
+    ensures  { 0 &lt;= s &lt; w 0 -&gt; result = k_states + s - w 0 }
+  = mod (s - w 0) k_states
+
+
+
+  let rec ghost function convState_hlpr (w:world) (base:state) (delta:int) : state
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    requires { 0 &lt;= base &lt; k_states /\ 1 &lt;= delta &lt; k_states }
+    requires { base + delta &lt;  k_states -&gt;
+	       (forall s :state. base&lt;=s&lt;base+delta -&gt; not (noOcc w s))
+	       /\
+	       exists c :state. (base + delta &lt;= c &lt; k_states \/ 0 &lt;= c &lt; base) /\ noOcc w c }
+    requires { base + delta &gt;= k_states -&gt;
+	       (forall s :state. base&lt;=s&lt;k_states -&gt; not (noOcc w s))
+	       /\
+	       (forall s :state. 0&lt;=s&lt;base+delta-k_states -&gt; not (noOcc w s))
+	       /\
+	       exists c :state. base+delta-k_states &lt;= c &lt; base /\ noOcc w c }
+    ensures  { base+delta &lt; k_states -&gt; base+delta &lt;= result &lt; k_states \/ 0&lt;=result&lt;base }
+    ensures  { base+delta &lt; k_states -&gt; base+delta &lt;= result &lt; k_states -&gt; forall s :state. base&lt;=s&lt;result -&gt; not (noOcc w s) }
+    ensures  { base+delta &lt; k_states -&gt; 0&lt;=result&lt;base -&gt; forall s :state. base&lt;=s&lt;k_states \/ 0&lt;=s&lt;result -&gt; not (noOcc w s) }
+    ensures  { base+delta &gt;= k_states -&gt; base+delta-k_states &lt;= result &lt; base  }
+    ensures  { base+delta &gt;= k_states -&gt; forall s :state. base&lt;=s&lt;k_states -&gt; not (noOcc w s) }
+    ensures  { base+delta &gt;= k_states -&gt; forall s :state. 0&lt;=s&lt;result -&gt; not (noOcc w s) }
+    ensures  { noOcc w result }
+    variant  { k_states-delta }
+    = let s = mod (base + delta) k_states
+    in if delta+1 = k_states then s
+      else if (noOcc w s) then s
+	else convState_hlpr w base (delta+1)
+
+
+
+  (* The convergence state is the non-occurring state that is closer to w 0
+   *)
+  let ghost function convState (w:world) : state
+    requires { forall n :int. validNd n -&gt; 0 &lt;= w n &lt; k_states }
+    ensures  { 0 &lt;= result &lt; k_states }
+    ensures  { not (initConv w) -&gt; noOcc w result }
+    ensures  { noOcc_from w (w 0) 1 -&gt; result = w 0 }
+    ensures  { initConv w &lt;-&gt; result = w 0 }
+    ensures  { w 0 &lt;= result &lt; k_states -&gt;  forall s :state. w 0&lt;=s&lt;result -&gt; not (noOcc w s) }
+    ensures  { 0 &lt;= result &lt; w 0 -&gt; forall s :state. w 0&lt;=s&lt;k_states \/ 0&lt;=s&lt;result -&gt; not (noOcc w s) }
+    ensures  { forall s :state. 0&lt;=s&lt;k_states -&gt; s&lt;&gt;result -&gt; noOcc w s -&gt; diffZero w result &lt; diffZero w s }
+  = if (initConv w) then (w 0) else convState_hlpr w (w 0) 1
+
+
+
+  (* enabling predicate for a given node
+     ensures that the transition relation being considered here
+     indeed terminates when the target legal configuration is reached
+   *)
+  let ghost predicate enabled (lS:map node state) (i:node)
+  = has_token lS i &amp;&amp; not (converged lS)
+
+  (* handling function *)
+  let function handleEnbld (h:node) (lS:map node state) : state
+  = if h = 0 then incre (lS (n_nodes-1))
+	     else lS (h-1)
+
+
+
+  (* candidate invariant predicate *)
+  predicate inv (lS:map node state) =
+    (forall n :int. validNd n -&gt; 0 &lt;= lS n &lt; k_states)
+
+  let ghost predicate indpred (w:world) = inv (w)
+
+
+
+  (* Cloning the Steps module will generate VCs to ensure that indpred is an inductive invariant *)
+  clone modelReadallEnabled.Steps with
+    type node,
+    type state,
+    val validNd,
+    val case_node,
+    val case_state,
+    val initState,
+    val indpred,
+    val enabled,
+    val handleEnbld
+
+
+  (* A few obvious facts when node 0 steps:
+       surely w is not an initConv config
+       the state of node 0 is not the convergence state.
+       Thus, the latter may not occur in the configuration.
+   *)
+  lemma step_obvious : forall w w' :world .
+    indpred w -&gt; step w 0 w' -&gt; not (initConv w) /\ convState w &lt;&gt; w 0 /\ noOcc w (convState w) /\
+      w' 0 = incre (w 0) /\ w' 0 = incre (w (n_nodes -1))
+
+  lemma step_noOcc : forall w w' :world, k :node, s :state.
+    indpred w -&gt; step w k w' -&gt; 0&lt;=s&lt;k_states -&gt; w k &lt;&gt; s -&gt; noOcc w' s -&gt; noOcc w s
+
+  (* Important lemma to prove the next one.
+     Requires use of interactive proof transformations:
+     unfolding of initConv predicate; case analysis; existential witnesses
+   *)
+  lemma step_initConv : forall w w' :world, k :node.
+    indpred w -&gt; step w k w' -&gt; initConv w -&gt; initConv w'
+
+  lemma step_changes_convState : forall w w' :world, k :node.
+    indpred w -&gt; step w k w' -&gt; convState w' &lt;&gt; convState w -&gt; noOcc w' (convState w)
+
+
+
+
+
+  (* measure of a single node
+   *)
+  let ghost function measureNode (w:world) (i:int) : int
+    requires { indpred w }
+    requires { validNd i }
+    ensures  { result &gt;= 0 }
+    ensures  { i=0 -&gt; convState w &gt;= w i -&gt; result = n_nodes * (convState w - w i) }
+    ensures  { i=0 -&gt; convState w &lt;  w i -&gt; result = n_nodes * (k_states - w i + convState w) }
+  = let p = if i=0 then diffZero w (convState w)
+		   else if has_token w i then 1 else 0
+    in (n_nodes-i) * p
+
+
+  (* measure of nodes 0 to n-1
+   *)
+  let rec ghost function measureNodes (w:world) (n:int) : int
+    requires { indpred w }
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures  { result &gt;= 0 }
+    ensures  { result = 0 -&gt; forall i :int. 0&lt;=i&lt;n -&gt; measureNode w i = 0 }
+    variant  { n }
+  = if n=0 then 0
+    else measureNode w (n-1) + measureNodes w (n-1)
+
+
+  (* measure of entire ring
+     This function is a fundamental part of the specification
+     PROPERTY 1 - Before convergence, the measure (which is always non-negative) has a positive value
+   *)
+  let ghost function measureAllNodes (w:world) : int
+    requires { indpred w }
+    ensures  { result &gt;= 0 }
+    (* ensures  { result = 0 -&gt; converged w } *)
+    ensures  { not (converged w) -&gt; result &gt; 0 }   (* equivalent to the previous formulation *)
+  = measureNodes w n_nodes
+
+
+  (* The above definitions are sufficient to express ou final goal step_decreasesMeasure below.
+     However, rather than write lemmas to allow us to prove the goal, we will define a let function
+     measureDeltaNodes that calculates the decrement of the measure when a node steps, and tie it
+     to the above defs with the postcond  { result = measureNodes w' n - measureNodes w n }, and write
+     lemmas about this function in the form of postconditions.
+     measureDeltaNodes in turn uses another let function measureDeltaNode, again annotated with
+     appropriate postconditions.
+  *)
+
+
+  (* delta of a single node i, when k is the stepping node
+   *)
+  let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+    requires { indpred w }
+    requires { validNd i /\ validNd k }
+    requires { step w k w' }
+    ensures  { i = 0 -&gt; k = 0 -&gt; convState w' = convState w -&gt; result + n_nodes = 0 }
+    ensures  { i = 0 -&gt; k = 0 -&gt; convState w' &lt;&gt; convState w -&gt; result + n_nodes * (diffZero w (convState w)) = 0 }
+    ensures  { i = 0 -&gt; k &gt; 0 -&gt; result + n_nodes * mod (convState w - convState w') k_states = 0 }
+    ensures  { i &gt; 0 -&gt; k = i-1 -&gt; i-n_nodes &lt;= result &lt;= n_nodes-i }
+    ensures  { i &gt; 0 -&gt; k = i -&gt; result = i-n_nodes }
+    ensures  { i &gt; 0 -&gt; k&lt;&gt;i-1 -&gt; k&lt;&gt;i -&gt; result = 0 }
+  = assert  { 0 &lt;= convState w' &lt; k_states} ;
+    measureNode w' i - measureNode w i
+
+
+   lemma prod : forall x y :int. x &gt; 0 -&gt; y &gt; 0 -&gt; x * y &gt;= x /\ x * y &gt;= y
+
+  (* delta of first n nodes, when k is the stepping node
+   *)
+  let rec ghost function measureDeltaNodes (w:world) (w':world) (n:int) (k:node) : int
+    requires { indpred w }
+    requires { 1 &lt;= n &lt;= n_nodes }
+    requires { validNd k }
+    requires { step w k w' }
+    ensures  { result = measureNodes w' n - measureNodes w n }
+    ensures  { 0 &lt;= n-1 &lt; k -&gt; result + n_nodes * mod (convState w - convState w') k_states = 0 }
+    ensures  { n&gt;1 -&gt; k = n-1 -&gt; result + n_nodes * mod (convState w - convState w') k_states = n-1-n_nodes }
+    ensures  { n&gt;0 -&gt; k = 0 -&gt; convState w' &lt;&gt; convState w -&gt; result + n_nodes * (diffZero w (convState w)) &lt;= 0 }
+    ensures  { n&gt;0 -&gt; k = 0 -&gt; convState w' =  convState w -&gt; result &lt; 0 }
+    ensures  { 0 &lt;= k &lt; n-1 -&gt; result &lt; 0 }
+    ensures  { n = n_nodes -&gt; result &lt; 0 }
+    variant  { n }
+  = if n=1 then measureDeltaNode w w' 0 k
+    else measureDeltaNode w w' (n-1) k + measureDeltaNodes w w' (n-1) k
+
+
+  (* PROPERTY 2 - the measure strictly decreases with every step of the system
+   *)
+  goal step_decreasesMeasure : forall w w' :world, k :node.
+    indpred w -&gt; step w k w' -&gt; measureAllNodes w' &lt; measureAllNodes w
+
+
+  (* helper definitions for legal configurations *)
+  let rec ghost predicate atLeastOneToken (lS:map node state) (n:int)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures  { result &lt;-&gt; exists k :int. 0&lt;=k&lt;n /\ has_token lS k }
+    variant  { n }
+  = n &gt; 0 &amp;&amp; (has_token lS (n-1) || atLeastOneToken lS (n-1))
+
+  val ghost predicate atMostOneToken (lS:map node state) (n:int)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures { result &lt;-&gt; forall i j :int. 0&lt;=i&lt;n -&gt; 0&lt;=j&lt;n -&gt; has_token lS i -&gt; has_token lS j -&gt; i=j }
+
+  predicate oneToken (w:world) = atMostOneToken w n_nodes /\ atLeastOneToken w n_nodes
+
+
+  (* PROPERTY 3 - final confuguration of convergence phase is legal
+     and first node holds the token
+  *)
+  goal converged_oneToken : forall w :world. converged w -&gt; oneToken w /\ has_token w 0
+
+end
+
+</pre>
+</div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6267e67" class="outline-2">
-<h2 id="org6267e67"><span class="section-number-2">7</span> Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact</h2>
+<div id="outline-container-orgc135d64" class="outline-2">
+<h2 id="orgc135d64"><span class="section-number-2">7</span> Implémentation et preuve de l’algorithme de coloring basé sur le modèle de l'artefact</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org9d37931" class="outline-3">
-<h3 id="org9d37931"><span class="section-number-3">7.1</span> Essai d'utilisation de org mode</h3>
+<div id="outline-container-org36c54c0" class="outline-3">
+<h3 id="org36c54c0"><span class="section-number-3">7.1</span> Essai d'utilisation de org mode</h3>
 <div class="outline-text-3" id="text-7-1">
 <div class="org-src-container">
 <pre class="src src-python">print("hello world")
 </pre>
 </div>
+</div>
+</div>
+
+
+<div id="outline-container-orgad10ffd" class="outline-3">
+<h3 id="orgad10ffd"><span class="section-number-3">7.2</span> Explication détaillée</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Nous allons maintenant implémenter l'algorithme de coloration sur un anneau présenté en partie . dans why3 et prouver la closure et la terminaison. 
+</p>
+
+<p>
+Tout d'abord, nous créons un nouveau module et nous importons les différents bibliothèque dont nous aurons besoin. 
+</p>
+<ul class="org-ul">
+<li>Les listes</li>
+<li>Les entiers</li>
+<li>La division euclidienne pour pouvoir faire des modulos</li>
+<li>Les maps (associations de valeurs d'un type à un autre)</li>
+<li>Les ensembles d'entiers</li>
+</ul>
 <div class="org-src-container">
-<pre class="src src-why3">(* On va prouver la closure et la terminaison de l'algo de coloration dans une topologie en anneau *)
+<pre class="src src-why3">
 module Coloring_Ring
-  use list.List
-  use int.Int
-  use int.EuclideanDivision
-  use map.Map
-  use list.Mem
-  use list.Length
-  use ref.Ref
-  use set.SetAppInt
+ use list.List
+ use int.Int
+ use int.EuclideanDivision
+ use map.Map
+ use list.Mem
+ use set.SetAppInt
+</pre>
+</div>
 
-  (* PARTIE 1: CLOSURE *)
+<p>
+Dans un premier temps, on va montrer la closure.
+Pour cela, on commence à définir les objets et règles avec lesquels on va travailler. 
+On définit n_nodes, une constante entière qui représente le nombre de noeud de notre système. 
+De la même manière on définit k_color qui représente le nombre de couleurs disponibles.
+</p>
 
-  (* number of processes *)
-  val constant n_nodes : int
+<p>
+Ici nous avons besoin de règles de base initiale supplémentaire: 
+Nous nous plaçons dans un anneau donc il nous faut au minimum 3 noeuds. 
+Il faut s'assurer que le graphe soit coloriable, pour cela il suffit de s'assurer qu'il y a plus de couleurs disponibles que de noeuds, c'est à dire au moins une couleur par noeud. 
+Pour cela on utilise le mot clé axiom, il faut être très délicat avec ce mot clé car il est facile d'écrire une contradiction. 
+</p>
 
-  axiom at_least_two : 2 &lt; n_nodes
+<div class="org-src-container">
+<pre class="src src-why3">
+val constant n_nodes : int
 
-  (* Nombre de couleurs *)
-  val constant k_color : int
+axiom at_least_two : 2 &lt; n_nodes
 
-  (* On suppose qu'il y a plus de couleurs que de noeuds (une couleur par noeud) *)
-  axiom k_color_bound : n_nodes &lt;= k_color
+val constant k_color : int
 
+axiom k_color_bound : n_nodes &lt;= k_color
+
+</pre>
+</div>
+<p>
+Puis on définit les types que l'on va utiliser. 
+On choisit de représenter les noeuds par des entiers.
+Pour l'état du noeud (sa couleur) on utilise une structure contenant un entier, on pourrait utiliser seulement un entier mais ça permet d'être plus général.
+Dans d'autres algorithmes on peut avoir des états représentés par deux entiers par exemple.
+Avoir une structure permet également la possibilité de mettre une condition sur l'état sous forme d'invariant (exemple en commentaire)
+</p>
+
+<p>
+On définit alors le type config comme étant le map entre les noeuds et les états.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-why3">
   type node = int
-}
+
+  type state = {k: int}
+(*  invariant{ 0 &lt;= k  *)
+
+  type config = map node state
+
+</pre>
+</div>
+
+<p>
+Pour donner un exemple d'axiome problèmatique, on peut prendre le suivant: 
+Si on souhaite dire que pour toute configuration c, pour tout noeud n, la couleur de ce noeud dans cette configuration c n est positive. 
+On pourrait croire que c'est une possibilité pour ajouter une condition sur notre configuration mais cet axiom est une contradiction car il existe des configurations (ie des map d'int vers {int})
+tel que l'état n'est pas positif.
+Donc si nous écrivons cet axiom nous considérons vrai une contradiction ce qui permet à why3 de prouver sans souci que 1+1 = 3.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-why3">axiom max_color : forall c: config. forall n. 0 &lt;= c n
+</pre>
+</div>
+
+
+<p>
+Pour ajouter des propriétés, il est préférable de définir des prédicats et de vérifier qu'ils soient vrais. 
+Ici nous ajoutons le prédicats qui signifie qu'un noeud est valide s'il est compris entre 0 et n_nodes le nombre de noeuds
+</p>
+<div class="org-src-container">
+<pre class="src src-why3">
+  let predicate validNd (n:node) = 0 &lt;= n &lt; n_nodes
+
+
+(* Fonction qui renvoie l'ensemble des couleurs(type int et non state) des voisins d'un noeud dans un anneau *)
+let function neighbor_set (i:node): set
+  ensures { forall c. mem c result -&gt; c &lt;&gt; i} (* un noeud n'est pas son propre voisin *)
+  (*ensures { not mem i result }*) (* un noeud n'est pas son propre voisin *)
+  ensures {  cardinal result = 2 } (* XXX pour un anneau seulement ! *)
+  =
+  add (mod (i-1) n_nodes) (add (mod (i+1) n_nodes) (empty()))
+
+
+
+(* Fonction qui calcule la plus petite couleur disponible *)
+(*prouvable avec Cvc 5 sur la machine d'Erwan, j'ai pas réussi sur cette version de Why3 avec ces solveurs
+
+- 3s avec CVC5 (depuis le top)
+*)
+let function free (colors: set) (k:int) : int =
+  requires { cardinal colors &lt; k }
+  ensures { not mem result colors }
+  ensures { forall x. (0 &lt;= x &lt; k /\ not mem x colors) -&gt; result &lt;= x }
+  ensures { 0 &lt;= result &lt; k }
+  min_elt (diff (interval 0 k) colors)
+
+
+(* modelReadallEnabledDemon est ma version modifié de modelReadallEnabled *)
+
+  clone modelReadallEnabled.World with
+    type node,
+    type state
+
+
+(* Dans  modelReadallEnabledDemon, il n'y  a plus d'état  initial, je
+laisse la fonction initState en commentaire pour l'instant *)
+
+
+
+
+  let function initState (k:node) : state =
+  {k=0}
+
+let function color (w:world) (n:node)  : int =
+   (w n).k
+
+
+let rec function get_colors (nl:set) (w:world) : set =
+   requires { cardinal nl &lt; 3 }
+   ensures { cardinal result &lt;= cardinal nl }
+
+   (* Nécessaire pour prouver no conflict !! *)
+   ensures { forall c. mem c result &lt;-&gt; exists x. mem x nl /\ c = (w x).k }
+
+   variant { cardinal nl }
+   if is_empty nl then empty () else
+    let n = choose nl in
+    let c = color w n in
+    add c (get_colors (remove n nl) w)
+
+
+(* pour un noeud, on regarde ses voisins et on vérifie s'il en existe un qui a la même couleur *)
+predicate conflict (lS: world) (n:node) =
+   exists c : int.
+    mem c (get_colors (neighbor_set n) lS)
+   /\ (lS n).k = c
+(*   exists c : state. mem c (map lS (neighbor_set n)) /\ (lS n).k = c.k *)
+
+(*   exists c : int. mem c (neighbor_set lS n) /\ (lS n).k = c *)
+
+
+(*littéralement la négation de conflict *)
+predicate couleurDifferentes (w: config) (n: node) = not  conflict w n
+
+(*  forall c: int. mem c (neighbor_set lS i) -&gt; (lS i).k &lt;&gt; c *)
+
+
+
+(* enabling predicate *)
+let ghost predicate enabled (lS:config) (i:node) =
+  conflict lS i
+
+
+ (* handling function *)
+ (* c'est la fonction step de sasa *)
+ (* k est la couleur de l'état (par rapport à l'invariant de définition ) *)
+
+
+
+let function handleEnbld (n:node) (w:world) : state
+  ensures { not mem result.k (get_colors (neighbor_set n) w) }
+  =
+  { k = free (get_colors (neighbor_set n) w) k_color }
+
+
+(* C'est une tautologie, Il est nécessaire de donner un invariant au modele *)
+
+predicate inv (w: config) =
+  (* Garantir que les états des nœuds sont valides *)
+  (*  (forall n: node. 0 &lt;= n &lt; n_nodes ) *)
+  (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; 0 &lt;= (w n).k &lt;= k_color)
+
+ let ghost predicate indpred (w:world) = inv w
+
+
+clone modelReadallEnabled.Steps with
+    type node, type state, val validNd, val indpred, val enabled, val handleEnbld, val initState,
+
+(* tout les noeuds sont bien coloriés *)
+predicate colored (w: world) =
+  forall n1: node.
+    validNd n1 -&gt;
+    couleurDifferentes w n1
+
+
+(* renvoie true si pour tout les noeuds il n'y a pas pas de conflits *)
+predicate no_conflict (w: world) = forall n: node. not(conflict w n)
+  goal goal_colored : forall w, w_init :world. reachable w -&gt; no_conflict w -&gt; colored w
+
+
+ (*PARTIE 2: TERMINAISON *)
+
+  (* On va utiliser une fonction de measureNode qui compte le nombre de conflit  *)
+
+  let ghost function measureNode (w:world) (n:int) : int
+(*  requires { indpred w } *)
+  requires { validNd n }
+  ensures { result &gt;=0 }
+  ensures { result = 1 &lt;-&gt; conflict w n }
+  ensures { result = 0 &lt;-&gt; not(conflict w n) }
+  =
+  if conflict w n then 1 else 0
+
+    (* measure of nodes 0 to n-1
+   *)
+  let rec ghost function measureNodes (w:world) (n:int) : int
+(*    requires { indpred w } *)
+    requires { 0 &lt;= n &lt;= n_nodes }
+    ensures  { result &gt;= 0 }
+    ensures  { result = 0 &lt;-&gt; forall i :int. 0&lt;=i&lt;n -&gt; measureNode w i = 0 }
+    variant  { n }
+  = if n=0 then 0
+    else measureNode w (n-1) + measureNodes w (n-1)
+
+    (* measure of entire ring
+     This function is a fundamental part of the specification
+     PROPERTY 1 - Before convergence, the measure (which is always non-negative) has a positive value
+   *)
+
+
+  let ghost function measureAllNodes (w:world) : int
+(*    requires { indpred w } *)
+    ensures  { result &gt;= 0 }
+    (* si je mets juste ensures{ not(colored w) -&gt; result &gt; 0} il réussi pas *)
+    ensures  { not(colored w) -&gt; exists n:node. not(couleurDifferentes w n) -&gt; (measureNode w n = 1) -&gt; (result&gt; 0)}
+
+    (* R1: j'ai rajouté ca pour pouvoir prouver help_goal *)
+    ensures  { result = 0 &lt;-&gt; forall i :int. 0 &lt;= i &lt; n_nodes -&gt; measureNode w i = 0 }
+
+  = measureNodes w n_nodes
+
+    (* delta of a single node i, when k is the stepping node   *)
+
+
+(* delete me *)
+lemma step_preserves_states_bis :
+    forall w w' :world, n i :node. step w n w' -&gt; i&lt;&gt;n -&gt; w i = w' i
+
+
+(* delete me *)
+lemma no_conflict_after_step_alt:
+      forall w, n.
+	let nc = handleEnbld n w in
+	let w' = set w n nc in
+
+	not(conflict w' n)
+
+lemma no_conflict_after_step:
+      forall w, w', k.
+		step w k w' -&gt; not(conflict w' k)
+	     (* measureNode w' k = 0 *)
+
+(* delete me *)
+lemma measure_null_eq_no_conflict:
+      forall w, k.
+	     validNd k -&gt;
+		(measureNode w k = 0 &lt;-&gt; not(conflict w k))
+
+
+
+(* delete me *)
+lemma measure_null_after_step:
+      forall w, w', k.
+		(step w k w' -&gt; measureNode w' k = 0 )
+
+
+let rec ghost function measureDeltaNode (w:world) (w':world) (i:int) (k:node) : int
+  (*  requires { indpred w } *)
+    requires { validNd i /\ validNd k }
+    requires { step w k w' }
+    ensures {  i =  k /\ measureNode w i = 1 /\  measureNode w' i = 0 -&gt; result = 1 }
+  =
+    measureNode w i - measureNode w' i
+
+
+(* delete me *)
+lemma prod : forall x y :int. x &gt; 0 -&gt; y &gt; 0 -&gt; x * y &gt;= x /\ x * y &gt;= y
+
+ let rec ghost function measureDeltaNodes (w:world) (w':world) (n:int) (k:node) : int
+  (*  requires { indpred w } *)
+    requires { 0 &lt;= n &lt;= n_nodes}
+    requires { 0 &lt;= n &lt;= n_nodes -&gt; validNd n}
+    requires { validNd k }
+    requires { step w k w' }
+    variant  { n }
+
+  = if n = 0 then measureDeltaNode w w' 0 k
+  else measureDeltaNode w w' n k + measureDeltaNodes w w' (n-1) k
+
+
+  let ghost function measureAllDeltaNodes (w:world) (w':world) (k:node) : int
+  (*  requires { indpred w } *)
+   requires { validNd k }
+   requires { validNd n_nodes}
+   requires { step w k w' }
+    ensures { result &gt; 0 }
+    ensures { result = measureAllNodes w - measureAllNodes w'}
+  = measureDeltaNodes w w' n_nodes k
+
+
+
+lemma goal_decreasesMeasure : forall w w' :world, k :node.
+  (* indpred w /\ *)
+  validNd n_nodes -&gt; step w k w' -&gt; measureAllNodes w &gt; measureAllNodes w'
+
+
+
+lemma help_goal :
+  forall w : world. (measureAllNodes w = 0) &lt;-&gt; (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; measureNode w n = 0)
+
+goal goal_converged : forall w : world. (measureAllNodes w = 0) &lt;-&gt; colored w
+
+goal terminated : forall w : world. (measureAllNodes w = 0) &lt;-&gt; (forall n: node. 0 &lt;= n &lt; n_nodes -&gt; not(enabled w n))
+
+goal convergence :
+     (* forall wi : world. *)
+     exists w:world, k:int .  step_TR_max initWorld w k /\ measureAllNodes w = 0 
+     (* colored w *)
+
+(* XXX montrer la convergence
+
+  *)
+
+
+(*Controle pour voir s'il n'y a pas de true = false dans le code
+   goal trivially_false : 1+1= 3
+*)
+
+
+end   
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd492a51" class="outline-3">
-<h3 id="orgd492a51"><span class="section-number-3">7.2</span> Explication détaillée</h3>
-</div>
-
-<div id="outline-container-orgda653b7" class="outline-3">
-<h3 id="orgda653b7"><span class="section-number-3">7.3</span> Problèmes rencontrés et solutions</h3>
+<div id="outline-container-orgb061979" class="outline-3">
+<h3 id="orgb061979"><span class="section-number-3">7.3</span> Problèmes rencontrés et solutions</h3>
 </div>
 </div>
 
-<div id="outline-container-org6822f50" class="outline-2">
-<h2 id="org6822f50"><span class="section-number-2">8</span> Autres différents essais et faisabilité</h2>
+<div id="outline-container-orge27959b" class="outline-2">
+<h2 id="orge27959b"><span class="section-number-2">8</span> Autres différents essais et faisabilité</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>Pour tout état initial -&gt; Angle envisagé mais semble complexe</li>
@@ -575,13 +1711,13 @@ module Coloring_Ring
 
 
 
-<div id="outline-container-org07e7ff1" class="outline-2">
-<h2 id="org07e7ff1"><span class="section-number-2">9</span> Conclusion</h2>
+<div id="outline-container-orgf334be2" class="outline-2">
+<h2 id="orgf334be2"><span class="section-number-2">9</span> Conclusion</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Lilian Derain</p>
-<p class="date">Created: 2024-07-03 Wed 11:43</p>
+<p class="date">Created: 2024-07-16 Tue 14:54</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
