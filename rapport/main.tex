@@ -1,4 +1,4 @@
-% Created 2024-07-19 Fri 07:58
+% Created 2024-07-24 Wed 13:20
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -15,16 +15,6 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \input{header}
-\input{preambule}  % Assuming this includes your custom LaTeX settings
-\usepackage{listings}  % Include listings package
-\lstdefinelanguage{why3}{
-morekeywords={function, predicate, axiom, lemma, goal, type, var, mutable, invariant, ensures, requires, modifies, returns, assert, if, then, else, match, with, while, do, done, for, to, downto, break, continue, try, raise, exception, in, begin, end, ghost, import, export, clone, axiomatize},
-sensitive=true,
-morecomment=[l]{//},
-morecomment=[s]{/*}{*/},
-morestring=[b]",
-}
-\hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,filecolor=blue,urlcolor=blue}
 \DeclareUnicodeCharacter{00A0}{~}
 \author{Lilian Derain}
 \date{<modified the 01/07/2024 (at 10:30) by Erwan Jahier>}
@@ -41,8 +31,9 @@ morestring=[b]",
 
 
 
+
 \section{Remerciement}
-\label{sec:orge670bc7}
+\label{sec:org460de28}
   En introduction de ce rapport, je tiens à exprimer ma gratitude envers le laboratoire
 VERIMAG pour m’avoir accueilli au sein de son équipe de recherche, me
 permettant ainsi d’explorer le monde de la recherche scientifique.
@@ -53,28 +44,26 @@ monde de la recherche et qui avec Karine Altisen m'ont beaucoup aidé durant ce 
 Je remercie également Nicolas Palix qui a accepté d’être mon enseignant référant pendant
 ce stage. 
 
-
 \section{Résumé/Abstract}
-\label{sec:org5e5b21f}
+\label{sec:org0a7085f}
   J'ai fait un stage de 3 mois au laboratoire  VERIMAG. 
   L'objectif de ce stage est d'utiliser des méthodes formelles pour prouver de façon la plus automatisée possible la correction d'algorithmes distribués auto-stabilisants.
   L'idée de ce stage est d'explorer des techniques de preuves
 basées sur la logique de séparation et  des solveurs SMT. 
-  L'article why3-do se présente un modèle 
+L'article why3-do (à mettre en cible) présente un modèle 
 pour la preuve d'algorithmes distribués auto-stabilisants basé sur l'outil Why3.  
-  L'objectif de ce stage  est d'évaluer ce qu'il est possible et impossible de faire avec ces outils.
+  L'objectif de ce stage  est d'évaluer ce qu'il est possible de faire avec ces outils.
 
 \section{Contexte}
-\label{sec:orgd884884}
+\label{sec:org637280a}
 
 \subsection{Verimag}
-\label{sec:org5bd5243}
+\label{sec:org923cc85}
 
-   Le laboratoire VERIMAG est un centre de recherche en informatique situé à Grenoble. Fondé
+   Le laboratoire VERIMAG est une unité de recherche en informatique située à Grenoble. Fondé
 en 1991, le laboratoire est affilié à l’UGA. Le laboratoire vise à produire des outils théoriques
 et techniques sur les systèmes informatisés en mettant en place une rigueur mathématique.
-Le laboratoire s'intéresse à  de nombreux problèmes tels que les circuits, les processeurs, des al-
-gorithmes distribués et des systèmes intégrants de l’IA.
+Le laboratoire s'intéresse à  de nombreux problèmes tels que les circuits, les processeurs, des algorithmes distribués et des systèmes intégrants de l’IA.
 L’une des spécialités du laboratoire est la vérifcation formelle. Il s’agit d’une approche
 mathématique permettant de garantir que des systèmes répondent bien aux spécifications
 et propriétés. Erwan Jahier et Karine Altisen font de la vérification formelle dans le 
@@ -83,11 +72,15 @@ atteindre un état correct depuis n'importe quel état sans intervention externe
 
 
 \subsection{Organisation de travail}
-\label{sec:org9898cfe}
+\label{sec:org2f7447c}
 
-Au début de mon stage, j'ai consacré du temps à installer et configurer les outils Why3 et Why3-do.  
+Mon stage avait pour objectif de prendre un article de recherche récent, le comprendre, tester l’implémentation fournie, 
+explorer ses limitations et développer un autre exemple que celui fourni. 
 
-Pour pouvoir comprendre l'article Why3-do, j'ai du acquérir des connaissances sur la logiques de Hoare et SMT solveur qui sont des composantes essentiels à Why3.
+Au début de mon stage, j'ai commencé par lire le livre Introduction to Distributed Self-Stabilizing Algorithms  pour comprendre le domaine des algorithmes auto-stabilisants, 
+en particulier ceux liés à la circulation dans un anneau et au coloriage et j'ai également consacré du temps à installer et configurer les outils Why3 et Why3-do.  
+
+Pour pouvoir comprendre l'article Why3-do, j'ai du acquérir des connaissances sur la logique de Hoare et les SMT solveurs qui sont des composantes essentielles à Why3.
 De plus j'ai également étudié le fonctionnement des algorithmes distribués auto-stabilisants pour pouvoir comprendre leurs implémentations dans Why3-do.
 Cette phase initiale d'apprentissage était cruciale pour établir une base solide pour mes travaux futurs. 
 Afin de surmonter les défis techniques et méthodologiques, des échanges fréquents avec Erwan ont été établis. 
@@ -100,17 +93,22 @@ Ces séances de retour d'information m'ont permis de recevoir des suggestions pr
 et sur les points à focaliser pour la semaine suivante. Erwan et Karine proposaient également de nouvelles idées pour résoudre les problèmes non résolus,
  ce qui m'a aidé à progresser de manière structurée et efficace tout au long de mon stage.
 
+En parallèle, j'ai travaillé avec un dépôt Git pour versionner mon code et mes documents. 
+Cela m'a permis de suivre mes modifications de manière précise, de revenir en arrière en cas de besoin, 
+et de collaborer plus efficacement avec Erwan et Karine en partageant facilement mes avancées et en intégrant leurs retours dans mon travail.
+
+
 \section{Algorithme distribué auto-stable}
-\label{sec:orgaa06fbf}
+\label{sec:org4a5ea9e}
 
 
 \subsection{Définition algorithme distribué auto-stable}
-\label{sec:org6b2d4ea}
+\label{sec:orgad8ffcf}
 
 
 \textbf{\textbf{Introduction}}
 
-Le concept d'auto-stabilisation a été introduit par Dijkstra en 1973 dans le contexte des systèmes distribués. 
+Le concept d'auto-stabilisation a été introduit par Dijkstra en 1973 (à mettre en cible) dans le contexte des systèmes distribués. 
 Un système distribué est composé d'un ensemble fini de processus autonomes interconnectés par un réseau de communication, 
 avec pour objectif d'atteindre un but global. Le design d'un algorithme distribué auto-stabilisant peut sembler complexe, 
 car chaque processus doit se coordonner avec les autres malgré une vue partielle du système. 
@@ -123,9 +121,8 @@ le reliant à une partie des autres processus.
 \begin{itemize}
 \item L'algorithme converge d'un état illégitime à un état légitime en un nombre fini d'étapes.
 \item Une fois dans un état légitime, l'algorithme y reste.
-\item En cas de "transient fault" (faute transitoire) entraînant un retour à un état illégitime,
+\item En cas de faute transitoire entraînant un retour à un état illégitime, l'algorithme converge de lui-même vers un état légitime.
 \end{itemize}
-l'algorithme converge de lui-même vers un état légitime.
 
 
 \textbf{\textbf{Définition}}
@@ -151,28 +148,27 @@ Exemples non exhaustifs de démons :
 
 L'auto-stabilisation repose sur trois propriétés :
 \begin{enumerate}
-\item \textbf{\textbf{Clôture (Closure) :}} À partir d'un état légitime, on reste dans un état légitime.
-\item \textbf{\textbf{Convergence :}} À partir d'un état illégitime, on atteint un état légitime en un nombre fini d'étapes.
-\item \textbf{\textbf{Correction (Correctness) :}} Assure que l'algorithme fonctionne comme prévu et maintient les deux propriétés précédentes.
+\item \textbf{\textbf{Clôture :}} À partir d'un état légitime, on reste dans un état légitime.
+\item \textbf{\textbf{Convergence :}} À partir d'un état illégitime, on atteint un état légitime en un nombre fini d'étapes (steps).
+\item \textbf{\textbf{Correction :}} Assure que l'algorithme fonctionne comme prévu et conformément à sa spécification quand il est dans un état légitime.
 \end{enumerate}
 
 
+
 \subsection{Exemple 1 : Token Ring Dijkstra}
-\label{sec:org693f0ec}
+\label{sec:org44c316f}
 
--> Est-ce que c'est nécecessaire de décrire en détail l'algo alors que la partie principale est le coloring ?  
-
-Le problème du Token Ring introduit par Dijkstra est une illustration classique d'un algorithme distribué auto-stabilisant. 
+Le problème du Token Ring introduit par Dijkstra (à mettre en cible) est une illustration classique d'un algorithme distribué auto-stabilisant. 
 Il s'agit de garantir la circulation continue d'un unique jeton (token) dans un réseau en anneau, permettant ainsi une coordination ordonnée entre les nœuds du réseau.
 
 \subsubsection{Description de l'algorithme}
-\label{sec:org693669a}
+\label{sec:org1355d5e}
 
 L'objectif principal est de faire en sorte qu'un seul jeton circule indéfiniment dans un réseau en anneau de n nœuds (avec n > 3). 
 Ce jeton permet la synchronisation et la gestion des ressources entre les différents nœuds du réseau.
 
 \subsubsection{État initial et variables}
-\label{sec:org7edb391}
+\label{sec:orge0554d3}
 \begin{itemize}
 \item Anneau : Le réseau est structuré sous la forme d'un anneau de n nœuds.
 \item Racine : Le premier nœud de l'anneau est désigné comme la racine.
@@ -181,7 +177,7 @@ Ce jeton permet la synchronisation et la gestion des ressources entre les diffé
 qui est une valeur entière comprise entre 0 et K (où K est une valeur supérieure au nombre de nœuds).
 
 \subsubsection{Prédicat Token}
-\label{sec:orga9b0f69}
+\label{sec:orgf81d592}
 Chaque nœud possède également un prédicat nommé Token, défini comme suit :
 \begin{itemize}
 \item Pour la racine : Token(root) est vrai si state(root) != state(predecessor(root)).
@@ -189,27 +185,37 @@ Chaque nœud possède également un prédicat nommé Token, défini comme suit :
 \end{itemize}
 
 \subsubsection{Activation des nœuds}
-\label{sec:org29a9b45}
+\label{sec:org79e1a5d}
 Un nœud est dit activable (enabled) lorsque son prédicat Token est vrai. Lorsque cela se produit :
 \begin{itemize}
 \item La racine prend la valeur de l'état de son prédécesseur.
 \item Pour les autres nœuds, leur état est incrémenté de 1 modulo K.
 \end{itemize}
 
-\subsubsection{Exemple d'exécution simple sous démon central}
-\label{sec:org94566f5}
+\subsubsection{Exemple d'exécution simple sous un démon}
+\label{sec:org79476cc}
 
--> à faire
+Ici nous avons un exemple d'execution sous un démon distribué, (au moins un noeud activé à chaque step). 
+-> à l'étape 2, le noeud ayant la valeur 0 est aussi activé non ? 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figs/exec_distribue.png}
+    \caption{Exemple d'execution pour un démon distribué}
+    \label{fig:ex_disjkstra}
+\end{figure}
+
+Les noeuds en vert représentent les noeuds enabled, on remarque qu'à partir de l'étape 5, on a atteint un état légitime avec seulement un seul token.
 
 \subsection{Exemple 2 : Coloring}
-\label{sec:org79c4867}
+\label{sec:org45a4c91}
 
 \subsubsection{Algorithme}
-\label{sec:orgcc6dbaa}
+\label{sec:org12a1bd1}
 L'algorithme de coloration vise à attribuer des couleurs aux nœuds d'un graphe de manière à ce que deux nœuds adjacents n'aient jamais la même couleur. 
 
 \begin{enumerate}
-\item Chaque nœud \(v\) a un état  \(color(v)\).
+\item Chaque nœud \(v\) a un état  \(color(v)\) qui est représenté par un entier positif.
 \item Chaque nœud \(v\) observe les couleurs de ses voisins.
 \item Si \(v\) détecte qu'il a la même couleur qu'un de ses voisins, il change sa couleur à la première couleur différente des couleurs de ses voisins.
 \end{enumerate}
@@ -224,7 +230,7 @@ où voisins(v) est la liste des voisins du noeud v et color(u) est la couleur du
 \end{itemize}
 
 \subsubsection{Exécution sous démon central}
-\label{sec:org3cee252}
+\label{sec:orga36fd39}
 Sous un démon central, à chaque étape, un seul nœud est activé. Voici un exemple simple :
 
 \begin{enumerate}
@@ -248,7 +254,7 @@ Le noeud \(A\) et le noeud \(B\) sont enabled,
 L'algorithme a convergé vers une configuration légitime où tous les nœuds adjacents ont des couleurs différentes.
 
 \subsubsection{Exécution sous démon synchrone}
-\label{sec:org0fd9176}
+\label{sec:org256f1b0}
 Sous un démon synchrone, tous les nœuds activés changent leur couleur en même temps. Voici un exemple montrant pourquoi cela peut ne pas converger :
 
 \begin{enumerate}
@@ -267,16 +273,15 @@ On retrouve la configuration initiale à un rennomage près, ce qui montre que l
 
 
 
-
 \section{Explication des outils}
-\label{sec:org6518f37}
+\label{sec:orgfc94188}
 Pour pouvoir bien comprendre la preuve présente dans why3-do, il est nécessaire de comprendre les outils et les méthodes utilisées.
 
 \subsection{Logique de Hoare}
-\label{sec:org0ec9562}
+\label{sec:org6bca6d9}
 
 \subsubsection{Définition}
-\label{sec:org0ff232a}
+\label{sec:org777e0f4}
 La logique de Hoare est un formalisme utilisé pour raisonner sur la correction des programmes impératifs. Elle utilise des triples de Hoare, notés \{P\} C \{Q\}, où :
 
 \begin{itemize}
@@ -285,7 +290,7 @@ La logique de Hoare est un formalisme utilisé pour raisonner sur la correction 
 \item Q est la postcondition, une assertion sur l'état des variables du programme après l'exécution de C.
 \end{itemize}
 
-Un triple de Hoare \{P\} C \{Q\} signifie que si la précondition P est vraie avant l'exécution de C, alors la postcondition Q sera vraie après l'exécution de C, à condition que C termine son exécution.
+Un triplet de Hoare \{P\} C \{Q\} signifie que si la précondition P est vraie avant l'exécution de C, alors la postcondition Q sera vraie après l'exécution de C, à condition que C termine son exécution.
 
 Règles  de la logique de Hoare : 
 \begin{enumerate}
@@ -312,7 +317,7 @@ Règles  de la logique de Hoare :
 
 
 \subsubsection{Exemple}
-\label{sec:org2772392}
+\label{sec:org3b81493}
 Considérons la fonction free utilisée dans l'implémentation du coloring dans l'outil why3 en 7.1
 Cette fonction renvoie le plus petit entier qui n'est pas présent dans un ensemble :
 
@@ -329,16 +334,16 @@ Dans le langage de Why3, whyMl, les préconditions sont implémentées avec requ
 et les postconditions par ensures.
 
 \paragraph{Préconditions (requires)}
-\label{sec:org6ac4478}
+\label{sec:org3ab6fb4}
 
 requires \{ cardinal colors < k \}
   Cette précondition stipule que la taille (cardinal) 
 de l'ensemble \texttt{colors} doit être strictement inférieure à \texttt{k}.
  Cela signifie qu'il existe au moins un entier dans l'intervalle [0, k) qui n'est pas présent dans l'ensemble \texttt{colors}. 
-En d'autres termes, l'ensemble \texttt{colors} ne peut pas contenir tous les entiers de 0 à k-1.
+En d'autres termes, l'ensemble \texttt{colors} ne peut pas contenir tous les entiers de 0 à k.
 
 \paragraph{Postconditions (ensures)}
-\label{sec:orgf2e61fd}
+\label{sec:orgfbcf911}
 
 ensures \{ not mem result colors \}
   Cette postcondition garantit que le résultat (l'entier retourné par la fonction \texttt{free}) ne fait pas partie de l'ensemble \texttt{colors}. 
@@ -354,7 +359,7 @@ ensures \{ 0 <= result < k \}
 Le résultat doit être un entier non négatif et strictement inférieur à \texttt{k}.
 
 \paragraph{Détails de l'implémentation}
-\label{sec:orgda8f54e}
+\label{sec:org974b123}
 
 \texttt{min\_elt (diff (interval 0 k) colors)}
   Cette expression utilise des opérations sur les ensembles pour trouver le résultat.
@@ -364,9 +369,8 @@ Le résultat doit être un entier non négatif et strictement inférieur à \tex
 \item \texttt{min\_elt} trouve le plus petit élément de cet ensemble, qui est le plus petit entier manquant dans \texttt{colors}.
 \end{itemize}
 
-
 \subsection{SMT solver}
-\label{sec:org2e9cf86}
+\label{sec:org2551d30}
 
 Les SMT (Satisfiability Modulo Theories) solveurs sont des outils puissants utilisés pour 
 vérifier la satisfiabilité d'expressions logiques sous certaines contraintes théoriques, 
@@ -380,9 +384,9 @@ Les formules SMT sont souvent converties en une forme équivalente, que les solv
 Nous allons par la suite utiliser différents solveurs SMT tel que Z3, altErgo et CVC4
 
 \subsection{Why3}
-\label{sec:org8c65aee}
+\label{sec:org40daa76}
 
-Why3 est un outil pour la vérification formelle basé sur la logique de Hoare, 
+Why3 (à cibler) est un outil pour la vérification formelle basé sur la logique de Hoare, 
 permettant de garantir leur correction en utilisant des techniques sophistiquées. 
 Il permet de spécifier des propriétés formelles à l'aide de contrats, incluant préconditions, postconditions, 
 invariants de boucle et variants. 
@@ -397,34 +401,34 @@ Il peut également collaborer avec divers prouveurs SMT comme AltErgo, Z3 et CVC
 ainsi que des assistants de preuve interactifs comme Coq, 
 offrant une grande flexibilité pour la vérification formelle.
 
-
 \section{Why3doTheWayOfHarmoniousDistributedSystemProofs}
-\label{sec:org47e21e2}
+\label{sec:org90d71f5}
 
-Maintenant nous avons connaissances des différents outils nous pouvons aborder why3-do.
-Dans leurs articles ils proposent une implémentation d'un modèle instanciable pour des algorithmes
+Maintenant nous avons connaissance des différents outils nous pouvons aborder why3-do.
+Dans leurs articles (à cibler) ils proposent une implémentation d'un modèle instanciable pour des algorithmes
 distribués auto-stable ainsi que l'algo du Token Ring de Disjkstra et sa preuve.
 
 
-Tout d'abord, il est important de comprendre que leur modélisation est séparé en deux parties distinctes
+Tout d'abord, il est important de comprendre que leur modélisation est séparée en deux parties distinctes. 
 La première partie est un modèle instanciable qui est la partie commune aux algorithmes distribués
 auto-stabilisants. 
-La seconde est propre aux spécifités de l'algorithme et de la topologie dans laquelle celui-ci est appliqué.
+La seconde est propre aux spécifités de l'algorithme et de la topologie dans laquelle celui-ci est appliqué. 
+
 
 \subsection{Explication du modèle : modelReadallEnabled}
-\label{sec:org002cd01}
+\label{sec:org2e64b80}
 
-Nous commençons par étudier le modèle nommé modelReadallEnabled.
+Nous commençons par étudier le modèle à instancier nommé modelReadallEnabled.
 Celui-ci est composé de deux modules Config et Steps.
 
 
 \subsubsection{Module Config}
-\label{sec:org1b2d891}
+\label{sec:orgbbd047f}
 
 Dans le module Config (nommé World dans leur papier), on définit les différents types qui seront utilisés dans l'algorithme.
-Nous aurons alors le type node, qui représente les noeuds du graphes et le type state qui représente les états que peux prendre un noeud.
-On définit alors le type Config comme étant le map entre les noeuds et les états, c'est à dire une fonction qui relie chaque noeud à un état.
-Les types node et state ne sont pas défini dans le modèle car ils dépendent de l'algorithme. 
+Nous aurons alors le type node, qui représente les noeuds du graphe et le type state qui représente les états que peut prendre un noeud.
+On définit alors le type Config comme étant un map entre les noeuds et les états, c'est à dire une fonction qui relie chaque noeud à un état.
+Les types node et state ne sont pas définis dans le modèle car ils dépendent de l'algorithme. 
 Lorsque l'on décrira l'algorithme il faudra spécifier leurs types, puis instancier le module Config avec ces types à l'aide de mot clé Clone. 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
@@ -446,7 +450,7 @@ end
 \end{lstlisting}
 
 \subsubsection{Module Steps}
-\label{sec:orga02fa3e}
+\label{sec:org75f66df}
 
 Le second module est un modèle de mémoire localement partagé.
 De la même manière que Config c'est un modèle à instancier,
@@ -484,10 +488,10 @@ doit être instancié, ce qui est une limitation très restrictive pour un algor
 on voudrait pouvoir faire des preuves pour toutes configuartions initiales.
 
 indpred est un prédicat inductif qui va faire office d'invariant dans la preuve des programmes instanciés, 
-de plus ce prédicat doit être vrai pour la configuration initial. 
+de plus ce prédicat doit être vrai pour la configuration initiale. 
 
 On remarque l'utilisation du mot clé ghost, cette notation indique que le prédicat ici est seulement présent dans 
-les spécifications et non dans dans le code exécutable. Cela permet d'ajouter des informations pour faciliter la
+les spécifications et non dans le code exécutable. Cela permet d'ajouter des informations pour faciliter la
 preuve de programme.
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -523,8 +527,8 @@ val function handleEnbld (n:node) (c : config) : state
 
 \end{lstlisting}
 
-step est un invariant inductif qui décrit la une transition d'une configuration à une autre après l'activation d'un noeud.
-La ligne step c n (step\_enbld c n (handleEnbld n c)) signifie que l'on passe de la configuration c à la configuration dans laquelle le noeud n a été mis à jour. 
+step est un invariant inductif qui décrit une transition d'une configuration à une autre après l'activation d'un noeud.
+La ligne step c n (step\_enbld c n (handleEnbld n c)) signifie que l'on passe de la configuration c à la configuration dans laquelle le noeud n a été mise à jour. 
 Cela implique qu'il n'y a qu'un seul noeud qui peut être activé au même moment, donc cela fixe le démon comme un démon central. 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
@@ -561,7 +565,7 @@ inductive step_TR config config int =
 
 \end{lstlisting}
 Le lemme noNegative\_step\_TR assure que le nombre de steps pour passer d'une configuration à une autre est toujours positif.
-Le prédicat reachable vaut vrai s'il existe un nombre d'étape pour atteindre la configuration c depuis la configuration initiale.
+Le prédicat reachable vaut vrai s'il existe un nombre d'étapes pour atteindre la configuration c depuis la configuration initiale.
 indpred\_manySteps assure que le prédicat inductif est conservé par plusieurs étapes.
 indpred\_reachable étend le lemme précédent à l'aide de reachable en assurant que le prédicat inductif reste vrai pour toutes les configurations atteignables. 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
@@ -582,20 +586,20 @@ lemma indpred_reachable :
 
 
 \subsection{Explication de selfstab-ring}
-\label{sec:org35eb5b2}
+\label{sec:orga2176d9}
 Nous allons faire une explication rapide de la preuve de l'algorithme de Token Ring de Dijkstra (voir annexe pour le programme en entier)
 
 La preuve est séparée en deux parties, la closure : depuis un état légitime, on reste dans un état légitime 
 puis la terminaison : à partir d'un état non légitime, en un nombre fini d'étape, on atteint un état légitime.
 
-\subsubsection{Closure}
-\label{sec:orgeaa0095}
+\subsubsection{Cloture}
+\label{sec:org105e0de}
 Pour définir l'algorithme, ils vont implémenter les différents types, prédicats et fonctions du modèle à instancier, c'est à dire à chaque fois
 qu'il y avait le mot clé val.
 
 
-Dans un premier temps ils choisissent de définir les noeud et les états comme des entiers. 
-Ils peuvent alors définir le type config en clonant le moodule Config du modèle. 
+Dans un premier temps ils choisissent de définir les noeuds et les états comme des entiers. 
+Ils peuvent alors définir le type config en clonant le module Config du modèle. 
 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
@@ -674,12 +678,12 @@ end
 
 \end{lstlisting}
 \subsubsection{Terminaison}
-\label{sec:orgb1cd3f4}
+\label{sec:orgf604865}
 
 -> à détailler plus
-Dans la seconde partie le modèle est réinstancié avec des valeurs initiales différentes (pire cas possible ?)
+Dans la seconde partie le modèle est réinstancié avec des valeurs initiales différentes 
 L'état initial n'est plus un état légitime et on cherche à atteindre l'état converged qui 
-est défini comme tous les noeuds ont la même valeur. Cet état est un état légitime. 
+est défini comme tous les noeuds qui ont la même valeur. Cet état est un état légitime. 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -694,7 +698,7 @@ predicate converged (c:config) =
 
 Pour prouver qu'en partant d'un état initial, on arrive bien à cet état légitime, 
 la méthode proposée est d'utiliser une fonction de potentiel measureAllNodes,
-une fonction réccursive qui somme le potentiel de chaque noeud.
+une fonction récursive qui somme le potentiel de chaque noeud.
 
 
 
@@ -715,9 +719,10 @@ let ghost function measureAllNodes (w:world) : int
 
 \end{lstlisting}
 
-Pour faire cela, Wh3do détaillent cas par cas les différentes exécutions possibles  comme nous
+Pour faire cela, Why3do détaille cas par cas les différentes exécutions possibles comme nous
 pouvons le voir dans les nombreux ensures de measureDeltaNodes. 
-Cela permet à Why3 de prouver step\_decresasesMeasure et converged\_oneToken
+Cela permet à Why3 de prouver step\_decresasesMeasure (la mesure de la configuration décroit lorsque l'on fait un step)
+ et converged\_oneToken (lorsque la mesure vaut 0, alors il y a un seul token et il se trouve à la racine).  
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -747,18 +752,18 @@ goal converged_oneToken : forall w :world. converged w -> oneToken w /\ has_toke
 \end{lstlisting}
 
 \section{Implémentation et preuve de l’algorithme de coloring basé sur le modèle de why3-do}
-\label{sec:org963800a}
+\label{sec:orgc4ed998}
 
 Nous allons maintenant implémenter l'algorithme de coloration en nous basant sur le modèle proposé par why3-do.
-Nous allons suivre les méthodes présentés dans le chapitre précédent pour cette implémentation.
+Nous allons suivre les méthodes présentées dans le chapitre précédent pour cette implémentation.
 
 \subsection{Cloture}
-\label{sec:org04acca6}
+\label{sec:orgf5f422d}
 -> Finir le renommage du code
 
 Pour la cloture, notre objectif est d'instancier le modèle. 
 
-Pour cela, nous créons un nouveau module et nous importons les différents bibliothèque dont nous aurons besoin. 
+Pour cela, nous créons un nouveau module et nous importons les différentes bibliothèques dont nous aurons besoin. 
 \begin{itemize}
 \item Les listes
 \item Les entiers
@@ -820,7 +825,7 @@ clone modelReadallEnabled.World with
 
 
 \end{lstlisting}
-Ici nous ajoutons le prédicats qui signifie qu'un noeud est valide s'il est compris entre 0 et n\_nodes le nombre de noeuds
+Ici nous ajoutons le prédicat qui signifie qu'un noeud est valide s'il est compris entre 0 et n\_nodes le nombre de noeuds
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 
@@ -895,7 +900,7 @@ let rec function get_colors (nl:set) (w:config) : set =
 \end{lstlisting}
 
 Le prédicat conflict est défini tel que pour un noeud, on regarde ses voisins et on vérifie s'il en existe un qui a la même couleur.
-On définit également couleurDifferentes comme étant la négationd de conflit. 
+On définit également couleurDifferentes comme étant la négation de conflit. 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -947,8 +952,8 @@ clone modelReadallEnabled.Steps with
 On définit alors le prédicat colored qui vérifie que tout les noeuds sont bien coloriés, 
 puis no\_conflict, un prédicat qui renvoie true si pour tout les noeuds il n'y a pas de conflits.
 On peut alors écrire notre goal : goal\_colored qui spécifie que pour tout état atteignable (depuis 
-la configuration initiale) alors s'il n'y a pas de conflit pour la configuration alors le configuration 
-est bien colorié. 
+la configuration initiale) s'il n'y a pas de conflit pour la configuration alors le configuration 
+est bien coloriée. 
 
 \lstset{language=why3,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -965,17 +970,17 @@ end
 
 \end{lstlisting}
 
-\subsection{Terminsaison}
-\label{sec:orgb152f14}
+\subsection{Terminaison}
+\label{sec:org79f504b}
 
-J'ai supprimé ce que j'avais puisque c'était faux.
+->en cours pas dans ce fichier
 
 
 \subsection{Informations supplémentaires}
-\label{sec:orgd1bb41b}
+\label{sec:orgc10e57b}
 
 \subsubsection{Types avec structure}
-\label{sec:org4eae3ff}
+\label{sec:org03376aa}
 
 Dans d'autres algorithmes on peut avoir des états représentés par deux entiers par exemple.
 Avoir une structure permet également la possibilité de mettre une condition sur l'état sous forme d'invariant (exemple en commentaire)
@@ -985,11 +990,10 @@ Avoir une structure permet également la possibilité de mettre une condition su
 
 
 \subsubsection{Problème axiomes}
-\label{sec:org1d8d183}
+\label{sec:org6396096}
 
--> à reformuler
-
-Pour donner un exemple d'axiome problèmatique, on peut prendre le suivant: 
+Dès qu'on suppose un axiome faux, on peut prouver de résultats faux. 
+Pour donner un exemple, on peut prendre le suivant: 
 Si on souhaite dire que pour toute configuration c, pour tout noeud n, la couleur de ce noeud dans cette configuration c n est positive. 
 On pourrait croire que c'est une possibilité pour ajouter une condition sur notre configuration mais cet axiom est une contradiction car il existe des configurations (ie des map d'int vers \{int\})
 tel que l'état n'est pas positif.
@@ -1004,39 +1008,32 @@ axiom max_color : forall c: config. forall n. 0 <= c n
 Pour ajouter des propriétés, il est préférable de définir des prédicats et de vérifier qu'ils soient vrais. 
 
 \subsubsection{Différents solveurs SMT}
-\label{sec:orgd742311}
+\label{sec:orge14bf4d}
 
--> à reformuler et développer
-
-Grâce à la fonction free nous observons que d'avoir différents solveurs SMT 
+Grâce à la fonction free (à cibler) nous observons que d'avoir différents solveurs SMT 
 peut être très avantageux, la plupart des solveurs n'arrivent pas à prouver
 les ensures demandés là où CVC5 met moins de 3 secondes.
 
 \subsubsection{Topologie}
-\label{sec:org5e64826}
-
--> peut-être mieux dans la partie d'après
+\label{sec:org324f051}
 
 Pour essayer de limiter l'impact de la topologie dans l'algorithme nous n'avons que 
 neighbor\_set qui dépends de la topologie en anneau,
 alors que dans leur implémentation du token ring, celle-ci était présente à de nombreux endroits.
 
 \subsection{Problèmes rencontrés}
-\label{sec:orga327759}
-
--> à détailler/fusionner avec la partie précédente
+\label{sec:org8089f71}
 
 Lors de la mise en œuvre du programme, plusieurs défis importants ont été identifiés. 
-Tout d'abord, la présence implicite de la valeur true = false au début du programme a entraîné des erreurs significatives, 
+Tout d'abord, la présence implicite d'axiomes faux au début du programme a entraîné des erreurs significatives, 
 soulignant l'importance cruciale d'exécuter le détecteur de dysfonctionnements ("smoke detector") en amont pour éviter ces problèmes. 
-En outre, la documentation insuffisante concernant le modèle utilisé dans la seconde partie du projet a compliqué sa compréhension, 
-nécessitant des efforts supplémentaires pour en saisir les subtilités. 
+En outre, la documentation insuffisante concernant le modèle utilisé dans la seconde partie du projet a compliqué sa compréhension. 
 Par ailleurs, le modèle s'est révélé trop restrictif par rapport aux algorithmes distribués auto-stabilisants en raison de plusieurs limitations structurelles : 
 la présence d'un unique démon central, une configuration initiale prédéterminée et une topologie fixe. 
 
-
 \section{Autres différents essais et faisabilité}
-\label{sec:org724ae67}
+\label{sec:org55a5f85}
+
 Dans le cadre de l'exploration des possibilités pour améliorer le modèle, 
 plusieurs angles ont été envisagés mais certains sont restés partiellement développés. 
 Tout d'abord, l'exploration de l'impact d'un état initial varié sur le modèle a été considérée, 
@@ -1049,8 +1046,4 @@ Enfin, l'idée de permettre l'activation simultanée de plusieurs nœuds à chaq
 Bien que cette approche n'ait pas encore été testée, cependant le modèle a été soumis à des vérifications de type "smoke test", 
 de plus elle a été validée par la vérification formelle à l'aide de l'outil Why3. 
 Cette validation préliminaire suggère une faisabilité potentielle, mais des tests pratiques seront nécessaires pour confirmer son efficacité et sa robustesse.
-
-
-\section{Conclusion}
-\label{sec:org2df66b5}
 \end{document}

@@ -4,7 +4,6 @@
 \usepackage{algorithm}
 \usepackage{multirow}
 
-%
 \usepackage{paralist}
 \usepackage{makeidx}  % allows for indexgeneration
 %
@@ -638,6 +637,20 @@
   morecomment=[l]{--},
   morecomment=[s]{(*}{*)}
 }
+\lstdefinelanguage{why3}{%
+  morekeywords={function,predicate,lemma,module,use,end,as,fun,match,try,with,let,in,val,type,and,;;,'=',rec},
+  morekeywords=[2]{if,then,else,ref,not,or,+,raise},%XXX'=>'?
+  morekeywords=[3]{option,list,string,unit,bool,int,float},
+  morekeywords=[4]{List,Int,Map,Append,Lmap,Hashtbl,Algo,Random},
+  morestring=[b]",
+  %  escapechar={_},
+%  textcl=true,
+%  escapeinside={_},
+  sensitive=false,
+  morecomment=[l]{--},
+  morecomment=[s]{(*}{*)}
+}
+\lstnewenvironment{why3} {\lstset{language=why3}}  {}
 
 
 

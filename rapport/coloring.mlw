@@ -1,0 +1,7 @@
+module Coloring_Ring
+ use list.List
+ use int.Int
+ use int.EuclideanDivision
+ use map.Map
+ use list.Mem
+ use set.SetAppInt

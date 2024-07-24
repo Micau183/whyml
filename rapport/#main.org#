@@ -72,7 +72,6 @@ En parallèle, j'ai travaillé avec un dépôt Git pour versionner mon code et m
 Cela m'a permis de suivre mes modifications de manière précise, de revenir en arrière en cas de besoin, 
 et de collaborer plus efficacement avec Erwan et Karine en partageant facilement mes avancées et en intégrant leurs retours dans mon travail.
 
- 
 * Algorithme distribué auto-stable
 
 
@@ -206,7 +205,6 @@ Sous un démon synchrone, tous les nœuds activés changent leur couleur en mêm
 Ainsi, après une étape synchrone, \(A\) et \(B\) ont tout les deux la couleur 3.
 On a de nouveaux les noeuds A et B enabled car ils ont tous les deux la couleur 3.
 On retrouve la configuration initiale à un rennomage près, ce qui montre que l'algorithme ne converge pas nécessairement vers un état légitime sous un démon synchrone.
-
 
 
 * Explication des outils
