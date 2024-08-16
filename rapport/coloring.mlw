@@ -5,3 +5,112 @@ module Coloring_Ring
  use map.Map
  use list.Mem
  use set.SetAppInt
+
+val constant n_nodes : int
+
+axiom at_least_three : 2 < n_nodes
+
+val constant k_color : int
+
+axiom k_color_bound : n_nodes <= k_color
+
+type node = int
+
+type state = {k: int}
+
+clone modelReadallEnabled.Config with
+  type node,
+  type state
+
+let predicate validNd (n:node) = 0 <= n < n_nodes
+
+predicate is_neighbor (i : int) (j : int) =
+  validNd i -> validNd j ->
+   if i = 0         then j=1 \/ j=n_nodes-1 else
+   if i = n_nodes-1 then j=0 \/ j=n_nodes-2 else
+   j = i-1 \/ j = i+1
+
+predicate is_neighbor_in_a_ring (i:int) (j:int) = is_neighbor i j
+
+lemma is_neighbor_symmetric: forall i j. is_neighbor i j = is_neighbor j i
+
+lemma not_its_own_neighbor : forall i.  validNd i -> not (is_neighbor i i)
+
+let function neighbor_set (i:node): set
+(* prouvable en auto 3 *)
+  requires { validNd i }
+
+  ensures { is_neighbor (mod (i-1) n_nodes) i } (* *)
+  ensures { is_neighbor (mod (i+1) n_nodes) i } (* *)
+
+  ensures { forall c. mem c result -> c <> i} (* un noeud n'est pas son propre voisin *)
+  (*ensures { not mem i result }*) (* un noeud n'est pas son propre voisin *)
+  ensures {  cardinal result = 2 } (* ZZZ pour un anneau seulement ! *)
+  ensures { forall j. mem j result -> validNd j }
+  ensures { forall j. mem j result -> is_neighbor  i j }
+  ensures { forall j. validNd j -> is_neighbor i j -> mem j result }
+(*  ensures { forall j. mem j result <-> is_neighbor j i } *)
+  =
+  let next = mod (i+1) n_nodes in
+  let prev = mod (i-1) n_nodes in
+  add next (add prev (empty()))
+
+let function free (colors: set) (k:int) : int =
+  requires { cardinal colors < k }
+  ensures { not mem result colors }
+  ensures { forall x. (0 <= x < k /\ not mem x colors) -> result <= x }
+  ensures { 0 <= result < k }
+  min_elt (diff (interval 0 k) colors)
+
+let function initState (n:node) : state =
+  {k=0}
+
+let function color (c:config) (n:node)  : int =
+   (c n).k
+
+let rec function get_colors (nl:set) (w:config) : set =
+   requires { cardinal nl < 3 }
+   ensures { cardinal result <= cardinal nl }
+
+   ensures { forall c. mem c result <-> exists x. mem x nl /\ c = (w x).k }
+
+   variant { cardinal nl }
+   if is_empty nl then empty () else
+    let n = choose nl in
+    let c = color w n in
+    add c (get_colors (remove n nl) w)
+
+predicate conflict (w: world) (n:node) =
+   exists c : int.
+    mem c (get_colors (neighbor_set n) w)
+   /\ (w n).k = c
+
+predicate couleurDifferentes (w: config) (n: node) = not  conflict w n
+
+let ghost predicate enabled (lS:config) (i:node) =
+  conflict lS i
+
+
+let function handleEnbld (n:node) (w:world) : state
+  ensures { not mem result.k (get_colors (neighbor_set n) w) }
+  =
+  { k = free (get_colors (neighbor_set n) w) k_color }
+
+predicate inv (w: config) =
+  (forall n: node. 0 <= n < n_nodes -> 0 <= (w n).k <= k_color)
+
+let ghost predicate indpred (w:world) = inv w
+
+
+clone modelReadallEnabled.Steps with
+    type node, type state, val validNd, val indpred, val enabled, val handleEnbld, val initState,
+
+predicate colored (w: world) =
+  forall n1: node.
+    validNd n1 ->
+    couleurDifferentes w n1
+
+predicate no_conflict (w: world) = forall n: node. not(conflict w n)
+  goal goal_colored : forall w:world. reachable w -> no_conflict w -> colored w
+
+end

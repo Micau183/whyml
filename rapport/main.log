@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.5)  24 JUL 2024 13:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.5)  16 AUG 2024 23:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -612,43 +612,63 @@ ng of objects, relative to a reference object or in absolute terms
 \LMpt=\skip81
 ))
    defining Unicode char U+00A0 (decimal 160)
+
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count323
+\Gm@cntv=\count324
+\c@Gm@tempcnt=\count325
+\Gm@bindingoffset=\dimen256
+\Gm@wd@mp=\dimen257
+\Gm@odd@mp=\dimen258
+\Gm@even@mp=\dimen259
+\Gm@layoutwidth=\dimen260
+\Gm@layoutheight=\dimen261
+\Gm@layouthoffset=\dimen262
+\Gm@layoutvoffset=\dimen263
+\Gm@dimlist=\toks37
+)
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 29.
+h' as default language. on input line 30.
  (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count323
-\scratchdimen=\dimen256
+\scratchcounter=\count326
+\scratchdimen=\dimen264
 \scratchbox=\box87
-\nofMPsegments=\count324
-\nofMParguments=\count325
-\everyMPshowfont=\toks37
-\MPscratchCnt=\count326
-\MPscratchDim=\dimen257
-\MPnumerator=\count327
-\makeMPintoPDFobject=\count328
-\everyMPtoPDFconversion=\toks38
+\nofMPsegments=\count327
+\nofMParguments=\count328
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count329
+\MPscratchDim=\dimen265
+\MPnumerator=\count330
+\makeMPintoPDFobject=\count331
+\everyMPtoPDFconversion=\toks39
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -658,7 +678,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 29.
+Package hyperref Info: Link coloring OFF on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -669,11 +689,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count329
+\c@section@level=\count332
 )
-LaTeX Info: Redefining \ref on input line 29.
-LaTeX Info: Redefining \pageref on input line 29.
-LaTeX Info: Redefining \nameref on input line 29.
+LaTeX Info: Redefining \ref on input line 30.
+LaTeX Info: Redefining \pageref on input line 30.
+LaTeX Info: Redefining \nameref on input line 30.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -688,12 +708,12 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-\c@lstlisting=\count330
+\c@lstlisting=\count333
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 29.
+(lastpage)             ! on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
 nary-english.trsl
@@ -701,78 +721,164 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 29.
- [1
+or `english'. on input line 30.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3]
-Overfull \hbox (31.4751pt too wide) in paragraph at lines 183--184
-[]\T1/cmr/m/n/10.95 Pour la racine : To-ken(root) est vrai si state(root) != st
-ate(predecessor(root)). 
- []
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
 
-Overfull \hbox (24.39143pt too wide) in paragraph at lines 184--185
-[]\T1/cmr/m/n/10.95 Pour les autres n÷uds : To-ken(v) est vrai si state(v) = st
-ate(predecessor(v)). 
- []
-
-[4]
-<figs/exec_distribue.png, id=193, 1209.51875pt x 604.2575pt>
-File: figs/exec_distribue.png Graphic file (type png)
-<use figs/exec_distribue.png>
-Package pdftex.def Info: figs/exec_distribue.png  used on input line 203.
-(pdftex.def)             Requested size: 360.0pt x 179.84952pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 218
-.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 218
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [5 <./figs/exec_distribue.png>] [6] [7]
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<figs/popo.png, id=175, 255.354pt x 79.0152pt>
+File: figs/popo.png Graphic file (type png)
+<use figs/popo.png>
+Package pdftex.def Info: figs/popo.png  used on input line 41.
+(pdftex.def)             Requested size: 204.85846pt x 63.39188pt.
+<figs/verimag.png, id=177, 225.84375pt x 225.84375pt>
+File: figs/verimag.png Graphic file (type png)
+<use figs/verimag.png>
+Package pdftex.def Info: figs/verimag.png  used on input line 46.
+(pdftex.def)             Requested size: 204.85846pt x 204.87025pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.62 \end{titlepage}
+                     [1 <./figs/popo.png> <./figs/verimag.png>] (./main.toc)
+\tf@toc=\write4
+\openout4 = `main.toc'.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.73 
+      [1] [2] [3]
+<figs/exec_distribue.png, id=247, 1209.51875pt x 604.2575pt>
+File: figs/exec_distribue.png Graphic file (type png)
+<use figs/exec_distribue.png>
+Package pdftex.def Info: figs/exec_distribue.png  used on input line 241.
+(pdftex.def)             Requested size: 455.24411pt x 227.43504pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] [5 <./figs/exec_distribue.png>] [6]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-25.
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+65.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 326.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 366.
 
-[8]
-Overfull \hbox (3.1873pt too wide) in paragraph at lines 364--367
- []\T1/cmr/bx/n/10.95 Détails de l'implémentation[] \T1/cmtt/m/n/10.95 min_elt 
-(diff (interval 0 k) colors)
+Overfull \hbox (3.13824pt too wide) in paragraph at lines 391--394
+ []\T1/cmr/bx/n/10.95 Postconditions (en-sures)[][] \T1/cmtt/m/n/10.95 ensures 
+{ not mem result colors } \T1/cmr/m/n/10.95 Cette post-con-di-tion garan-
  []
 
-[9]
-Overfull \hbox (54.15222pt too wide) in paragraph at lines 404--404
-[]\T1/cmr/bx/n/14.4 Why3doTheWayOfHarmoniousDistributedSystemProofs 
+
+Overfull \hbox (12.65146pt too wide) in paragraph at lines 395--399
+[]\T1/cmtt/m/n/10.95 ensures { forall x. (0 <= x < k /\ not mem x colors) -> re
+sult <= x } \T1/cmr/m/n/10.95 Cette post-
  []
 
-[10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
-Overfull \hbox (2.21849pt too wide) in paragraph at lines 1020--1023
-\T1/cmr/m/n/10.95 Pour es-sayer de lim-iter l'impact de la topolo-gie dans l'al
-gorithme nous n'avons
+[7] [8] [9]
+Overfull \hbox (8.30327pt too wide) in paragraph at lines 553--557
+[]\T1/cmtt/m/n/10.95 let ghost function step_enbld (c: config) (n: node) (s: st
+ate): config \T1/cmr/m/n/10.95 : met
  []
 
-[21] 
+
+Overfull \hbox (11.52621pt too wide) in paragraph at lines 588--592
+\T1/cmr/m/n/10.95 facile-ment prou-vable grâce aux post-con-di-tions de \T1/cmt
+t/m/n/10.95 handleEnbld\T1/cmr/m/n/10.95 . Le lemme \T1/cmtt/m/n/10.95 step_pre
+serves_states
+ []
+
+[10] [11] [12] [13] [14] [15]
+Overfull \hbox (15.72989pt too wide) in paragraph at lines 1043--1045
+\T1/cmr/m/n/10.95 reste du-rant l'exécution du pro-gramme. Nous pou-vons alors 
+in-stancier/-cloner \T1/cmtt/m/n/10.95 modelReadallEnabled 
+ []
+
+[16]
+Overfull \hbox (0.78374pt too wide) in paragraph at lines 1153--1154
+[]\T1/cmtt/m/n/10.95 step_on_n_preserves_other_nodes \T1/cmr/m/n/10.95 af-firme
+ que lorsqu'une étape de trans-for-ma-tion (\T1/cmtt/m/n/10.95 step\T1/cmr/m/n/
+10.95 )
+ []
+
+[17]
+Overfull \hbox (12.10048pt too wide) in paragraph at lines 1163--1164
+[]\T1/cmtt/m/n/10.95 step_influences_neighborhood_only \T1/cmr/m/n/10.95 af-fir
+me que lorsqu'une étape de trans-for-ma-tion (\T1/cmtt/m/n/10.95 step\T1/cmr/m/
+n/10.95 )
+ []
+
+[18]
+Overfull \hbox (6.99762pt too wide) in paragraph at lines 1249--1250
+[]\T1/cmtt/m/n/10.95 the_potential_decreases_after_a_step \T1/cmr/m/n/10.95 af-
+firme que si une étape de trans-for-ma-tion (\T1/cmtt/m/n/10.95 step\T1/cmr/m/n
+/10.95 )
+ []
+
+[19] 
 AED: lastpage setting LastPage
-[22] (./main.aux)
+[20] [21] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7C7A0C815825F102EF6F40DD855E42AF;7020.
+(rerunfilecheck)             Checksum: 0E1CE4AD87E3F0A45738BE5060D2D31E;7200.
  ) 
 Here is how much of TeX's memory you used:
- 19833 strings out of 478287
- 365633 string characters out of 5849290
- 1029411 words of memory out of 5000000
- 37339 multiletter control sequences out of 15000+600000
- 481461 words of font info for 59 fonts, out of 8000000 for 9000
+ 20469 strings out of 478287
+ 375618 string characters out of 5849290
+ 1067397 words of memory out of 5000000
+ 37861 multiletter control sequences out of 15000+600000
+ 482811 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,82p,541b,1524s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,6n,82p,541b,1520s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
 fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
@@ -780,13 +886,16 @@ public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.p
 fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf
 /fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfit0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on main.pdf (22 pages, 452137 bytes).
+cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0800.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sftt1095.pfb>
+Output written on main.pdf (23 pages, 538297 bytes).
 PDF statistics:
- 728 PDF objects out of 1000 (max. 8388607)
- 674 compressed objects within 7 object streams
- 387 named destinations out of 1000 (max. 500000)
- 326 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 924 PDF objects out of 1000 (max. 8388607)
+ 855 compressed objects within 9 object streams
+ 488 named destinations out of 1000 (max. 500000)
+ 344 words of extra memory for PDF output out of 10000 (max. 10000000)
 

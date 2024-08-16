@@ -1,0 +1,41 @@
+\contentsline {section}{\numberline {1}Remerciements}{2}{section.1}%
+\contentsline {section}{\numberline {2}Résumé/Abstract}{2}{section.2}%
+\contentsline {section}{\numberline {3}Contexte}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Verimag}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Organisation de travail}{2}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Algorithme distribué auto-stable}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Définitions}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Exemple 1 :Anneau à jeton de Dijkstra (Token Ring Dijkstra)}{4}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Description de l'algorithme}{4}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}État initial et variables}{4}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Prédicat Token}{4}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Activation des nœuds}{4}{subsubsection.4.2.4}%
+\contentsline {subsubsection}{\numberline {4.2.5}Exemple d'exécution simple sous un démon distribué}{5}{subsubsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.3}Exemple 2 : Coloring}{5}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Algorithme}{5}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Exécution sous démon central}{6}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Exécution sous démon synchrone}{6}{subsubsection.4.3.3}%
+\contentsline {section}{\numberline {5}Explication des outils}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Logique de Hoare}{6}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Définition}{6}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Exemple}{7}{subsubsection.5.1.2}%
+\contentsline {paragraph}{Préconditions (requires)}{7}{section*.3}%
+\contentsline {paragraph}{Postconditions (ensures)}{7}{section*.4}%
+\contentsline {paragraph}{Détails de l'implémentation}{8}{section*.5}%
+\contentsline {subsection}{\numberline {5.2}SMT solver}{8}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Why3}{8}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Why3 do The Way Of Harmonious Distributed System Proofs}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Explication du modèle : modelReadallEnabled}{8}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Module Config}{9}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Module Steps}{9}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}Explication de selfstab-ring}{11}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Cloture}{11}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Terminaison}{12}{subsubsection.6.2.2}%
+\contentsline {section}{\numberline {7}Implémentation et preuve de l’algorithme de coloring basé sur le modèle de why3-do}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Cloture}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Terminaison}{17}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Quelques remarques}{20}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Différents solveurs SMT}{20}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Topologie}{20}{subsubsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.4}Problèmes rencontrés}{20}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Perspectives}{20}{section.8}%
